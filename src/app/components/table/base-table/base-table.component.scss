@@ -1,0 +1,41 @@
+.header {
+  padding: 16px 0px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  color: #222222;
+}
+
+.table {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 16px;
+  tr {
+    border-bottom: 1px solid red;
+    cursor: pointer;
+    th {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 20px;
+      color: #222222;
+      text-align: center;
+      height: 55px;
+    }
+    td {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      color: #222222;
+      text-align: center;
+      height: 55px;
+    }
+  }
+}
+
+.pagination-controls {
+  text-align: center;
+}
