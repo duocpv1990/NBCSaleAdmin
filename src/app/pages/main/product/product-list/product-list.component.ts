@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-product-list',
@@ -6,21 +7,55 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  dataFilterCard = [
-    {
-      type: {
-        Id: 'id',
-        Phone: 'phone',
-        startDate: 'startDate',
-        endDate: 'endDate',
-        Status: 'status',
-      },
-    },
-  ];
+  listFilter;
+  config = new Product();
+  value: string;
+  dataSub = [];
+  data = [];
 
   constructor() { }
 
   ngOnInit(): void {
+    this.listFilter = this.config.filter;
+  }
+
+  handleCallback = (value?) => {
+    const filter = this.listFilter.filter(x => x.value);
+    if (this.value) {
+      this.dataSub = this.data.filter(x => x.trang_thai === this.value);
+      if (filter.length) {
+        filter.forEach(x => {
+          if (x.type === 'text' || x.type === 'search') {
+            this.dataSub = this.dataSub.filter(
+              (a) => a[x.condition].toString().toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+          } else {
+            this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
+          }
+        });
+      }
+    }
+
+    if (!this.value) {
+      if (!filter.length) return this.dataSub = this.data;
+      filter.forEach((x, ix) => {
+        if (ix === 0) {
+          if (x.type === 'text' || x.type === 'search') {
+            this.dataSub = this.data.filter(
+              (a) => a[x.condition].toString().toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+          } else {
+            this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
+          }
+        } else {
+          if (x.type === 'text' || x.type === 'search') {
+            this.dataSub = this.dataSub.filter(
+              (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+          } else {
+            this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
+          }
+        }
+
+      });
+    }
   }
 
 }

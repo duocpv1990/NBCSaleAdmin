@@ -1,1 +1,3 @@
-<app-filter-card [listFilter]="dataFilterCard"></app-filter-card>
+<div class="content-title">Danh sách sản phẩm</div>
+<app-filter [(listFilter)]="listFilter" (callback)="handleCallback($event)">
+</app-filter>

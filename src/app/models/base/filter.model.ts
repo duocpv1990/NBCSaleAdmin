@@ -1,15 +1,11 @@
-export interface FilterModel {
-          ContractCode: string;
-          Seller: string;
-          StartDate: string;
-          EndDate: string;
-          Status: string;
-          Product:string;
-          typeDayFilter:string
-          data: ArrayModel | []
+export class FilterModel {
+    Text: string;
+    type: string;
+    condition?: string;
+    value?: string;
+    data?: ArrayModel | [];
 }
-
-export interface ArrayModel {
-          value : any;
-          text: string
+export class ArrayModel {
+    value: any;
+    text: string;
 }

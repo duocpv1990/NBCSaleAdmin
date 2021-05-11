@@ -190,3 +190,37 @@
   border: none;
   margin: 0px 16px;
 }
+
+.shadow {
+  box-shadow: 0 0 3px 1px rgb(128 128 128 / 30%);
+  border-radius: 20px;
+  background-color: var(--color-white);
+}
+.shadow-half {
+  box-shadow: 0 0 3px 1px rgb(128 128 128 / 30%);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: var(--color-white);
+}
+
+.base-input {
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid #e4e4e4;
+  outline-style: none;
+  &-search {
+    background-color: var(--color-list-nav);
+    border-radius: 20px;
+    height: 40px;
+    padding: 0px 20px;
+    border: none;
+    color: white;
+    outline-style: none;
+  }
+}
+
+.content-title {
+  margin-bottom: 21px;
+  margin-top: 9px;
+  font-weight: 600;
+}
