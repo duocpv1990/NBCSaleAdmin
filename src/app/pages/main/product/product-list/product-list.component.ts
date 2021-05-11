@@ -12,11 +12,13 @@ export class ProductListComponent implements OnInit {
   value: string;
   dataSub = [];
   data = [];
+  tableData = [];
 
   constructor() { }
 
   ngOnInit(): void {
     this.listFilter = this.config.filter;
+    this.tableData = this.config.collums;
   }
 
   handleCallback = (value?) => {
@@ -57,5 +59,7 @@ export class ProductListComponent implements OnInit {
       });
     }
   }
+
+
 
 }

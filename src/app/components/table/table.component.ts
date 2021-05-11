@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, NgModule, OnChanges, OnInit, Output } f
 })
 export class TableComponent implements OnInit, OnChanges {
     @Input() data: any;
-    @Input() listlable: any;
+    @Input() tableData: any;
     @Input() listActive?: any;
     @Output() callback = new EventEmitter<any>();
 

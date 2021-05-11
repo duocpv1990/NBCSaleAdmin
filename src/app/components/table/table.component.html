@@ -25,7 +25,7 @@
             <thead>
                 <tr>
                     <th>STT </th>
-                    <th scope="col" *ngFor="let item of listlable" [style.min-width.px]="item.width">{{ item.name }}
+                    <th scope="col" *ngFor="let item of tableData" [style.min-width.px]="item.width">{{ item.name }}
                     </th>
                 </tr>
             </thead>
@@ -34,24 +34,20 @@
                     <td>
                         {{ i+1 }}
                     </td>
-                    <td *ngFor="let i of listlable">
-                        <span *ngIf="i.type === 'number'" (click)="handleRouteLink(item)">{{ item[i.id] | number }}</span>
+                    <td *ngFor="let i of tableData">
+                        <span *ngIf="i.type === 'number'" (click)="handleRouteLink(item)">{{ item[i.id] | number
+                            }}</span>
                         <span *ngIf="i.type === 'text'" (click)="handleRouteLink(item)">{{ item[i.id] }}</span>
-                        <span *ngIf="i.type === 'object'" (click)="handleRouteLink(item)">{{ item[i.id][i.idSub] }}</span>
+                        <span *ngIf="i.type === 'object'" (click)="handleRouteLink(item)">{{ item[i.id][i.idSub]
+                            }}</span>
                         <span *ngIf="i.type === 'date'" (click)="handleRouteLink(item)">
                             {{ item[i.id] | date: "dd-MM-YYYY" }}
                         </span>
                         <span *ngIf="i.type === 'setting'">
-                            <button
-                                (click)="onClickSetting(item, 'edit')"
-                                class="btn mbf-btn-active"
-                            >
+                            <button (click)="onClickSetting(item, 'edit')" class="btn mbf-btn-active">
                                 Sửa
                             </button>
-                            <button
-                                (click)="onClickSetting(item, 'delete')"
-                                class="btn mbf-btn-create ml-2"
-                            >
+                            <button (click)="onClickSetting(item, 'delete')" class="btn mbf-btn-create ml-2">
                                 Xóa
                             </button>
                         </span>

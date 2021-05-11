@@ -6,6 +6,7 @@ import { productRoute } from './product.routes';
 import { ProductComponent } from './product.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { FilterBaseModule } from 'src/app/components/filter/filter.component';
+import { TableBaseModule } from 'src/app/components/table/table.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { FilterBaseModule } from 'src/app/components/filter/filter.component';
   imports: [
     CommonModule,
     RouterModule.forChild(productRoute),
-    FilterBaseModule
+    FilterBaseModule,
+    TableBaseModule
   ],
   exports: [ProductComponent]
 })
