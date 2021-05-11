@@ -10,7 +10,7 @@ export class AppGuard implements CanLoad, CanActivate {
   constructor(
     private localStorageService: LocalStorageService,
     public router: Router
-  ) {}
+  ) { }
 
   canLoad(): boolean | Observable<boolean> | Promise<boolean> {
     if (!this.localStorageService.get('access_token')) {
@@ -23,7 +23,7 @@ export class AppGuard implements CanLoad, CanActivate {
 
   canActivate(): boolean | Observable<boolean> | Promise<boolean> {
     if (this.localStorageService.get('access_token')) {
-      this.router.navigate(['employee']);
+      this.router.navigate(['home']);
       return false;
     } else {
       return true;

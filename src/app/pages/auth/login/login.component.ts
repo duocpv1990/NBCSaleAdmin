@@ -14,15 +14,15 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private localStorage: LocalStorageService,
     private authService: AuthenticationService
-  ) {}
-  
+  ) { }
+
   data = {
     type: {
       phone: 'phone',
       password: 'password',
     },
   };
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   login(ev) {
     this.authService
@@ -33,9 +33,9 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (res) => {
           this.localStorage.set('access_token', res);
-          this.router.navigate(['employee']);
+          this.router.navigate(['home']);
         },
-        (err) => {          
+        (err) => {
           this.errorLogin = err.error.message;
         }
       );
