@@ -22,13 +22,8 @@ export class MainLayoutComponent implements OnInit {
         linkURL: 'home',
       },
       {
-        icon: 'assets/img/bag.svg',
-        name: 'Sản phẩm',
-        linkURL: 'product',
-      },
-      {
         icon: 'assets/img/enterprise-code.svg',
-        name: 'Mã doanh nghiệp',
+        name: 'Doanh nghiệp',
         linkURL: 'enterprise',
       },
       {
@@ -37,10 +32,15 @@ export class MainLayoutComponent implements OnInit {
         linkURL: 'distributor',
       },
       {
-        icon: 'assets/img/shop.svg',
-        name: 'Điểm bán',
-        linkURL: 'shop',
+        icon: 'assets/img/bag.svg',
+        name: 'Sản phẩm',
+        linkURL: 'product',
       },
+      // {
+      //   icon: 'assets/img/shop.svg',
+      //   name: 'Điểm bán',
+      //   linkURL: 'shop',
+      // },
     ],
   };
   constructor() { }
