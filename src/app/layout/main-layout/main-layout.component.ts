@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { fader } from 'src/app/utils/animations/fader.animation';
 
@@ -10,6 +10,7 @@ import { fader } from 'src/app/utils/animations/fader.animation';
     // <-- add your animations here
     fader,
   ],
+  encapsulation: ViewEncapsulation.None
 })
 export class MainLayoutComponent implements OnInit {
   showFiller = false;
@@ -20,21 +21,28 @@ export class MainLayoutComponent implements OnInit {
         icon: 'assets/img/home.svg',
         name: 'Trang chủ',
         linkURL: 'home',
+        subs: [
+          { name: 'Danh sách doanh nghiệp', path: 'home/enterprise-list' },
+          { name: 'Danh sách sản phẩm', path: 'home/product-list' }
+        ]
       },
       {
         icon: 'assets/img/enterprise-code.svg',
         name: 'Doanh nghiệp',
         linkURL: 'enterprise',
+        subs: []
       },
       {
         icon: 'assets/img/distributor.svg',
         name: 'Nhà phân phối',
         linkURL: 'distributor',
+        subs: []
       },
       {
         icon: 'assets/img/bag.svg',
         name: 'Sản phẩm',
         linkURL: 'product',
+        subs: []
       },
       // {
       //   icon: 'assets/img/shop.svg',
