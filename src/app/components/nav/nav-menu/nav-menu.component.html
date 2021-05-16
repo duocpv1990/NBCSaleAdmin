@@ -20,8 +20,7 @@
     <mat-accordion [displayMode]="'flat'">
         <div *ngFor="let navItem of dataNavMenu?.list; let i = index" class="nav-item">
             <div class="nav-head mat-elevation-z0" *ngIf="navItem.subs.length === 0">
-                <a class="nav-link" (click)="isActive = i" [routerLink]="navItem.linkURL"
-                    [routerLinkActive]="['nav-menu-active']">
+                <a class="nav-link" [routerLink]="navItem.linkURL" [routerLinkActive]="['nav-menu-active']">
                     <img [src]="navItem.icon" />
                     <span class="nav-link-text">{{ navItem.name }}</span>
                 </a>
@@ -30,12 +29,12 @@
                 <mat-expansion-panel-header class="nav-head">
                     <mat-panel-title class="nav-link">
                         <img [src]="navItem.icon" />
-                        <span class="nav-link-text" (click)="isActive = i">{{ navItem.name }}</span>
+                        <span class="nav-link-text">{{ navItem.name }}</span>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="nav-section">
                     <div *ngFor="let navPage of navItem.subs" class="nav-item">
-                        <a class="nav-link" [routerLink]="navPage.path" [routerLinkActive]="['nav-menu-active']">
+                        <a class="nav-link" [routerLink]="navPage.path" [routerLinkActive]="['nav-submenu-active']">
                             {{ navPage.name }}
                         </a>
                     </div>
