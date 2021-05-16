@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EnterPriseModel } from 'src/app/models/enterprise.model';
-import { EnterpriseEditComponent } from '../../enterprise/enterprise-edit/enterprise-edit.component';
+import { Product } from 'src/app/models/product.model';
+
+
 
 @Component({
   selector: 'app-home-product',
@@ -8,128 +9,98 @@ import { EnterpriseEditComponent } from '../../enterprise/enterprise-edit/enterp
   styleUrls: ['./home-product.component.scss']
 })
 export class HomeProductComponent implements OnInit {
-
-  config = new EnterPriseModel();
-  listFilter = [];
+  listFilter;
+  config = new Product();
+  value: string;
+  dataSub = [];
+  tableData = [];
+  listActive;
+  dataTable;
   data = [
     {
-      "stt": "1",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 1',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country": "Viet Nam",
-      "city": "1",
-      "district": "1",
-      "address": "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
+      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
+      productName: 'Bút bi Thiên Long',
+      barcode: '123456789',
+      contractPackage: 'Gói cơ bản',
+      owner: 'Công ty TNHH Việt An',
+      authorization: {
+        name: 'DNSH-NSX',
+        type: 'Toàn quyền'
+      },
+      status: 'Cho quét',
+      infoStatus: 'Đã duyệt',
+      scanCount: 6
     },
     {
-      "stt": "2",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 2 ',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country": "Viet Nam",
-      "city": "1",
-      "district": "1",
-      "address": "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
+      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
+      productName: 'Bút bi Thiên Long',
+      barcode: '123456789',
+      contractPackage: 'Gói cơ bản',
+      owner: 'Công ty TNHH Việt An',
+      authorization: {
+        name: 'DNSH-NSX',
+        type: 'Toàn quyền'
+      },
+      status: 'Cho quét',
+      infoStatus: 'Đã duyệt',
+      scanCount: 6
     },
     {
-      "stt": "3",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 3',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country": "Viet Nam",
-      "city": "1",
-      "district": "1",
-      "address": "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
+      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
+      productName: 'Bút bi Thiên Long',
+      barcode: '123456789',
+      contractPackage: 'Gói cơ bản',
+      owner: 'Công ty TNHH Việt An',
+      authorization: {
+        name: 'DNSH-NSX',
+        type: 'Toàn quyền'
+      },
+      status: 'Cho quét',
+      infoStatus: 'Đã duyệt',
+      scanCount: 6
     },
     {
-      "stt": "4",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 4',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country": "Viet Nam",
-      "city": "1",
-      "district": "1",
-      "address": "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
+      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
+      productName: 'Bút bi Thiên Long',
+      barcode: '123456789',
+      contractPackage: 'Gói cơ bản',
+      owner: 'Công ty TNHH Việt An',
+      authorization: {
+        name: 'DNSH-NSX',
+        type: 'Toàn quyền'
+      },
+      status: 'Cho quét',
+      infoStatus: 'Đã duyệt',
+      scanCount: 6
     },
     {
-      "stt": "5",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 5',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country": "Viet Nam",
-      "city": "1",
-      "district": "1",
-      "address": "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
-    {
-      "stt": "6",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 6',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country": "Viet Nam",
-      "city": "1",
-      "district": "1",
-      "address": "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
-
-
+      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
+      productName: 'Bút bi Thiên Long',
+      barcode: '123456789',
+      contractPackage: 'Gói cơ bản',
+      owner: 'Công ty TNHH Việt An',
+      authorization: {
+        name: 'DNSH-NSX',
+        type: 'Toàn quyền'
+      },
+      status: 'Cho quét',
+      infoStatus: 'Đã duyệt',
+      scanCount: 6
+    }
   ];
-  dataTable;
-  listActive;
-  dataSub;
+
   constructor(
 
   ) { }
 
   ngOnInit(): void {
     this.listFilter = this.config.filter;
+    this.tableData = this.config.collums;
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
     this.dataSub = this.data;
   }
+
   handleCallback(ev) {
     const filter = this.listFilter.filter(x => x.value);
     if (!filter.length) return this.dataSub = this.data;
@@ -151,10 +122,12 @@ export class HomeProductComponent implements OnInit {
       }
 
     });
+
   }
+
   handleCallbackTable(ev) {
 
-
   }
+
 
 }
