@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -12,18 +12,19 @@ import { ChangePasswordComponent } from '../../dialog/change-password/change-pas
   selector: 'app-header-info',
   templateUrl: './header-info.component.html',
   styleUrls: ['./header-info.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HeaderInfoComponent implements OnInit {
   @Input() dataHeaderInfo;
   profile: Observable<ProfileModel>;
-  constructor( private local : LocalStorageService,
+  constructor(private local: LocalStorageService,
     private route: Router,
     private profileService: ProfileService,
-    private dialog: MatDialog ) { }
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
-   this.getProfile()
-    
+    this.getProfile()
+
   }
 
   btnLogout() {
@@ -31,17 +32,17 @@ export class HeaderInfoComponent implements OnInit {
     this.route.navigate([''])
   }
   getProfile() {
-    this.profile = this.profileService.get('').pipe(map((res : any) => {
+    this.profile = this.profileService.get('').pipe(map((res: any) => {
       return res.data
     }))
-    
+
   }
-  changePassword() : void {
+  changePassword(): void {
     this.dialog.open(ChangePasswordComponent, {
       data: {}
     })
       .afterClosed()
-    .subscribe(() => {})
+      .subscribe(() => { })
   }
 
 }

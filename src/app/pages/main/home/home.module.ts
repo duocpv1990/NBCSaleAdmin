@@ -11,11 +11,12 @@ import { HomeEnterpriseComponent } from './home-enterprise/home-enterprise.compo
 import { HomeProductComponent } from './home-product/home-product.component';
 import { FilterBaseModule } from 'src/app/components/filter/filter.component';
 import { TableBaseModule } from 'src/app/components/table/table.component';
+import { HomeNotificationComponent } from './home-notification/home-notification.component';
 
 
 
 @NgModule({
-  declarations: [HomeComponent, HomeEnterpriseComponent, HomeProductComponent],
+  declarations: [HomeComponent, HomeEnterpriseComponent, HomeProductComponent, HomeNotificationComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(homeRoute),
