@@ -1,1 +1,5 @@
-<p>home-notification works!</p>
+<div class="content-title">Thông báo</div>
+<app-filter [(listFilter)]="listFilter" (callback)="tableFilter($event)">
+</app-filter>
+<app-table [tableData]="dataTable" [data]="dataSub">
+</app-table>
