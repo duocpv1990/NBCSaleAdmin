@@ -17,6 +17,22 @@ export class HomeNotificationComponent implements OnInit {
     {
       time: '08:00 24/04/2021',
       title: 'Công ty TNHH MTV Phú An đã cập nhật thông tin doanh nghiệp'
+    },
+    {
+      time: '08:00 24/04/2021',
+      title: 'Công ty TNHH MTV Phú An đã cập nhật thông tin doanh nghiệp'
+    },
+    {
+      time: '08:00 24/04/2021',
+      title: 'Công ty TNHH MTV Phú An đã cập nhật thông tin doanh nghiệp'
+    },
+    {
+      time: '08:00 24/04/2021',
+      title: 'Công ty TNHH MTV Phú An đã cập nhật thông tin doanh nghiệp'
+    },
+    {
+      time: '08:00 24/04/2021',
+      title: 'Công ty TNHH MTV Phú An đã cập nhật thông tin doanh nghiệp'
     }
   ];
   dataTable;
