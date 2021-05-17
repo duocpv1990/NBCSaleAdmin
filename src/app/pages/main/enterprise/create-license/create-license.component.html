@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div class="title">THÊM MỚI CHỨNG CHỈ, CHỨNG NHẬN</div>
+  <div class="content">
+    <label for="">Tên chứng chỉ, chứng nhận</label>
+    <input class="name" [(ngModel)]="model.Name" type="text" />
+    <div class="form">
+      <div class="text">
+        <label for="">Trạng thái</label>
+        <select name="" id="">
+          <option value="">Hiển thị</option>
+          <option value="">Không hiển thị</option>
+        </select>
+      </div>
+      <div class="text">
+        <label for="">Ngày hết hạn</label>
+        <input type="date" [(ngModel)]="model.Date" />
+      </div>
+      <label for="">Hình ảnh giấy chứng nhận</label>
+      <br />
+    </div>
+    <div class="upload">
+      <div class="radio">
+        <input
+          id="img"
+          [checked]="check == 1"
+          (click)="clickUpload(1)"
+          type="radio"
+        />
+        <label for="img">Tải ảnh từ máy</label>
+      </div>
+      <div class="radio">
+        <input
+          id="link"
+          [checked]="check == 2"
+          (click)="clickUpload(2)"
+          type="radio"
+        />
+        <label for="link">Đường link</label>
+      </div>
+    </div>
+  </div>
+  <div class="link-upload" *ngIf="check === 1">
+    <div class="upload-img">
+      <div class="name-img">
+        <p *ngFor="let item of listUpload">{{ item.name }}</p>
+      </div>
+      <input
+        id="images"
+        multiple
+        #file
+        hidden
+        type="file"
+        accept="image/*"
+        (change)="preview(file.files)"
+      />
+      <label for="images">+</label>
+    </div>
+  </div>
+  <div class="link" *ngIf="check === 2">
+       <div></div>
+       <input type="text" name="link" [(ngModel)]="model.Link" placeholder="Nhập URL">
+  </div>
+  <div class="group-btn">
+    <button (click)="cancel()" class="btn-cancel">
+        Huỷ bỏ
+    </button>
+    <button (click)="save()" class="btn-save">
+        Lưu
+    </button>
+  </div>
+
+</div>
