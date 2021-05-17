@@ -13,18 +13,21 @@ import { DeleteEnterpriseComponent } from './delete-enterprise/delete-enterprise
 import { CertificateEnterpriseComponent } from './enterprise-create/certificate-enterprise/certificate-enterprise.component';
 import { EnterpriseEditComponent } from './enterprise-edit/enterprise-edit.component';
 import { EditModule } from 'src/app/components/edit/edit.component';
+import { CreateLicenseComponent } from './create-license/create-license.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [EnterpriseComponent, EnterpriseListComponent, EnterpriseCreateComponent, DeleteEnterpriseComponent, CertificateEnterpriseComponent, EnterpriseEditComponent],
+  declarations: [EnterpriseComponent, EnterpriseListComponent, EnterpriseCreateComponent, DeleteEnterpriseComponent, CertificateEnterpriseComponent, EnterpriseEditComponent, CreateLicenseComponent],
   imports: [
     CommonModule,
     FilterBaseModule,
+    FormsModule,
     TableBaseModule,
     CreateModule,
     DeleteModule,
     EditModule,
     RouterModule.forChild(enterpriseRoute),
   ],
-  exports: [EnterpriseComponent]
+  exports: [EnterpriseComponent,EnterpriseListComponent, EnterpriseCreateComponent, DeleteEnterpriseComponent,CertificateEnterpriseComponent , CreateLicenseComponent]
 })
 export class EnterpriseModule { }

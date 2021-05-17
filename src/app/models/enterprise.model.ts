@@ -3,8 +3,7 @@ import { CreateModel } from "./base/create.model";
 import { FilterModel } from "./base/filter.model";
 
 export class EnterPriseModel {
-
-
+    
     public get filter(): Array<FilterModel> {
         return [
             {
@@ -215,4 +214,11 @@ export class EnterPriseModel {
     }
 
 
+}
+export class EnterPrise{
+    Name: string;
+    Date: string;
+    Status: number;
+    MediaURLList: [];
+    Link: string
 }

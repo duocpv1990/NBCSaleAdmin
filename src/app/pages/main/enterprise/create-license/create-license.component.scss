@@ -1,0 +1,98 @@
+.title{
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    padding: 20px;
+}
+.content{
+    padding: 25px 40px 25px 40px;
+    .name{
+        width: 97%;
+    }
+    input, select {
+        outline: none;
+        width: 95%;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 10px 0 10px 0;
+        border: 1px solid #e4e4e4;
+      }
+    input[type='date']{
+        height: 15px;
+    }
+    .form{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .upload{
+        margin-top: 15px;
+        display: flex;
+        .radio{
+            display: flex;
+            align-items: center;
+            width: 100%;
+            input[type='radio']{
+                width: 35px;
+            }
+        }
+    }
+}
+.link{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    input{
+        outline: none;
+        width: 87%;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 10px 0 10px 0;
+        border: 1px solid #e4e4e4;
+      }
+}
+.link-upload{
+    padding: 0 40px 25px 40px;
+    .upload-img{
+        display: flex;
+        width: 50%;
+        min-height: 50px;
+        border-radius: 10px;
+        border: 1px solid #e4e4e4;
+        align-items: center;
+        .name-img{
+            width: 100%;
+        }
+        label{
+            width: 45px;
+            height: 35px;
+            font-size: 30px;
+            border: 1px solid #1894FF;
+            text-align: center;
+            border-radius: 10px;
+            color: #1894FF;
+            margin-right: 10px;
+        }
+    }
+}
+.group-btn {
+    text-align: center;
+    margin-top: 30px;
+    .btn-cancel {
+        width: 140px;
+        height: 50px;
+        background-color: #d6d6d6;
+        border-radius: 10px;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+      .btn-save {
+        width: 140px;
+        height: 50px;
+        background-color: #1894ff;
+        border-radius: 10px;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+      }
+  }

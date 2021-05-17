@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, NgModule, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { CreateLicenseComponent } from 'src/app/pages/main/enterprise/create-license/create-license.component';
 
 @Component({
   selector: 'app-create',
@@ -21,7 +22,9 @@ export class CreateComponent implements OnInit {
   model: any = {};
   imagePath;
   imgURL;
+  result = null;
   constructor(
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -58,6 +61,15 @@ export class CreateComponent implements OnInit {
   onClickButton = (i) => {
     i.data = this.model;
     this.callback.emit(i);
+  }
+  onClick(){
+    return this.dialog.open(CreateLicenseComponent, {
+      width: '940px',
+      height: '843px'
+    }).afterClosed().subscribe(result => {
+      this.result = result;
+      
+    });
   }
 }
 
