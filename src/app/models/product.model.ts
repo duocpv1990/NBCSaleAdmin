@@ -20,35 +20,12 @@ export class Product {
                 condition: 'product-name'
             },
             {
-                Text: 'Công ty sở hữu',
-                type: 'text',
-                data: [],
-                condition: 'owner'
-            },
-            {
-                Text: 'Gói sản phẩm',
-                type: 'text',
-                data: [],
-                condition: 'package'
-            },
-            {
-                Text: 'Quyền quản lý',
-                type: 'select',
-                data: [],
-                condition: 'authorization'
-            },
-            {
                 Text: 'Trạng thái',
                 type: 'select',
                 data: [],
                 condition: 'status'
             },
-            {
-                Text: 'Trạng thái thông tin',
-                type: 'select',
-                data: [],
-                condition: 'info-status'
-            },
+
             {
                 Text: '',
                 type: 'search',
@@ -65,7 +42,12 @@ export class Product {
                 width: 100,
                 type: 'checkbox',
             },
-
+            {
+                id: 'stt',
+                name: 'STT',
+                width: 100,
+                type: 'text',
+            },
             {
                 id: 'image',
                 name: 'Ảnh',
@@ -74,7 +56,7 @@ export class Product {
             },
             {
                 id: 'productName',
-                name: 'Sản phẩm',
+                name: 'Tên sản phẩm',
                 width: 200,
                 type: 'text',
             },
@@ -84,25 +66,6 @@ export class Product {
                 width: 200,
                 type: 'text',
             },
-
-            {
-                id: 'contractPackage',
-                name: 'Gói hợp đồng',
-                width: 200,
-                type: 'text',
-            },
-            {
-                id: 'owner',
-                name: 'Công ty sở hữu',
-                width: 200,
-                type: 'text',
-            },
-            {
-                id: 'authorization',
-                name: 'Quyền quản lý',
-                width: 200,
-                type: 'object',
-            },
             {
                 id: 'status',
                 name: 'Trạng thái',
@@ -110,14 +73,36 @@ export class Product {
                 type: 'text',
             },
             {
-                id: 'infoStatus',
-                name: 'Trạng thái thông tin',
+                id: 'scanCount',
+                name: 'Lượt quét',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'scanCount',
-                name: 'Lượt quét',
+                id: 'vote',
+                name: 'Lượt đánh giá',
+                width: 200,
+                type: 'text',
+            },
+
+            {
+                id: 'condition',
+                name: 'Tình trạng',
+                width: 200,
+                type: 'text',
+            },
+
+            {
+                id: 'price',
+                name: 'Gía',
+                width: 200,
+                type: 'text',
+            },
+
+
+            {
+                id: 'infoStatus',
+                name: 'Trạng thái thông tin',
                 width: 200,
                 type: 'text',
             },
@@ -131,18 +116,6 @@ export class Product {
                 class: 'btn-create',
                 text: 'Thêm mới',
                 type: 'create',
-                icon: ''
-            },
-            // {
-            //     class: 'btn-create',
-            //     text: 'Cập nhật',
-            //     type: 'update',
-            //     icon: ''
-            // },
-            {
-                class: 'btn-delete',
-                text: 'Xoá sản phẩm',
-                type: 'delete',
                 icon: ''
             },
             {

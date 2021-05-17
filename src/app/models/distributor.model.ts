@@ -89,10 +89,10 @@ export class DistributorModel {
                 type: 'text',
             },
             {
-                id: 'noun',
-                name: 'Hành động',
+                id: 'condition',
+                name: 'Tình trạng',
                 width: 200,
-                type: 'setting',
+                type: 'text',
             },
 
         ];
@@ -106,11 +106,6 @@ export class DistributorModel {
                 icon: ''
             },
             {
-                class: 'btn-delete',
-                text: 'Gỡ nhà phân phối',
-                type: 'delete',
-                icon: ''
-            },            {
                 class: 'btn-export',
                 text: 'Export',
                 type: 'export',
@@ -173,7 +168,7 @@ export class DistributorModel {
                 label: 'Email',
                 name: 'email',
                 type: 'text'
-            },            
+            },
             {
                 id: 'website',
                 label: 'Website',

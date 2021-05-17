@@ -7,9 +7,20 @@
     <span matBadge="2" matBadgeOverlap="false">
       <img src="assets/svg/nbc-mess.svg" srcset="" />
     </span>
-    <span matBadge="18" matBadgeOverlap="false">
+    <span [matMenuTriggerFor]="menu" matBadge="18" matBadgeOverlap="false">
       <img src="assets/svg/nbc-noti.svg" srcset="" />
     </span>
+    <mat-menu #menu="matMenu">
+      <div>
+        <div class="noti-header">
+          <span>THÔNG BÁO</span>
+          <span>Tất cả thông báo</span>
+        </div>
+      </div>
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
+
     <span matBadge="!" matBadgeOverlap="false" matBadgeColor="warn">
       <img src="assets/svg/nbc-setting.svg" srcset="" />
     </span>

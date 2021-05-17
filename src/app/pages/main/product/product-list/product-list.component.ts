@@ -20,6 +20,7 @@ export class ProductListComponent implements OnInit {
   dataTable;
   data = [
     {
+      stt: 1,
       image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
       productName: 'Bút bi Thiên Long',
       barcode: '123456789',
@@ -31,9 +32,13 @@ export class ProductListComponent implements OnInit {
       },
       status: 'Cho quét',
       infoStatus: 'Đã duyệt',
-      scanCount: 6
+      scanCount: 6,
+      vote: 91,
+      price: '138.500 đ',
+      condition: 'Cho quét'
     },
     {
+      stt: 2,
       image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
       productName: 'Bút bi Thiên Long',
       barcode: '123456789',
@@ -45,9 +50,13 @@ export class ProductListComponent implements OnInit {
       },
       status: 'Cho quét',
       infoStatus: 'Đã duyệt',
-      scanCount: 6
+      scanCount: 6,
+      vote: 91,
+      price: '138.500 đ',
+      condition: 'Cho quét'
     },
     {
+      stt: 3,
       image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
       productName: 'Bút bi Thiên Long',
       barcode: '123456789',
@@ -59,9 +68,13 @@ export class ProductListComponent implements OnInit {
       },
       status: 'Cho quét',
       infoStatus: 'Đã duyệt',
-      scanCount: 6
+      scanCount: 6,
+      vote: 91,
+      price: '138.500 đ',
+      condition: 'Cho quét'
     },
     {
+      stt: 4,
       image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
       productName: 'Bút bi Thiên Long',
       barcode: '123456789',
@@ -73,9 +86,13 @@ export class ProductListComponent implements OnInit {
       },
       status: 'Cho quét',
       infoStatus: 'Đã duyệt',
-      scanCount: 6
+      scanCount: 6,
+      vote: 91,
+      price: '138.500 đ',
+      condition: 'Cho quét'
     },
     {
+      stt: 5,
       image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
       productName: 'Bút bi Thiên Long',
       barcode: '123456789',
@@ -87,7 +104,10 @@ export class ProductListComponent implements OnInit {
       },
       status: 'Cho quét',
       infoStatus: 'Đã duyệt',
-      scanCount: 6
+      scanCount: 6,
+      vote: 91,
+      price: '138.500 đ',
+      condition: 'Cho quét'
     }
   ];
 

@@ -8,19 +8,31 @@ export class EnterPriseModel {
     public get filter(): Array<FilterModel> {
         return [
             {
-                Text: 'Mã doanh nghiệp',
+                Text: 'Mã địa điểm toàn cầu',
                 type: 'text',
                 data: [],
                 condition: 'code'
             },
             {
-                Text: 'Tên đăng ký',
+                Text: 'Tên doanh nghiệp',
                 type: 'text',
                 data: [],
                 condition: 'register'
             },
             {
                 Text: 'Trạng thái',
+                type: 'select',
+                data: [],
+                condition: 'status'
+            },
+            {
+                Text: 'Tình trạng',
+                type: 'select',
+                data: [],
+                condition: 'status'
+            },
+            {
+                Text: 'Gói dịch vụ',
                 type: 'select',
                 data: [],
                 condition: 'status'
@@ -62,16 +74,17 @@ export class EnterPriseModel {
             },
             {
                 id: 'register',
-                name: 'Tên đăng ký',
+                name: 'Tên doanh nghiệp',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'gt',
-                name: 'Giấy tờ',
+                id: 'servicePackage',
+                name: 'Gói dịch vụ',
                 width: 200,
                 type: 'text',
             },
+
             {
                 id: 'status',
                 name: 'Trạng thái',
@@ -80,16 +93,17 @@ export class EnterPriseModel {
                 color: '#26A700'
             },
             {
-                id: 'update',
-                name: 'Cập nhật',
+                id: 'condition',
+                name: 'Tình trạng',
                 width: 200,
                 type: 'text',
             },
+
             {
-                id: 'noun',
-                name: 'Hành động',
+                id: 'approve',
+                name: 'Phê duyệt',
                 width: 200,
-                type: 'setting',
+                type: 'text',
             },
 
         ];
@@ -104,11 +118,6 @@ export class EnterPriseModel {
                 icon: ''
             },
             {
-                class: 'btn-delete',
-                text: 'Xoá mã doanh nghiệp',
-                type: 'delete',
-                icon: ''
-            }, {
                 class: 'btn-export',
                 text: 'Export',
                 type: 'export',

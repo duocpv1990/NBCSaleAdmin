@@ -30,7 +30,8 @@ export class DistributorListComponent implements OnInit {
       "register": 'Công ty TNHH Việt An',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
+      "update": "13:30, 21/04/2021",
+      condition: 'Chưa duyệt'
     },
     {
       "stt": "2",
@@ -45,8 +46,8 @@ export class DistributorListComponent implements OnInit {
       "register": 'Công ty TNHH Việt An',
       "gt": '1 giấy tờ',
       "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021"
-
+      "update": "13:30, 21/04/2021",
+      condition: 'Đã duyệt'
     },
     {
       "stt": "3",
@@ -62,6 +63,7 @@ export class DistributorListComponent implements OnInit {
       'area': 'Hà Nội',
       'production': 0,
       'phone': '0123456789',
+      condition: 'Chưa duyệt'
     },
     {
       "stt": "4",
@@ -77,6 +79,7 @@ export class DistributorListComponent implements OnInit {
       'area': 'Hà Nội',
       'production': 0,
       'phone': '0123456789',
+      condition: 'Đã duyệt'
     },
     {
       "stt": "5",
@@ -92,6 +95,7 @@ export class DistributorListComponent implements OnInit {
       'area': 'Hà Nội',
       'production': 0,
       'phone': '0123456789',
+      condition: 'Đã duyệt'
     },
     {
       "stt": "6",
@@ -108,7 +112,7 @@ export class DistributorListComponent implements OnInit {
       'area': 'Hà Nội',
       'production': 0,
       'phone': '0123456789',
-
+      condition: 'Đã duyệt'
     },
 
 
