@@ -2,23 +2,12 @@ import { CollumsModel } from "./base/collums.model";
 import { CreateModel } from "./base/create.model";
 import { FilterModel } from "./base/filter.model";
 
-export class EnterPriseModel {
+export class HomeEnterPriseModel {
 
 
     public get filter(): Array<FilterModel> {
         return [
-            {
-                Text: 'Mã doanh nghiệp',
-                type: 'text',
-                data: [],
-                condition: 'code'
-            },
-            {
-                Text: 'Tên đăng ký',
-                type: 'text',
-                data: [],
-                condition: 'register'
-            },
+
             {
                 Text: 'Trạng thái',
                 type: 'select',
@@ -28,19 +17,15 @@ export class EnterPriseModel {
             {
                 Text: '',
                 type: 'search',
-                condition: 'stt'
-            }];
+                condition: 'fullText'
+            }
+        ];
     }
 
 
     public get collums(): Array<CollumsModel> {
         return [
-            {
-                id: 'checkbox',
-                name: '',
-                width: 100,
-                type: 'checkbox',
-            },
+
             {
                 id: 'stt',
                 name: 'STT',
@@ -56,7 +41,7 @@ export class EnterPriseModel {
 
             {
                 id: 'global',
-                name: 'Mã địa điểm toàn cầu',
+                name: 'Mã GLN',
                 width: 200,
                 type: 'text',
             },
@@ -67,8 +52,8 @@ export class EnterPriseModel {
                 type: 'text',
             },
             {
-                id: 'gt',
-                name: 'Giấy tờ',
+                id: 'servicePackage',
+                name: 'Gói dịch vụ',
                 width: 200,
                 type: 'text',
             },
@@ -80,17 +65,12 @@ export class EnterPriseModel {
                 color: '#26A700'
             },
             {
-                id: 'update',
-                name: 'Cập nhật',
+                id: 'condition',
+                name: 'Tình trạng',
                 width: 200,
                 type: 'text',
             },
-            {
-                id: 'noun',
-                name: 'Hành động',
-                width: 200,
-                type: 'setting',
-            },
+
 
         ];
     }

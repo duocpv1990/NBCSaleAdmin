@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EnterPriseModel } from 'src/app/models/enterprise.model';
+import { HomeEnterPriseModel } from 'src/app/models/home-enterprise.model';
+
 
 
 @Component({
@@ -9,7 +10,7 @@ import { EnterPriseModel } from 'src/app/models/enterprise.model';
 })
 export class HomeEnterpriseComponent implements OnInit {
 
-  config = new EnterPriseModel();
+  config = new HomeEnterPriseModel();
   listFilter = [];
   data = [
     {
@@ -18,7 +19,7 @@ export class HomeEnterpriseComponent implements OnInit {
       "global": '023456781',
       "register": 'Công ty TNHH Việt An 1',
       "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
+      "status": "Cho quét",
       "update": "13:30, 21/04/2021",
       "taxcode": "01234",
       "country": "Viet Nam",
@@ -27,7 +28,9 @@ export class HomeEnterpriseComponent implements OnInit {
       "address": "Ha Noi - Viet Nam",
       "phone": "0987654321",
       "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
+      "website": "https://www.consultindochina.com/",
+      "servicePackage": "Gói MBTT-5",
+      "condition": "Đã duyệt"
     },
     {
       "stt": "2",
@@ -35,7 +38,7 @@ export class HomeEnterpriseComponent implements OnInit {
       "global": '023456781',
       "register": 'Công ty TNHH Việt An 2 ',
       "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
+      "status": "Cho quét",
       "update": "13:30, 21/04/2021",
       "taxcode": "01234",
       "country": "Viet Nam",
@@ -44,7 +47,9 @@ export class HomeEnterpriseComponent implements OnInit {
       "address": "Ha Noi - Viet Nam",
       "phone": "0987654321",
       "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
+      "website": "https://www.consultindochina.com/",
+      "servicePackage": "Gói MBTT-5",
+      "condition": "Đã duyệt"
     },
     {
       "stt": "3",
@@ -52,7 +57,7 @@ export class HomeEnterpriseComponent implements OnInit {
       "global": '023456781',
       "register": 'Công ty TNHH Việt An 3',
       "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
+      "status": "Cho quét",
       "update": "13:30, 21/04/2021",
       "taxcode": "01234",
       "country": "Viet Nam",
@@ -61,7 +66,9 @@ export class HomeEnterpriseComponent implements OnInit {
       "address": "Ha Noi - Viet Nam",
       "phone": "0987654321",
       "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
+      "website": "https://www.consultindochina.com/",
+      "servicePackage": "Gói MBTT-5",
+      "condition": "Đã duyệt"
     },
     {
       "stt": "4",
@@ -69,7 +76,7 @@ export class HomeEnterpriseComponent implements OnInit {
       "global": '023456781',
       "register": 'Công ty TNHH Việt An 4',
       "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
+      "status": "Cho quét",
       "update": "13:30, 21/04/2021",
       "taxcode": "01234",
       "country": "Viet Nam",
@@ -78,7 +85,9 @@ export class HomeEnterpriseComponent implements OnInit {
       "address": "Ha Noi - Viet Nam",
       "phone": "0987654321",
       "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
+      "website": "https://www.consultindochina.com/",
+      "servicePackage": "Gói MBTT-5",
+      "condition": "Đã duyệt"
     },
     {
       "stt": "5",
@@ -86,7 +95,7 @@ export class HomeEnterpriseComponent implements OnInit {
       "global": '023456781',
       "register": 'Công ty TNHH Việt An 5',
       "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
+      "status": "Cho quét",
       "update": "13:30, 21/04/2021",
       "taxcode": "01234",
       "country": "Viet Nam",
@@ -95,7 +104,9 @@ export class HomeEnterpriseComponent implements OnInit {
       "address": "Ha Noi - Viet Nam",
       "phone": "0987654321",
       "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
+      "website": "https://www.consultindochina.com/",
+      "servicePackage": "Gói MBTT-5",
+      "condition": "Đã duyệt"
     },
     {
       "stt": "6",
@@ -103,7 +114,7 @@ export class HomeEnterpriseComponent implements OnInit {
       "global": '023456781',
       "register": 'Công ty TNHH Việt An 6',
       "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
+      "status": "Cho quét",
       "update": "13:30, 21/04/2021",
       "taxcode": "01234",
       "country": "Viet Nam",
@@ -112,7 +123,9 @@ export class HomeEnterpriseComponent implements OnInit {
       "address": "Ha Noi - Viet Nam",
       "phone": "0987654321",
       "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
+      "website": "https://www.consultindochina.com/",
+      "servicePackage": "Gói MBTT-5",
+      "condition": "Đã duyệt"
     },
 
 

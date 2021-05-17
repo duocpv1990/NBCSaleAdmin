@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product.model';
+import { HomeProduct } from 'src/app/models/home-product.model';
+
 
 
 
@@ -10,7 +11,7 @@ import { Product } from 'src/app/models/product.model';
 })
 export class HomeProductComponent implements OnInit {
   listFilter;
-  config = new Product();
+  config = new HomeProduct();
   value: string;
   dataSub = [];
   tableData = [];
@@ -18,73 +19,73 @@ export class HomeProductComponent implements OnInit {
   dataTable;
   data = [
     {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
+      stt: 1,
       productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
+      gtinCode: '123456789',
       contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
+      register: 'Công ty TNHH Việt An',
       authorization: {
         name: 'DNSH-NSX',
         type: 'Toàn quyền'
       },
       status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
+      condition: 'Đã duyệt',
       scanCount: 6
     },
     {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
+      stt: 2,
       productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
+      gtinCode: '123456789',
       contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
+      register: 'Công ty TNHH Việt An',
       authorization: {
         name: 'DNSH-NSX',
         type: 'Toàn quyền'
       },
       status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
+      condition: 'Đã duyệt',
       scanCount: 6
     },
     {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
+      stt: 3,
       productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
+      gtinCode: '123456789',
       contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
+      register: 'Công ty TNHH Việt An',
       authorization: {
         name: 'DNSH-NSX',
         type: 'Toàn quyền'
       },
       status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
+      condition: 'Đã duyệt',
       scanCount: 6
     },
     {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
+      stt: 4,
       productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
+      gtinCode: '123456789',
       contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
+      register: 'Công ty TNHH Việt An',
       authorization: {
         name: 'DNSH-NSX',
         type: 'Toàn quyền'
       },
       status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
+      condition: 'Đã duyệt',
       scanCount: 6
     },
     {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
+      stt: 5,
       productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
+      gtinCode: '123456789',
       contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
+      register: 'Công ty TNHH Việt An',
       authorization: {
         name: 'DNSH-NSX',
         type: 'Toàn quyền'
       },
       status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
+      condition: 'Đã duyệt',
       scanCount: 6
     }
   ];
