@@ -193,12 +193,7 @@ export class ShopModel {
                 name: 'avatar',
                 type: 'img'
             },
-            {
-                id: 'background',
-                label: 'Ảnh nền',
-                name: 'background',
-                type: 'img'
-            },
+          
         ];
     }
 

@@ -210,7 +210,13 @@ export class Product {
                 label: 'Ảnh đại diện',
                 name: 'avatar',
                 type: 'img'
-            }
+            },
+            {
+                id: 'addnew',
+                label: 'Chứng từ, chứng nhận',
+                name: 'addnew',
+                type: 'button'
+            },
         ];
     }
 
