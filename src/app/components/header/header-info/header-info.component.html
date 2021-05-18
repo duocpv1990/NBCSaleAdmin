@@ -96,25 +96,21 @@
       </div>
 
     </mat-menu>
-
-    <span matBadge="!" matBadgeOverlap="false" matBadgeColor="warn">
+    <span matBadge="!" [matMenuTriggerFor]="setting" matBadgeOverlap="false" matBadgeColor="warn">
       <img src="assets/svg/nbc-setting.svg" srcset="" />
     </span>
+    <mat-menu #setting="matMenu">
+      <button mat-menu-item [routerLink]="['/home/setting/enterprise']">Thông tin doanh nghiệp</button>
+      <button mat-menu-item [routerLink]="['/home/setting']">Thông tin tài khoản</button>
+      <button mat-menu-item>Thay đổi mật khẩu</button>
+      <button mat-menu-item (click)="btnLogout()">Đăng xuất</button>
+    </mat-menu>
   </div>
   <div class="info">
-    <div class="image" [matMenuTriggerFor]="menu">
+    <div class="image">
       <img src="assets/img/default-avatar.jpg" alt="" srcset="" />
     </div>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="btnLogout()">
-        <mat-icon> <span class="material-icons"> logout </span> </mat-icon>
-        <span>Đăng xuất</span>
-      </button>
-      <!-- <button mat-menu-item (click)="changePassword()">
-        <mat-icon><span class="material-icons"> https </span></mat-icon>
-        <span>Đổi mật khẩu</span>
-      </button> -->
-    </mat-menu>
+
     <div class="detail">
       <strong>Cty TNHH Nhật Minh</strong>
       <p>Superadmin</p>

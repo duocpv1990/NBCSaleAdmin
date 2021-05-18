@@ -12,6 +12,7 @@ import { HomeProductComponent } from './home-product/home-product.component';
 import { FilterBaseModule } from 'src/app/components/filter/filter.component';
 import { TableBaseModule } from 'src/app/components/table/table.component';
 import { HomeNotificationComponent } from './home-notification/home-notification.component';
+import { SettingModule } from './setting/setting.module';
 
 
 
@@ -24,7 +25,8 @@ import { HomeNotificationComponent } from './home-notification/home-notification
     ReactiveFormsModule,
     NgApexchartsModule,
     FilterBaseModule,
-    TableBaseModule
+    TableBaseModule,
+    SettingModule
   ],
   exports: [HomeComponent]
 })

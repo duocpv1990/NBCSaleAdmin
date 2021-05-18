@@ -23,6 +23,11 @@ export const homeRoute: Routes = [
       {
         path: 'notification-list',
         component: HomeNotificationComponent
+      },
+      {
+        path: 'setting',
+        loadChildren: () =>
+          import('./setting/setting.module').then((m) => m.SettingModule),
       }
     ]
   }
