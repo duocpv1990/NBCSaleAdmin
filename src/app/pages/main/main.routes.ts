@@ -31,7 +31,7 @@ export const mainRoutes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'home/enterprise-list',
         pathMatch: 'full',
       },
     ],

@@ -33,17 +33,14 @@ $VT-HTBH-Admin-theme: mat-light-theme(
 
 @import "./themes/root-color.scss";
 @import "./themes/global-class.scss";
+* {
+  font-family: "Montserrat", sans-serif !important;
+}
 html,
 body {
   font-family: "Montserrat", sans-serif;
   margin: 0px;
   height: 100%;
-  button {
-    font-family: "Montserrat", sans-serif !important;
-  }
-  .mat-tab-label .mat-tab-label-content {
-    font-family: "Montserrat", sans-serif !important;
-  }
 }
 
 .mat-dialog-container {
