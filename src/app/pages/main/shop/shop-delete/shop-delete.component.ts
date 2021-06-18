@@ -11,22 +11,22 @@ export class ShopDeleteComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ShopDeleteComponent>,
-    
+
   ) { }
 
   ngOnInit(): void {
     this.model = this.data;
   }
-  handleEvent(ev){
+  handleEvent(ev) {
     console.log(ev);
-    if(ev.value === 'cancel'){
-         this.dialogRef.close();
+    if (ev.value === 'cancel') {
+      this.dialogRef.close();
     }
-    if(ev.value === 'confirm'){
-       this.deleteFunction();
+    if (ev.value === 'confirm') {
+      this.deleteFunction();
     }
   }
-  deleteFunction(){
+  deleteFunction() {
     this.dialogRef.close();
   }
 }

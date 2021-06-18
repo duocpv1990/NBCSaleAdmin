@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./filter-card.component.scss']
 })
 export class FilterCardComponent implements OnInit {
-@Input() listFilter;
+  @Input() listFilter;
   constructor() { }
 
   ngOnInit(): void {
@@ -16,13 +16,13 @@ export class FilterCardComponent implements OnInit {
 
 }
 
-@NgModule ({
+@NgModule({
   declarations: [FilterCardComponent],
   imports: [CommonModule,
-              FormsModule,ReactiveFormsModule
+    FormsModule, ReactiveFormsModule
   ],
   exports: [FilterCardComponent]
 
 })
 
-export class FilterCardModule{}
+export class FilterCardModule { }

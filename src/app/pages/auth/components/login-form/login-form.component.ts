@@ -32,22 +32,22 @@ export class LoginFormComponent implements OnInit, OnChanges {
 
   form = new FormGroup({
     username: new FormControl(''
-    // ,Validators.pattern(' /^[0]{1}([2]|[3]|[5]|[9]|[7]|[8]){1}[0-9]\d{7}?$/g')
+      // ,Validators.pattern(' /^[0]{1}([2]|[3]|[5]|[9]|[7]|[8]){1}[0-9]\d{7}?$/g')
     ),
     password: new FormControl(''),
   });
-  constructor() {}
+  constructor() { }
 
   listLabelSub = [];
   ngOnChanges() {
-    
+
   }
   ngOnInit(): void {
   }
   submit() {
     // if(this.form.invalid){
     //       console.log(this.form.invalid);
-          
+
     // }
     this.onSubmit.emit(this.form.value);
   }
@@ -59,4 +59,4 @@ export class LoginFormComponent implements OnInit, OnChanges {
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [LoginFormComponent],
 })
-export class LoginFormMudule {}
+export class LoginFormMudule { }

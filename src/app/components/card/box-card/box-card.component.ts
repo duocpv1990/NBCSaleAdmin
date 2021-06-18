@@ -15,9 +15,9 @@ export class BoxCardComponent implements OnInit {
 }
 
 @NgModule({
-  declarations: [ BoxCardComponent],
-  imports: [   
+  declarations: [BoxCardComponent],
+  imports: [
   ],
   exports: [BoxCardComponent]
 })
-export class BoxCardModule{}
+export class BoxCardModule { }

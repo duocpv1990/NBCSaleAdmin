@@ -7,26 +7,26 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./delete-enterprise.component.scss']
 })
 export class DeleteEnterpriseComponent implements OnInit {
-   model = {};
+  model = {};
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<DeleteEnterpriseComponent>,
-    
+
   ) { }
 
   ngOnInit(): void {
     this.model = this.data;
   }
-  handleEvent(ev){
+  handleEvent(ev) {
     console.log(ev);
-    if(ev.value === 'cancel'){
-         this.dialogRef.close();
+    if (ev.value === 'cancel') {
+      this.dialogRef.close();
     }
-    if(ev.value === 'confirm'){
-       this.deleteFunction();
+    if (ev.value === 'confirm') {
+      this.deleteFunction();
     }
   }
-  deleteFunction(){
+  deleteFunction() {
     this.dialogRef.close();
   }
 

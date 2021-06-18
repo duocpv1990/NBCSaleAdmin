@@ -105,7 +105,7 @@ export class ShopListComponent implements OnInit {
       "MediaURL": "assets/img/default-avatar.jpg",
     }];
   dataTable;
-  listForm =  [
+  listForm = [
     {
       "name": "Cửa hàng online",
       "value": "1",
@@ -122,10 +122,10 @@ export class ShopListComponent implements OnInit {
     this.listFilter[2].data = this.listForm;
     this.dataTable = this.config.collums;
   }
-  handleCallback(ev){
+  handleCallback(ev) {
 
   }
-  handleCallbackTable(ev){
+  handleCallbackTable(ev) {
     if (ev.type === 'create') {
       return this.dialog.open(ShopCreateComponent, {
         width: '940px',

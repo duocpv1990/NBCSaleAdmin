@@ -39,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
     private authenService: AuthenticationService,
     public router: Router,
     private local: LocalStorageService
-  ) {}
+  ) { }
 
   ngOnInit() {
   }
@@ -48,21 +48,21 @@ export class ChangePasswordComponent implements OnInit {
   }
   change() {
     this.authenService.changePassword(this.form.value).subscribe(
-      (res:any) => {
+      (res: any) => {
         this.success = res.message + "Bạn cần đăng nhập lại";
       },
       (error) => {
         console.log(error.error.message)
         this.err = error.error.message
       }
-    );  
+    );
   }
 
   confirm() {
     this.local.clear();
     this.close();
     this.router.navigate([''])
-    
+
   }
 }
 @NgModule({
@@ -70,4 +70,4 @@ export class ChangePasswordComponent implements OnInit {
   imports: [CommonModule, FormsModule, ReactiveFormsModule, BaseButtonModule],
   exports: [ChangePasswordComponent],
 })
-export class ChangePasswordModule {}
+export class ChangePasswordModule { }

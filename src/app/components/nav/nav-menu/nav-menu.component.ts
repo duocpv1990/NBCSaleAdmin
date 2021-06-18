@@ -9,9 +9,9 @@ import { RouterModule } from '@angular/router';
 })
 export class NavMenuComponent implements OnInit {
   @Input() dataNavMenu;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
 
 
@@ -21,4 +21,4 @@ export class NavMenuComponent implements OnInit {
 
   exports: [NavMenuComponent],
 })
-export class NavComponentModule {}
+export class NavComponentModule { }

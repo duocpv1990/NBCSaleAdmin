@@ -11,17 +11,17 @@ export class EnterpriseCreateComponent implements OnInit {
   conFig = new EnterPriseModel;
   dataModel = {};
   option = {
-      title: 'Thêm mới doanh nghiệp',
-      type: 'create'
+    title: 'Thêm mới doanh nghiệp',
+    type: 'create'
   };
 
   arrayButton = [{
-      class: 'btn-cancel',
-      text: 'Hủy bỏ'
+    class: 'btn-cancel',
+    text: 'Hủy bỏ'
   },
   {
-      class: 'btn-save',
-      text: 'Lưu'
+    class: 'btn-save',
+    text: 'Lưu'
   }]
   constructor(
     private dialogRef: MatDialogRef<EnterpriseCreateComponent>,
@@ -29,30 +29,30 @@ export class EnterpriseCreateComponent implements OnInit {
   listCreate = [];
 
   ngOnInit(): void {
-      this.listCreate = this.conFig.create;
+    this.listCreate = this.conFig.create;
   }
 
   handleCallbackEvent = (value) => {
-      console.log(value);
-      
-      switch (value.class) {
-          case 'btn-cancel':
-              this.cancel();
-              break;
-          case 'btn-save':
-              this.save(value.data)
-              break;
-          default:
-              break;
-      }
-      this.dialogRef.close();
+    console.log(value);
+
+    switch (value.class) {
+      case 'btn-cancel':
+        this.cancel();
+        break;
+      case 'btn-save':
+        this.save(value.data)
+        break;
+      default:
+        break;
+    }
+    this.dialogRef.close();
   }
 
   cancel = () => {
   }
 
   save = (value) => {
-     this.dataModel = value;
+    this.dataModel = value;
   }
 
 }

@@ -23,8 +23,8 @@ export class BaseButtonComponent implements OnInit {
 
 @NgModule({
   declarations: [BaseButtonComponent],
-  imports: [CommonModule,ReactiveFormsModule,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   exports: [BaseButtonComponent]
 })
 
-export class BaseButtonModule{}
+export class BaseButtonModule { }

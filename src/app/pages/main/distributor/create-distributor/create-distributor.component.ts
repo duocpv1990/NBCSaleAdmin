@@ -11,17 +11,17 @@ export class CreateDistributorComponent implements OnInit {
   conFig = new DistributorModel;
   dataModel = {};
   option = {
-      title: 'Thêm mới nhà phân phối',
-      type: 'create'
+    title: 'Thêm mới nhà phân phối',
+    type: 'create'
   };
 
   arrayButton = [{
-      class: 'btn-cancel',
-      text: 'Hủy bỏ'
+    class: 'btn-cancel',
+    text: 'Hủy bỏ'
   },
   {
-      class: 'btn-save',
-      text: 'Lưu'
+    class: 'btn-save',
+    text: 'Lưu'
   }]
   constructor(
     private dialogRef: MatDialogRef<CreateDistributorComponent>,
@@ -29,29 +29,29 @@ export class CreateDistributorComponent implements OnInit {
   listCreate = [];
 
   ngOnInit(): void {
-      this.listCreate = this.conFig.create;
+    this.listCreate = this.conFig.create;
   }
 
   handleCallbackEvent = (value) => {
-      switch (value.class) {
-          case 'mbf-btn-save-note':
-              this.onFunictionSaveNote();
-              break;
-          case 'mbf-btn-save':
-              this.onFunictionSave()
-              break;
-          default:
-              break;
-      }
-      this.dialogRef.close();
+    switch (value.class) {
+      case 'mbf-btn-save-note':
+        this.onFunictionSaveNote();
+        break;
+      case 'mbf-btn-save':
+        this.onFunictionSave()
+        break;
+      default:
+        break;
+    }
+    this.dialogRef.close();
   }
 
   onFunictionSaveNote = () => {
-      console.log(this.dataModel);
+    console.log(this.dataModel);
   }
 
   onFunictionSave = () => {
-      console.log(this.dataModel);
+    console.log(this.dataModel);
   }
 
 

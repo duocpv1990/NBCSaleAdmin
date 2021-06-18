@@ -12,12 +12,12 @@ export class DeleteComponent implements OnInit {
   @Input() data;
   @Output() callback = new EventEmitter<any>();
   constructor() { }
-  
+
   ngOnInit(): void {
   }
-  onClick(ev){
+  onClick(ev) {
     const model = {
-       value: ev
+      value: ev
     }
     this.callback.emit(model)
   }

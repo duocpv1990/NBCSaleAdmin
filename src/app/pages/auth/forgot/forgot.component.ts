@@ -6,16 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forgot.component.scss'],
 })
 export class ForgotComponent implements OnInit {
- 
+
   data = {
     type: {
-      phone : 'phone',
+      phone: 'phone',
     }
-   }
-  constructor() {}
+  }
+  constructor() { }
 
-  ngOnInit(): void {}
-  forgot(ev){
+  ngOnInit(): void { }
+  forgot(ev) {
     console.log(ev.username);
 
   }
