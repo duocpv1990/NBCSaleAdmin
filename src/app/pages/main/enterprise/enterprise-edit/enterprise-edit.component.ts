@@ -48,11 +48,40 @@ export class EnterpriseEditComponent implements OnInit {
         }
       });
     });
+    if (this.data && this.data.country) {
+      this.addressService.getProvince(this.data.country).subscribe(res => {
+        console.log(res);
+        this.listCreate.forEach(create => {
+          if (create.id === 'city' && res.length !== 0) {
+            create.data = res.map(x => {
+              return {
+                id: x.ProvinceId,
+                value: x.Name,
+              };
+            });
+          }
+        });
+      });
+    }
+    if (this.data && this.data.city) {
+      this.addressService.getDistrict(this.data.city).subscribe(res => {
+        console.log(res);
+        this.listCreate.forEach(create => {
+          if (create.id === 'district' && res.length !== 0) {
+            create.data = res.map(x => {
+              return {
+                id: x.DistrictId,
+                value: x.Name,
+              };
+            });
+          }
+        });
+      });
+    }
     // this.mediaService.getCompanyMedia(this.data.companyId).subscribe(res => {
     //   this.data.MediaURL = res.find(x => x.Type === 1)?.MediaURL;
     //   this.data.BackgroundURL = res.find(x => x.Type === 2)?.MediaURL;
     // });
-debugger;
     // this.data.MediaURL = this.data.CompanyMedias.find(x => x.Type === 1)?.MediaURL;
     // this.data.BackgroundURL = this.data.CompanyMedias.find(x => x.Type === 2)?.MediaURL;
     this.dataModel = this.data;
@@ -66,7 +95,7 @@ debugger;
         this.cancel();
         break;
       case 'btn-save':
-        this.save(value.data)
+        this.save(value.data);
         break;
       default:
         break;

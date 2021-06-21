@@ -106,7 +106,6 @@ export class EnterpriseListComponent implements OnInit {
     else if (ev.type === 'edit') {
       console.log(ev);
       this.enterpriseService.getEnterpriseDetail(ev.item.companyId).subscribe((res) => {
-        console.log(res);
         const item = {
           companyId: ev.item.companyId,
           code: res.CompanyCode,
@@ -117,15 +116,38 @@ export class EnterpriseListComponent implements OnInit {
           update: (res.UpdatedOn !== null) ? this.serviceDate.formatDate(res.UpdatedOn, 'hh:mm MM/DD/YYYY') : '',
           address: res.AddressDetail,
           taxcode: res.TaxCode,
-          city: res.Province,
-          district: res.District,
-          country: res.Nation,
+          // city: res.Province,
+          // district: res.District,
+          // country: res.Nation,
           website: res.Website,
           phone: res.PhoneNumber,
           email: res.Email,
+          country: res.NationId,
+          city: res.ProvinceId,
+          district: res.DistrictId,
           MediaURL: res.CompanyMedias.find(x => x.Type === 1 && x.Status === 1)?.MediaURL,
-          BackgroundURL: res.CompanyMedias.find(x => x.Type === 2 && x.Status === 1)?.MediaURL
+          BackgroundURL: res.CompanyMedias.find(x => x.Type === 2 && x.Status === 1)?.MediaURL,
+          certifi: []
         };
+        if (res.CompanyCertifications && res.CompanyCertifications.length !== 0) {
+          item.certifi = res.CompanyCertifications.map(cer => {
+            return {
+              name: cer.Name,
+              status: cer.Status,
+              date: (cer.ExpiredDate !== null) ? this.serviceDate.formatDate(cer.ExpiredDate, 'MM/DD/YYYY') : '',
+              image: cer.CertificationMedias.map(media => {
+                return {
+                  str: media.MediaURL.substring(media.MediaURL.lastIndexOf('/') + 1),
+                  url: media.MediaURL
+                };
+              }),
+              // status: (x.Status === 1) ? 'Hoạt động' : 'Không hoạt động',
+              // gt: x.CertificateNumber + ' giấy tờ',
+              // type: x.Type,
+              // update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
+            };
+          });
+        }
         return this.dialog.open(EnterpriseEditComponent, {
           width: '940px',
           height: '843px',

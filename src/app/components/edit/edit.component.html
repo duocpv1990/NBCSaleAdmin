@@ -64,12 +64,32 @@
       </div>
     </div>
   </div>
-  <div class="add-new">
+  <div class="subtitle add-new">
     <div class="content row align-items-center" [hidden]="item.type !== 'button'" *ngFor="let item of data">
       <div class="label">{{ item?.label }}</div>
-      <button class="btn-add-new">Thêm mới</button>
     </div>
+    <button class="btn-add-new">Thêm mới</button>
   </div>
+  <ng-container *ngIf="model.certifi && model.certifi.length !== 0">
+    <div class="certification" *ngFor="let certifi of model.certifi">
+      <ng-container *ngFor="let item of data">
+        <ng-container *ngFor="let certi of item.child">
+          <div class="cer-cell">
+            {{certi.label}}
+          </div>
+          <div class="cer-cell" *ngIf="certi.id !== 'image'">
+            {{certifi[certi.id]}}
+          </div>
+          <div class="cer-cell" *ngIf="certi.id === 'image'">
+            <ng-container *ngFor="let img of certifi.image">
+              <a href="{{img.url}}" target="_blank">{{img.str}}</a>
+            </ng-container>
+
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </ng-container>
   <div class="group-btn">
     <button *ngFor="let i of arrayButton; let index = index" class="btn mbf-btn" [class]="i.class"
       (click)="onClickButton(i)">

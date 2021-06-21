@@ -51,16 +51,28 @@
   }
   .add-new {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 3fr;
     .btn-add-new {
       outline: none;
       border: none;
-      width: 100%;
+      width: 140px;
       height: 45px;
       background: none;
       border: 1px solid #1894ff;
       color: #1894ff;
       border-radius: 20px;
+    }
+  }
+  .certification {
+    border: 2px #707070 dashed;
+    margin-top: 3em;
+    height: 200px;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    .cer-cell {
+      text-align: left;
+      padding: 0px 20px;
+      margin-top: 1em;
     }
   }
   .input-text {

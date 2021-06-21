@@ -5,6 +5,7 @@ export class CreateModel {
     label: string;
     data?: DataModel[];
     class?: string;
+    child?: CreateModel[];
 }
 export class DataModel {
   id: number;

@@ -20,6 +20,7 @@ export class EditComponent implements OnInit {
 
   html: '';
   model: any = {};
+  // modelChill: any = {};
   imagePath;
   imgURL;
   constructor(
@@ -27,6 +28,7 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.model = this.dataModel || {};
+    // this.modelChill = this.dataModel || {};
   }
 
   preview(files, value) {
