@@ -115,7 +115,12 @@ export class EnterPriseModel {
                 width: 200,
                 type: 'approve',
             },
-
+            {
+              id: 'noun',
+              name: 'Hành động',
+              width: 200,
+              type: 'setting',
+            },
         ];
     }
 

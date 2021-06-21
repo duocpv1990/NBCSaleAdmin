@@ -67,7 +67,7 @@ export class EnterpriseListComponent implements OnInit {
       });
   }
 
-  handleCallback() {
+  handleCallback(): void {
     console.log(this.listFilter);
     this.getListEnterprise(
       this.listFilter.find(x => x.condition === 'global')?.value,

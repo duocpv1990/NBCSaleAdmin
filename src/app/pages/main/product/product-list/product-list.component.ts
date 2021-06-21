@@ -104,26 +104,25 @@ export class ProductListComponent implements OnInit {
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
     // this.dataSub = this.data;
+    this.getListProduct('', '', 1);
   }
 
-  getListProduct(pageCurrent: number): void {
+  getListProduct(name: string, companyName: string, pageCurrent: number, status?: number, type?: number): void {
     this.productService.getProduct(pageCurrent, 5).subscribe((res) => {
       console.log(res);
       this.data = res.map((x, index) => {
         return {
+          stt: index + 1,
           image: x.MediaURL,
           productName: x.Name,
           barcode: x.ProductCode,
           scanCount: x.ScanNumber,
-          distributor: x.Name,
-          status: (x.Type === 1) ? 'Đã duyệt' : 'Chưa duyệt',
-          phone: x.PhoneNumber,
-          area: "Hà Nội",
-          address: x.AddressDetail,
-          gt: x.ProductNumber + ' giấy tờ',
-          MediaURL: x.MediaURL,
-          production: x.ProductNumber,
-          update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
+          rateCount: x.RatingNumber,
+          scanStatus: 0,
+          price: x.Price,
+          type: x.Type,
+          status: (x.Status === 1) ? 'Hoạt động' : 'Không hoạt động',
+          // update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
         };
       });
       this.dataSub = this.data;
@@ -134,28 +133,15 @@ export class ProductListComponent implements OnInit {
       });
   }
 
-  handleCallback(ev) {
-    const filter = this.listFilter.filter(x => x.value);
-    if (!filter.length) return this.dataSub = this.data;
-    filter.forEach((x, ix) => {
-      if (ix === 0) {
-        if (x.type === 'text' || x.type === 'search') {
-          this.dataSub = this.data.filter(
-            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-        } else {
-          this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
-        }
-      } else {
-        if (x.type === 'text' || x.type === 'search') {
-          this.dataSub = this.dataSub.filter(
-            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-        } else {
-          this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
-        }
-      }
-
-    });
-
+  handleCallback(): void {
+    console.log(this.listFilter);
+    this.getListProduct(
+      this.listFilter.find(x => x.condition === 'name')?.value,
+      this.listFilter.find(x => x.condition === 'companyName')?.value,
+      1,
+      this.listFilter.find(x => x.condition === 'status')?.value,
+      this.listFilter.find(x => x.condition === 'type')?.value,
+    );
   }
 
   handleCallbackTable(ev) {
