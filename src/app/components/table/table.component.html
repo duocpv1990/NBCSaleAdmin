@@ -45,6 +45,15 @@
                         <span *ngIf="i.type === 'date'" (click)="handleRouteLink(item);handleClickRow(item)">
                             {{ item[i.id] | date: "dd-MM-YYYY" }}
                         </span>
+                        <span *ngIf="i.type === 'type'" [ngStyle]="{'color': (item[i.id] === 1)? 'green' : 'red'}" (click)="handleRouteLink(item);handleClickRow(item)">
+                          <ng-container *ngIf="item[i.id] === 1">Đã duyệt</ng-container>
+                          <ng-container *ngIf="item[i.id] !== 1">Chưa duyệt</ng-container>
+                        </span>
+                        <span *ngIf="i.type === 'approve'" >
+                          <button (click)="onClickSetting(item, 'approve')" class="btn-approve">
+                            Phê duyệt
+                          </button>
+                        </span>
                         <span *ngIf="i.type === 'setting'">
                             <button (click)="onClickSetting(item, 'edit')" class="btn-table">
                                 <img src="assets/svg/nbc-edit.svg" alt="" srcset="">

@@ -23,7 +23,7 @@
                     <select class="base-input" (change)="onChangeValueDate($event.target.value, item)">
                         <option value="">Tất cả</option>
                         <option *ngFor="let i of item.data" [value]="i.value">
-                            {{ i.name }}
+                            {{ i.text }}
                         </option>
                     </select>
                 </div>

@@ -36,14 +36,15 @@ export class EnterpriseListComponent implements OnInit {
     this.listFilter = this.config.filter;
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
-    this.getListEnterprise(1);
+    this.getListEnterprise('', '', 1);
   }
   /**
    *
    * @param pageCurrent current
    */
-  getListEnterprise(pageCurrent: number): void {
-    this.enterpriseService.getEnterprise('', '', pageCurrent, 5).subscribe((res) => {
+  getListEnterprise(code: string, name: string, pageCurrent: number, status?: number): void {
+    this.enterpriseService.getEnterprise(code ? code : '', name ? name : '',
+       pageCurrent, 5, status ? status : null).subscribe((res) => {
       console.log(res);
       this.data = res.map((x, index) => {
         return {
@@ -52,8 +53,9 @@ export class EnterpriseListComponent implements OnInit {
           code: x.CompanyCode,
           global: x.GLN,
           register: x.Name,
-          status: (x.Status === 1) ? 'Đã duyệt' : 'Chưa duyệt',
+          status: (x.Status === 1) ? 'Hoạt động' : 'Không hoạt động',
           gt: x.CertificateNumber + ' giấy tờ',
+          type: x.Type,
           update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
         };
       });
@@ -65,27 +67,34 @@ export class EnterpriseListComponent implements OnInit {
       });
   }
 
-  handleCallback(ev) {
-    const filter = this.listFilter.filter(x => x.value);
-    if (!filter.length) return this.dataSub = this.data;
-    filter.forEach((x, ix) => {
-      if (ix === 0) {
-        if (x.type === 'text' || x.type === 'search') {
-          this.dataSub = this.data.filter(
-            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-        } else {
-          this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
-        }
-      } else {
-        if (x.type === 'text' || x.type === 'search') {
-          this.dataSub = this.dataSub.filter(
-            (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
-        } else {
-          this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
-        }
-      }
+  handleCallback() {
+    console.log(this.listFilter);
+    this.getListEnterprise(
+      this.listFilter.find(x => x.condition === 'global')?.value,
+      this.listFilter.find(x => x.condition === 'name')?.value,
+      1,
+      this.listFilter.find(x => x.condition === 'status')?.value
+    );
+    // const filter = this.listFilter.filter(x => x.value);
+    // if (!filter.length) return this.dataSub = this.data;
+    // filter.forEach((x, ix) => {
+    //   if (ix === 0) {
+    //     if (x.type === 'text' || x.type === 'search') {
+    //       this.dataSub = this.data.filter(
+    //         (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+    //     } else {
+    //       this.dataSub = this.data.filter((a) => a[x.condition] == x.value);
+    //     }
+    //   } else {
+    //     if (x.type === 'text' || x.type === 'search') {
+    //       this.dataSub = this.dataSub.filter(
+    //         (a) => a[x.condition].toLowerCase().indexOf(x.value.toLowerCase()) > -1);
+    //     } else {
+    //       this.dataSub = this.dataSub.filter((a) => a[x.condition] == x.value);
+    //     }
+    //   }
 
-    });
+    // });
   }
   // tslint:disable-next-line:typedef
   handleCallbackTable(ev) {
@@ -142,7 +151,12 @@ export class EnterpriseListComponent implements OnInit {
       }).afterClosed().subscribe(result => {
       });
     } else if (ev.type === 'page') {
-      this.getListEnterprise(+ev.item);
+      this.getListEnterprise(
+        this.listFilter.find(x => x.condition === 'global')?.value,
+        this.listFilter.find(x => x.condition === 'name')?.value,
+        +ev.item,
+        this.listFilter.find(x => x.condition === 'status')?.value
+      );
     }
   }
 

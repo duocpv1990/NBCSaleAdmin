@@ -23,6 +23,17 @@
         border: none;
         cursor: pointer;
     }
+    .btn-approve{
+        border: 1px #1894FF solid;
+        padding: 5px;
+        border-radius: 15px;
+        width: 150px;
+        height: 37px;
+        color: #1894FF;
+        text-align: center;
+        background: #D2EAFF;
+        font-size: 16px;
+    }
     .paginator {
         display: flex;
         align-items: center;

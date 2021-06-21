@@ -128,22 +128,21 @@ export class DistributorListComponent implements OnInit {
     this.getListDistributor(1, '');
   }
   getListDistributor(pageCurrent: number, name: string, provinceId?: number): void {
-    this.distributorService.getDistributor(name, pageCurrent, 5, provinceId).subscribe((res) => {
+    this.distributorService.getDistributor(name ? name : '', pageCurrent, 5, provinceId).subscribe((res) => {
       console.log(res);
       this.data = res.map((x, index) => {
         return {
-          stt: index + 1,
           distributorId: x.DistributorId,
           code: x.TaxCode,
           global: x.GLN,
           distributor: x.Name,
-          status: (x.Type === 1) ? 'Đã duyệt' : 'Chưa duyệt',
           phone: x.PhoneNumber,
           area: "Hà Nội",
           address: x.AddressDetail,
           gt: x.ProductNumber + ' giấy tờ',
           MediaURL: x.MediaURL,
           production: x.ProductNumber,
+          type: x.Type,
           update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
         };
       });
@@ -156,7 +155,7 @@ export class DistributorListComponent implements OnInit {
   }
   handleCallback() {
     this.getListDistributor(1,
-      this.listFilter.find(x => x.condition === 'code')?.value,
+      this.listFilter.find(x => x.condition === 'name-dis')?.value,
       this.listFilter.find(x => x.condition === 'city')?.value
     );
   }

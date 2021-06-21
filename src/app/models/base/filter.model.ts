@@ -3,7 +3,7 @@ export class FilterModel {
     type: string;
     condition?: string;
     value?: string;
-    data?: ArrayModel | [];
+    data?: ArrayModel[];
 }
 export class ArrayModel {
     value: any;

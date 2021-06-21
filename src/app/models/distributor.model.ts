@@ -8,21 +8,21 @@ export class DistributorModel {
     public get filter(): Array<FilterModel> {
         return [
             {
-                Text: 'Mã doanh nghiệp',
+                Text: 'Tên nhà phần phối',
                 type: 'text',
                 data: [],
-                condition: 'code'
+                condition: 'name-dis'
             },
             {
-                Text: 'Thành phố',
-                type: 'select',
+                Text: 'Tên doanh nghiệp',
+                type: 'text',
                 data: [],
-                condition: 'city'
+                condition: 'name-ent'
             },
             {
                 Text: '',
                 type: 'search',
-                condition: "production"
+                condition: 'production'
             }];
     }
     public get collums(): Array<CollumsModel> {
@@ -33,12 +33,12 @@ export class DistributorModel {
                 width: 100,
                 type: 'checkbox',
             },
-            {
-                id: 'stt',
-                name: 'STT',
-                width: 100,
-                type: 'text',
-            },
+            // {
+            //     id: 'stt',
+            //     name: 'STT',
+            //     width: 100,
+            //     type: 'text',
+            // },
             {
                 id: 'MediaURL',
                 name: 'Ảnh',
@@ -87,6 +87,25 @@ export class DistributorModel {
                 name: 'Cập nhập',
                 width: 200,
                 type: 'text',
+            },
+            // {
+            //     id: 'status',
+            //     name: 'Trạng thái',
+            //     width: 200,
+            //     type: 'text',
+            //     color: '#26A700'
+            // },
+            {
+                id: 'type',
+                name: 'Tình trạng',
+                width: 200,
+                type: 'type',
+            },
+            {
+                id: 'approve',
+                name: 'Phê duyệt',
+                width: 200,
+                type: 'approve',
             },
             {
                 id: 'noun',
@@ -173,7 +192,7 @@ export class DistributorModel {
                 label: 'Email',
                 name: 'email',
                 type: 'text'
-            },            
+            },
             {
                 id: 'website',
                 label: 'Website',

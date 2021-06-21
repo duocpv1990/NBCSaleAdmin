@@ -8,23 +8,47 @@ export class EnterPriseModel {
     public get filter(): Array<FilterModel> {
         return [
             {
-                Text: 'Mã doanh nghiệp',
+                Text: 'Mã địa điểm toàn cầu',
                 type: 'text',
                 data: [],
-                condition: 'code'
+                condition: 'global'
             },
             {
-                Text: 'Tên đăng ký',
+                Text: 'Tên doanh nghiệp',
                 type: 'text',
                 data: [],
-                condition: 'register'
+                condition: 'name'
             },
             {
                 Text: 'Trạng thái',
                 type: 'select',
-                data: [],
+                data: [
+                  {
+                    value: 1,
+                    text: 'Hoạt động',
+                  },
+                  {
+                    value: 0,
+                    text: 'Ngừng hoạt động',
+                  }
+                ],
                 condition: 'status'
             },
+            {
+              Text: 'Tình trạng',
+              type: 'select',
+              data: [
+                {
+                  value: 1,
+                  text: 'Đã duyệt',
+                },
+                {
+                  value: 0,
+                  text: 'Chưa duyệt',
+                }
+              ],
+              condition: 'type'
+          },
             {
                 Text: '',
                 type: 'search',
@@ -81,15 +105,15 @@ export class EnterPriseModel {
             },
             {
                 id: 'type',
-                name: 'Cập nhật',
+                name: 'Tình trạng',
                 width: 200,
-                type: 'text',
+                type: 'type',
             },
             {
-                id: 'noun',
-                name: 'Hành động',
+                id: 'approve',
+                name: 'Phê duyệt',
                 width: 200,
-                type: 'setting',
+                type: 'approve',
             },
 
         ];
