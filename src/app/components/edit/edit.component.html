@@ -17,8 +17,8 @@
           <input type="{{ item.type }}" id="{{ item.id }}" name="{{ item.name }}" [(ngModel)]="model[item.id]" />
         </div>
         <div *ngIf="item.type === 'select'">
-          <select [(ngModel)]="model[item.id]">
-            <option *ngFor="let i of item.data" [value]="i.value">
+          <select [(ngModel)]="model[item.id]" (change)="handleCallbackOption($event.target.value, item.id)">
+            <option *ngFor="let i of item.data" [value]="i.id">
               {{ i.value || 1 }}
             </option>
           </select>
@@ -36,13 +36,13 @@
           </div> -->
 
         <!-- chưa customer-->
-        <div *ngIf="item.type === 'radio'">
+        <!-- <div *ngIf="item.type === 'radio'">
           <mat-radio-group [(ngModel)]="model[item.id]" aria-label="Select an option">
             <mat-radio-button value="1">Nam</mat-radio-button>
             <mat-radio-button value="2">Nữ</mat-radio-button>
           </mat-radio-group>
         </div>
-        <div *ngIf="item.type === 'checkbox'">123</div>
+        <div *ngIf="item.type === 'checkbox'">123</div> -->
       </div>
     </div>
   </div>

@@ -7,14 +7,14 @@ import { BaseApiService } from './base-api.service';
 })
 export class AuthenticationService extends BaseApiService<any> {
   constructor(http: HttpClient) {
-    super(http, 'api/SalesManager');
+    super(http, 'cognito/login');
   }
 
   login = (params) => {
-    return this.http.post(`api/SalesManager/Admin/Account/Login`, params);
-  };
+    return this.http.post(this.actionUrl, params);
+  }
 
   changePassword = (params: ChangeModel) => {
-    return this.http.post(`api/SalesManager/Admin/Account/ChangePassword`,params,);
+    return this.http.post(`api/SalesManager/Admin/Account/ChangePassword`, params);
   }
 }

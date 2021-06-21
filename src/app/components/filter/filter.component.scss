@@ -37,4 +37,11 @@
   input {
     width: 80%;
   }
+  button {
+    cursor: pointer;
+    width: 200px;
+    span {
+      float: left;
+    }
+  }
 }

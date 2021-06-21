@@ -4,6 +4,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProductAddComponent } from '../product-add/product-add.component';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { ProductDeleteComponent } from '../product-delete/product-delete.component';
+import { ProductService } from 'src/app/services/product.service';
+import { FormatDateService } from 'src/app/services/format-date.service';
 
 @Component({
   selector: 'app-product-list',
@@ -15,7 +17,7 @@ export class ProductListComponent implements OnInit {
   config = new Product();
   value: string;
   dataSub = [];
-  tableData = [];
+  // tableData = [];
   listActive;
   dataTable;
   data = [
@@ -92,15 +94,44 @@ export class ProductListComponent implements OnInit {
   ];
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private productService: ProductService,
+    private serviceDate: FormatDateService
   ) { }
 
   ngOnInit(): void {
     this.listFilter = this.config.filter;
-    this.tableData = this.config.collums;
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
-    this.dataSub = this.data;
+    // this.dataSub = this.data;
+  }
+
+  getListProduct(pageCurrent: number): void {
+    this.productService.getProduct(pageCurrent, 5).subscribe((res) => {
+      console.log(res);
+      this.data = res.map((x, index) => {
+        return {
+          image: x.MediaURL,
+          productName: x.Name,
+          barcode: x.ProductCode,
+          scanCount: x.ScanNumber,
+          distributor: x.Name,
+          status: (x.Type === 1) ? 'Đã duyệt' : 'Chưa duyệt',
+          phone: x.PhoneNumber,
+          area: "Hà Nội",
+          address: x.AddressDetail,
+          gt: x.ProductNumber + ' giấy tờ',
+          MediaURL: x.MediaURL,
+          production: x.ProductNumber,
+          update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
+        };
+      });
+      this.dataSub = this.data;
+
+    },
+      (err) => {
+        console.log(err);
+      });
   }
 
   handleCallback(ev) {

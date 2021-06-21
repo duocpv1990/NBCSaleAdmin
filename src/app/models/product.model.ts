@@ -11,31 +11,19 @@ export class Product {
                 Text: 'Mã sản phẩm',
                 type: 'text',
                 data: [],
-                condition: 'code'
+                condition: 'productCode'
             },
             {
                 Text: 'Tên sản phẩm',
                 type: 'text',
                 data: [],
-                condition: 'product-name'
+                condition: 'name'
             },
             {
                 Text: 'Công ty sở hữu',
                 type: 'text',
                 data: [],
-                condition: 'owner'
-            },
-            {
-                Text: 'Gói sản phẩm',
-                type: 'text',
-                data: [],
-                condition: 'package'
-            },
-            {
-                Text: 'Quyền quản lý',
-                type: 'select',
-                data: [],
-                condition: 'authorization'
+                condition: 'companyName'
             },
             {
                 Text: 'Trạng thái',
@@ -47,7 +35,7 @@ export class Product {
                 Text: 'Trạng thái thông tin',
                 type: 'select',
                 data: [],
-                condition: 'info-status'
+                condition: 'type'
             },
             {
                 Text: '',

@@ -18,7 +18,6 @@ import { ForgotComponent } from './forgot/forgot.component';
     // FormsModule,
     // ReactiveFormsModule,
     LoginFormMudule
-    
 
   ],
   providers: [],

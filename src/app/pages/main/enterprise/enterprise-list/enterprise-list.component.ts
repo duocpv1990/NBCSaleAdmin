@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteComponent } from 'src/app/components/dialog/delete/delete.component';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
+import { AuthenticationService } from 'src/app/services/auth.service';
+import { EnterpriseService } from 'src/app/services/enterprise.service';
+import { FormatDateService } from 'src/app/services/format-date.service';
 import { DeleteEnterpriseComponent } from '../delete-enterprise/delete-enterprise.component';
 import { EnterpriseCreateComponent } from '../enterprise-create/enterprise-create.component';
 import { EnterpriseEditComponent } from '../enterprise-edit/enterprise-edit.component';
@@ -14,109 +17,9 @@ import { EnterpriseEditComponent } from '../enterprise-edit/enterprise-edit.comp
 export class EnterpriseListComponent implements OnInit {
   config = new EnterPriseModel();
   listFilter = [];
+  // data = [];
   data = [
-    {
-      "stt": "1",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 1',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country": "Viet Nam",
-      "city": "1",
-      "district": "1",
-      "address": "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
-    {
-      "stt": "2",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 2 ',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country": "Viet Nam",
-      "city": "1",
-      "district": "1",
-      "address": "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
-    {
-      "stt": "3",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 3',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country": "Viet Nam",
-      "city": "1",
-      "district": "1",
-      "address": "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
-    {
-      "stt": "4",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 4',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country": "Viet Nam",
-      "city": "1",
-      "district": "1",
-      "address": "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
-    {
-      "stt": "5",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 5',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country": "Viet Nam",
-      "city": "1",
-      "district": "1",
-      "address": "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
-    {
-      "stt": "6",
-      "code": "023456781",
-      "global": '023456781',
-      "register": 'Công ty TNHH Việt An 6',
-      "gt": '1 giấy tờ',
-      "status": "Đã duyệt",
-      "update": "13:30, 21/04/2021",
-      "taxcode": "01234",
-      "country": "Viet Nam",
-      "city": "1",
-      "district": "1",
-      "address": "Ha Noi - Viet Nam",
-      "phone": "0987654321",
-      "email": "city@gmail.com",
-      "website": "https://www.consultindochina.com/"
-    },
+    // }
 
 
   ];
@@ -124,15 +27,44 @@ export class EnterpriseListComponent implements OnInit {
   listActive;
   dataSub;
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private enterpriseService: EnterpriseService,
+    private serviceDate: FormatDateService
   ) { }
 
   ngOnInit(): void {
     this.listFilter = this.config.filter;
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
-    this.dataSub = this.data;
+    this.getListEnterprise(1);
   }
+  /**
+   *
+   * @param pageCurrent current
+   */
+  getListEnterprise(pageCurrent: number): void {
+    this.enterpriseService.getEnterprise('', '', pageCurrent, 5).subscribe((res) => {
+      console.log(res);
+      this.data = res.map((x, index) => {
+        return {
+          stt: index + 1,
+          companyId: x.CompanyId,
+          code: x.CompanyCode,
+          global: x.GLN,
+          register: x.Name,
+          status: (x.Status === 1) ? 'Đã duyệt' : 'Chưa duyệt',
+          gt: x.CertificateNumber + ' giấy tờ',
+          update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
+        };
+      });
+      this.dataSub = this.data;
+
+    },
+      (err) => {
+        console.log(err);
+      });
+  }
+
   handleCallback(ev) {
     const filter = this.listFilter.filter(x => x.value);
     if (!filter.length) return this.dataSub = this.data;
@@ -155,6 +87,7 @@ export class EnterpriseListComponent implements OnInit {
 
     });
   }
+  // tslint:disable-next-line:typedef
   handleCallbackTable(ev) {
     console.log(ev);
     if (ev.type === 'create') {
@@ -164,15 +97,40 @@ export class EnterpriseListComponent implements OnInit {
       }).afterClosed().subscribe(result => {
       });
     }
-    if (ev.type === 'edit') {
-      return this.dialog.open(EnterpriseEditComponent, {
-        width: '940px',
-        height: '843px',
-        data: ev.item
-      }).afterClosed().subscribe(result => {
-      });
+    else if (ev.type === 'edit') {
+      console.log(ev);
+      this.enterpriseService.getEnterpriseDetail(ev.item.companyId).subscribe((res) => {
+        console.log(res);
+        const item = {
+          companyId: ev.item.companyId,
+          code: res.CompanyCode,
+          global: res.GLN,
+          register: res.Name,
+          status: (res.Status === 1) ? 'Đã duyệt' : 'Chưa duyệt',
+          gt: res.CertificateNumber + ' giấy tờ',
+          update: (res.UpdatedOn !== null) ? this.serviceDate.formatDate(res.UpdatedOn, 'hh:mm MM/DD/YYYY') : '',
+          address: res.AddressDetail,
+          taxcode: res.TaxCode,
+          city: res.Province,
+          district: res.District,
+          country: res.Nation,
+          website: res.Website,
+          phone: res.PhoneNumber,
+          email: res.Email,
+        };
+        return this.dialog.open(EnterpriseEditComponent, {
+          width: '940px',
+          height: '843px',
+          data: item
+        }).afterClosed().subscribe(result => {
+        });
+
+      },
+        (err) => {
+          console.log(err);
+        });
     }
-    if (ev.type === 'delete') {
+    else if (ev.type === 'delete') {
       return this.dialog.open(DeleteEnterpriseComponent, {
         width: '400px',
         height: '250px',
@@ -183,6 +141,8 @@ export class EnterpriseListComponent implements OnInit {
         }
       }).afterClosed().subscribe(result => {
       });
+    } else if (ev.type === 'page') {
+      this.getListEnterprise(+ev.item);
     }
   }
 

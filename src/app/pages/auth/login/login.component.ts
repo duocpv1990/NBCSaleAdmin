@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   };
   ngOnInit(): void { }
 
+  // tslint:disable-next-line:typedef
   login(ev) {
     this.authService
       .login({
@@ -32,14 +33,19 @@ export class LoginComponent implements OnInit {
       })
       .subscribe(
         (res) => {
+          console.log(res);
+          debugger;
           this.localStorage.set('access_token', res);
           this.router.navigate(['home']);
         },
         (err) => {
-          this.errorLogin = err.error.message;
+           console.log(err);
+
+          //this.errorLogin = err.error.message;
         }
       );
   }
+  // tslint:disable-next-line:typedef
   routeTo(e) {
     console.log(e);
   }

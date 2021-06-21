@@ -16,6 +16,7 @@ export class EditComponent implements OnInit {
   @Input() arrayButton: any;
   @Input() dataModel?: any;
   @Output() callback = new EventEmitter<any>();
+  @Output() callBackOption = new EventEmitter<any>();
 
   html: '';
   model: any = {};
@@ -51,6 +52,15 @@ export class EditComponent implements OnInit {
 
       }
     }
+
+  }
+  handleCallbackOption(value, typeOption): void {
+    console.log(value);
+    const data = {
+      id: +value,
+      type: typeOption,
+    };
+    this.callBackOption.emit(data);
 
   }
   onCallBackData = () => { }

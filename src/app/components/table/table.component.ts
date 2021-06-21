@@ -21,13 +21,16 @@ export class TableComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.totalPage = Math.ceil((this.data.length / this.pageSive));
-    this.currentPage = 1;
-    this.onLoadDatePagitor();
+    console.log(this.data);
+    this.dataSub = this.data;
+
+    // this.onLoadDatePagitor();
   }
 
   ngOnInit() {
-    this.totalPage = Math.ceil((this.data.length / this.pageSive));
-    this.onLoadDatePagitor();
+    this.currentPage = 1;
+    // this.totalPage = Math.ceil((this.data.length / this.pageSive));
+    // this.onLoadDatePagitor();
   }
 
   nextPage = () => {
@@ -43,7 +46,11 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   onLoadDatePagitor = () => {
-    this.dataSub = this.data.filter((x, ix) => (this.currentPage - 1) * this.pageSive <= ix && ix < this.currentPage * this.pageSive);
+    this.callback.emit({
+      item: this.currentPage,
+      type: 'page'
+    });
+    // this.dataSub = this.data.filter((x, ix) => (this.currentPage - 1) * this.pageSive <= ix && ix < this.currentPage * this.pageSive);
   }
 
   onClickSetting = (item, type) => {

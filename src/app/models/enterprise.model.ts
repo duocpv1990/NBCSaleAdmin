@@ -62,13 +62,13 @@ export class EnterPriseModel {
             },
             {
                 id: 'register',
-                name: 'Tên đăng ký',
+                name: 'Tên doanh nghiệp',
                 width: 200,
                 type: 'text',
             },
             {
                 id: 'gt',
-                name: 'Giấy tờ',
+                name: 'Gói dịch vụ',
                 width: 200,
                 type: 'text',
             },
@@ -80,7 +80,7 @@ export class EnterPriseModel {
                 color: '#26A700'
             },
             {
-                id: 'update',
+                id: 'type',
                 name: 'Cập nhật',
                 width: 200,
                 type: 'text',
@@ -177,7 +177,7 @@ export class EnterPriseModel {
                 label: 'Email',
                 name: 'email',
                 type: 'text'
-            },            
+            },
             {
                 id: 'website',
                 label: 'Website',

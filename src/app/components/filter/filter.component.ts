@@ -21,7 +21,10 @@ export class FilterComponent {
     } else {
       item.value = valueDate;
     }
-    this.callback.emit(item)
+    // this.callback.emit(item);
+  }
+  search(): void {
+    this.callback.emit();
   }
 
 }
