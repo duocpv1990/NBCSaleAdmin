@@ -20,6 +20,7 @@ export class DistributorListComponent implements OnInit {
   ) { }
   config = new DistributorModel();
   listFilter = [];
+  dataLength = 0;
   data = [
     // {
     //   "stt": "1",
@@ -130,7 +131,8 @@ export class DistributorListComponent implements OnInit {
   getListDistributor(pageCurrent: number, name: string, provinceId?: number): void {
     this.distributorService.getDistributor(name ? name : '', pageCurrent, 5, provinceId).subscribe((res) => {
       console.log(res);
-      this.data = res.map((x, index) => {
+      this.dataLength = res.count;
+      this.data = res.payload.map((x, index) => {
         return {
           distributorId: x.DistributorId,
           code: x.TaxCode,

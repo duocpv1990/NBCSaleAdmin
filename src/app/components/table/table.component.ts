@@ -8,19 +8,20 @@ import { Component, EventEmitter, Input, NgModule, OnChanges, OnInit, Output } f
 })
 export class TableComponent implements OnInit, OnChanges {
   @Input() data: any;
+  @Input() dataLength: any;
   @Input() tableData: any;
   @Input() listActive?: any;
   @Output() callback = new EventEmitter<any>();
 
   totalPage: number;
-  currentPage: number = 1;
+  currentPage = 1;
   dataSub = [];
-  pageSive = 5;
+  pageSize = 5;
 
   constructor() { }
 
   ngOnChanges() {
-    this.totalPage = Math.ceil((this.data.length / this.pageSive));
+    this.totalPage = Math.ceil((this.dataLength / this.pageSize));
     console.log(this.data);
     this.dataSub = this.data;
 
@@ -29,7 +30,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.currentPage = 1;
-    // this.totalPage = Math.ceil((this.data.length / this.pageSive));
+    // this.totalPage = Math.ceil((this.data.length / this.pageSize));
     // this.onLoadDatePagitor();
   }
 
@@ -50,7 +51,7 @@ export class TableComponent implements OnInit, OnChanges {
       item: this.currentPage,
       type: 'page'
     });
-    // this.dataSub = this.data.filter((x, ix) => (this.currentPage - 1) * this.pageSive <= ix && ix < this.currentPage * this.pageSive);
+    // this.dataSub = this.data.filter((x, ix) => (this.currentPage - 1) * this.pageSize <= ix && ix < this.currentPage * this.pageSize);
   }
 
   onClickSetting = (item, type) => {

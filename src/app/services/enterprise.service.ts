@@ -13,13 +13,12 @@ export class EnterpriseService {
     // super(http, 'company');
   }
   getEnterprise(companyCode: string, name: string, pageNumber: number, pageSize: number, status?: number): Observable<any>  {
-    let url = `company?companyCode=${companyCode}&name=${name}&status=${status}
-      &pageNumber=${pageNumber}&pageSize=${pageSize}`;
+    let url = `company?companyCode=${companyCode}&name=${name}&status=${status}&pageNumber=${pageNumber}&pageSize=${pageSize}`;
     if (!status) {
       url = `company?companyCode=${companyCode}&name=${name}
       &pageNumber=${pageNumber}&pageSize=${pageSize}`;
     }
-    return this.http.get<any>(url).pipe(map((res: any) => res.payload));
+    return this.http.get<any>(url);
   }
 
   getEnterpriseDetail(companyId): Observable<any> {

@@ -12,11 +12,15 @@ export class ProductService {
   }
   /**
    * get list product
+   * @param name string
+   * @param companyName string
    * @param pageNumber number
    * @param pageSize number
+   * @param status number
+   * @param type number
    * @returns list
    */
-  getProduct(pageNumber: number, pageSize): Observable<any> {
-    return this.http.get<any>(`product?pageNumber=${pageNumber}&pageSize=${pageSize}`).pipe(map((res: any) => res.payload));
+  getProduct(name: string, companyName: string, pageNumber: number, pageSize, status, type): Observable<any> {
+    return this.http.get<any>(`product?name=${name}&companyName=${companyName}&type=${type}&status=${status}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
   }
 }

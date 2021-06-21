@@ -17,12 +17,8 @@ import { EnterpriseEditComponent } from '../enterprise-edit/enterprise-edit.comp
 export class EnterpriseListComponent implements OnInit {
   config = new EnterPriseModel();
   listFilter = [];
-  // data = [];
-  data = [
-    // }
-
-
-  ];
+  data = [];
+  dataLength = 0;
   dataTable;
   listActive;
   dataSub;
@@ -46,7 +42,8 @@ export class EnterpriseListComponent implements OnInit {
     this.enterpriseService.getEnterprise(code ? code : '', name ? name : '',
        pageCurrent, 5, status ? status : null).subscribe((res) => {
       console.log(res);
-      this.data = res.map((x, index) => {
+      this.dataLength = res.count;
+      this.data = res.payload.map((x, index) => {
         return {
           stt: index + 1,
           companyId: x.CompanyId,
@@ -126,6 +123,8 @@ export class EnterpriseListComponent implements OnInit {
           website: res.Website,
           phone: res.PhoneNumber,
           email: res.Email,
+          MediaURL: res.CompanyMedias.find(x => x.Type === 1 && x.Status === 1)?.MediaURL,
+          BackgroundURL: res.CompanyMedias.find(x => x.Type === 2 && x.Status === 1)?.MediaURL
         };
         return this.dialog.open(EnterpriseEditComponent, {
           width: '940px',

@@ -48,10 +48,13 @@ export class EnterpriseEditComponent implements OnInit {
         }
       });
     });
-    this.mediaService.getCompanyMedia(this.data.companyId).subscribe(res => {
-      this.data.MediaURL = res.find(x => x.Type === 1)?.MediaURL;
-      this.data.BackgroundURL = res.find(x => x.Type === 2)?.MediaURL;
-    });
+    // this.mediaService.getCompanyMedia(this.data.companyId).subscribe(res => {
+    //   this.data.MediaURL = res.find(x => x.Type === 1)?.MediaURL;
+    //   this.data.BackgroundURL = res.find(x => x.Type === 2)?.MediaURL;
+    // });
+debugger;
+    // this.data.MediaURL = this.data.CompanyMedias.find(x => x.Type === 1)?.MediaURL;
+    // this.data.BackgroundURL = this.data.CompanyMedias.find(x => x.Type === 2)?.MediaURL;
     this.dataModel = this.data;
   }
 

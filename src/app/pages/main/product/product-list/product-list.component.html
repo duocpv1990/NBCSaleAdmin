@@ -3,5 +3,5 @@
 <app-filter [(listFilter)]="listFilter" (callback)="handleCallback()">
 </app-filter>
 
-<app-table [tableData]="dataTable" [data]="dataSub" [listActive]="listActive" (callback)="handleCallbackTable($event)">
+<app-table [tableData]="dataTable" [data]="dataSub" [dataLength] = "dataLength" [listActive]="listActive" (callback)="handleCallbackTable($event)">
 </app-table>

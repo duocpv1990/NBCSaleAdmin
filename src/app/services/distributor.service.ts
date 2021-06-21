@@ -23,6 +23,6 @@ export class DistributorService {
     if (!provinceId) {
       url = `distributor?name=${name}&pageNumber=${pageNumber}&pageSize=${pageSize}`;
     }
-    return this.http.get<any>(url).pipe(map((res: any) => res.payload));
+    return this.http.get<any>(url);
   }
 }

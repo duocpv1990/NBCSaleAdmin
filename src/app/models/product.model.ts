@@ -111,7 +111,7 @@ export class Product {
               id: 'scanStatus',
               name: 'Trạng thái quét',
               width: 200,
-              type: 'text',
+              type: 'scanStatus',
             },
             {
               id: 'price',

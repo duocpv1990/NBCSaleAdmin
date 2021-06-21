@@ -20,78 +20,8 @@ export class ProductListComponent implements OnInit {
   // tableData = [];
   listActive;
   dataTable;
-  data = [
-    {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
-      productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
-      contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
-      authorization: {
-        name: 'DNSH-NSX',
-        type: 'Toàn quyền'
-      },
-      status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
-      scanCount: 6
-    },
-    {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
-      productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
-      contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
-      authorization: {
-        name: 'DNSH-NSX',
-        type: 'Toàn quyền'
-      },
-      status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
-      scanCount: 6
-    },
-    {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
-      productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
-      contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
-      authorization: {
-        name: 'DNSH-NSX',
-        type: 'Toàn quyền'
-      },
-      status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
-      scanCount: 6
-    },
-    {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
-      productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
-      contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
-      authorization: {
-        name: 'DNSH-NSX',
-        type: 'Toàn quyền'
-      },
-      status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
-      scanCount: 6
-    },
-    {
-      image: 'https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg',
-      productName: 'Bút bi Thiên Long',
-      barcode: '123456789',
-      contractPackage: 'Gói cơ bản',
-      owner: 'Công ty TNHH Việt An',
-      authorization: {
-        name: 'DNSH-NSX',
-        type: 'Toàn quyền'
-      },
-      status: 'Cho quét',
-      infoStatus: 'Đã duyệt',
-      scanCount: 6
-    }
-  ];
+  dataLength = 0;
+  data = [];
 
   constructor(
     private dialog: MatDialog,
@@ -108,9 +38,11 @@ export class ProductListComponent implements OnInit {
   }
 
   getListProduct(name: string, companyName: string, pageCurrent: number, status?: number, type?: number): void {
-    this.productService.getProduct(pageCurrent, 5).subscribe((res) => {
+    this.productService.getProduct(name ? name : '', companyName ? companyName : '',
+      pageCurrent, 5, status ? status : '', type ? type : '').subscribe((res) => {
       console.log(res);
-      this.data = res.map((x, index) => {
+      this.dataLength = res.count;
+      this.data = res.payload.map((x, index) => {
         return {
           stt: index + 1,
           image: x.MediaURL,
@@ -122,7 +54,6 @@ export class ProductListComponent implements OnInit {
           price: x.Price,
           type: x.Type,
           status: (x.Status === 1) ? 'Hoạt động' : 'Không hoạt động',
-          // update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
         };
       });
       this.dataSub = this.data;
@@ -172,6 +103,15 @@ export class ProductListComponent implements OnInit {
         }
       }).afterClosed().subscribe(result => {
       });
+    }
+    else if (ev.type === 'page') {
+      this.getListProduct(
+        this.listFilter.find(x => x.condition === 'name')?.value,
+        this.listFilter.find(x => x.condition === 'companyName')?.value,
+        +ev.item,
+        this.listFilter.find(x => x.condition === 'status')?.value,
+        this.listFilter.find(x => x.condition === 'type')?.value,
+      );
     }
   }
 
