@@ -8,6 +8,7 @@ import { FilterBaseModule } from 'src/app/components/filter/filter.component';
 import { TableBaseModule } from 'src/app/components/table/table.component';
 import { CreateDistributorComponent } from './create-distributor/create-distributor.component';
 import { CreateModule } from 'src/app/components/create/create.component';
+import { EditModule } from 'src/app/components/edit/edit.component';
 import { DeleteDistributorComponent } from './delete-distributor/delete-distributor.component';
 import { DeleteModule } from 'src/app/components/dialog/delete/delete.component';
 
@@ -20,6 +21,7 @@ import { DeleteModule } from 'src/app/components/dialog/delete/delete.component'
     FilterBaseModule,
     TableBaseModule,
     CreateModule,
+    EditModule,
     DeleteModule,
     RouterModule.forChild(distributorRoute)
   ],

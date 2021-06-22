@@ -21,7 +21,6 @@ export class ProductDeleteComponent implements OnInit {
   }
 
   handleEvent(ev) {
-    debugger;
     console.log(ev);
     if (ev.value === 'cancel') {
       this.dialogRef.close();

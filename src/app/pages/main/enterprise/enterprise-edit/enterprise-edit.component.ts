@@ -27,7 +27,7 @@ export class EnterpriseEditComponent implements OnInit {
   dataModel;
   option = {
     title: 'THÔNG TIN DOANH NGHIỆP',
-    type: 'edit',
+    type: 'edit'
   };
 
   arrayButton = [{

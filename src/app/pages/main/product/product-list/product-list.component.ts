@@ -166,7 +166,6 @@ export class ProductListComponent implements OnInit {
           content: "Bạn có muốn xoá sản phẩm trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {
-        debugger;
         if (result === true) {
           this.ngOnInit();
         }

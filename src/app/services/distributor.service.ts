@@ -25,7 +25,15 @@ export class DistributorService {
     }
     return this.http.get<any>(url);
   }
-
+  getDistributorDetail(distributorId): Observable<any> {
+    return this.http.get<any>(`distributor/detail?distributorId=${distributorId}`).pipe(map((res: any) => res.payload));
+  }
+  edit(distributorId, param): Observable<any> {
+    return this.http.put<any>(`distributor?distributorId=${distributorId}`, param).pipe(map((res: any) => res.payload));
+  }
+  add(param): Observable<any> {
+    return this.http.post<any>(`distributor`, param).pipe(map((res: any) => res.payload));
+  }
   delete(distributorId): Observable<any> {
     return this.http.delete<any>(`distributor?distributorId=${distributorId}`).pipe(map((res: any) => res.payload));
   }

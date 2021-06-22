@@ -168,9 +168,45 @@ export class DistributorListComponent implements OnInit {
         width: '940px',
         height: '843px'
       }).afterClosed().subscribe(result => {
+        if (result === true) {
+          this.ngOnInit();
+        }
       });
     }
+    if (ev.type === 'edit') {
+      this.distributorService.getDistributorDetail(ev.item.distributorId).subscribe((res) => {
+        console.log(res);
 
+        const item = {
+          distributorId: ev.item.distributorId,
+          name: res.CompanyId,
+          distributorName: res.Name,
+          mst: res.TaxCode,
+          country: res.NationId,
+          city: res.ProvinceId,
+          district: res.DistrictId,
+          address: res.AddressDetail,
+          phone: res.PhoneNumber,
+          email: res.Email,
+          website: res.Website,
+          MediaURL: res.DistributorMedias.find(x => x.Type === 1 && x.Status === 1)?.MediaURL,
+          BackgroundURL: res.DistributorMedias.find(x => x.Type === 2 && x.Status === 1)?.MediaURL,
+
+         };
+
+        return this.dialog.open(CreateDistributorComponent, {
+          width: '940px',
+          height: '843px',
+          data: item
+        }).afterClosed().subscribe(result => {
+          console.log(result);
+        });
+
+      },
+        (err) => {
+          console.log(err);
+        });
+    }
     if (ev.type === 'delete') {
       return this.dialog.open(DeleteDistributorComponent, {
         width: '400px',

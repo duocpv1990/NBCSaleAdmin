@@ -1,6 +1,8 @@
-<app-create
+<app-edit
   [(data)]="listCreate"
   [(option)]="option"
   [(arrayButton)]="arrayButton"
+  [(dataModel)]="dataModel"
   (callback)="handleCallbackEvent($event)"
-></app-create>
+  (callBackOption)="handleCallbackOption($event)"
+></app-edit>

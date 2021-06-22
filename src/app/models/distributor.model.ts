@@ -143,7 +143,7 @@ export class DistributorModel {
                 id: 'name',
                 label: 'Tên doanh nghiệp',
                 name: 'name',
-                type: 'text'
+                type: 'select'
             },
             {
                 id: 'distributorName',

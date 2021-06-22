@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { BaseUploadComponent, S3FileService } from '@consult-indochina/common';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditComponent extends BaseUploadComponent implements OnInit {
   @Input() data: any;
   @Input() option: any;
   @Input() arrayButton: any;
@@ -25,8 +26,12 @@ export class EditComponent implements OnInit {
   // modelChill: any = {};
   imagePath;
   imgURL;
-  constructor(
-  ) { }
+  constructor(public s3Service: S3FileService) {
+    super(s3Service);
+
+  }
+  // constructor(
+  // ) { }
 
   ngOnInit() {
     this.model = this.dataModel || {};
@@ -34,7 +39,8 @@ export class EditComponent implements OnInit {
   }
 
   preview(files, value) {
-    if (value === 'avatar') {
+    debugger;
+    if (value === 'MediaURL') {
       if (files.length === 0)
         return;
       let reader = new FileReader();
@@ -44,7 +50,7 @@ export class EditComponent implements OnInit {
         this.model.MediaURL = reader.result;
       }
     }
-    else if (value === 'background') {
+    else if (value === 'BackgroundURL') {
       if (files.length === 0)
         return;
       let reader = new FileReader();
@@ -60,16 +66,13 @@ export class EditComponent implements OnInit {
   }
   addUrl(files): void {
     console.log(files);
-    this.model.lstImg = files;
-    Array.from(files).forEach(file => {
-      console.log(file);
-      this.lstImg.push(file);
+    this.multipleUpload(files).subscribe(res => {
+      console.log(res, this.fileLinkList);
     });
   }
   handleCallbackOption(value, typeOption): void {
-    console.log(value);
     const data = {
-      id: +value,
+      id: +this.model[typeOption],
       type: typeOption,
     };
     this.callBackOption.emit(data);

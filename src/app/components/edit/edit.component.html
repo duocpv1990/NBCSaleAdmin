@@ -27,7 +27,7 @@
         </div>
         <div *ngIf="item.type === 'select'">
           <select [(ngModel)]="model[item.id]" (change)="handleCallbackOption($event.target.value, item.id)">
-            <option *ngFor="let i of item.data" [value]="i.id">
+            <option *ngFor="let i of item.data" [ngValue]="i.id">
               {{ i.value || 1 }}
             </option>
           </select>
@@ -73,7 +73,7 @@
       </div>
     </div>
   </div>
-  <div class="subtitle add-new" *ngIf="option?.unShow !== true">
+  <div class="subtitle add-new" *ngIf="!option?.unShow">
     <div class="content row align-items-center" [hidden]="item.type !== 'button'" *ngFor="let item of data">
       <div class="label">{{ item?.label }}</div>
     </div>
@@ -91,7 +91,8 @@
       <div class="cer-cell content row align-items-center">
         <div >
           <ul>
-            <li *ngFor="let item of lstImg">{{item.name}}</li>
+            <li *ngFor="let item of fileLinkList">
+              <a href="item">{{item}}</a></li>
           </ul>
         </div>
         <div>
