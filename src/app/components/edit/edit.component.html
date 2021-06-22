@@ -2,8 +2,8 @@
   <div class="title">
     {{ option?.title }}
   </div>
-  <div class="subtitle" *ngIf="option?.unShow !== true">
-    THÔNG TIN CHUNG
+  <div class="subtitle" *ngIf="option?.subtitle">
+    {{ option?.subtitle }}
   </div>
   <div class="content row align-items-center" *ngFor="let item of data" [hidden]="item.id !== 'name-full'">
     <div class="label">{{ item?.label }}</div>
@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="layout">
-    <div class="content row align-items-center" *ngFor="let item of data" [hidden]="item.id === 'name-full'">
+    <div class="content row align-items-center" *ngFor="let item of data" [hidden]="item.id === 'name-full' || item.id === 'Manual'">
       <div class="label" *ngIf="item.type !== 'img' && item.type !== 'button'">{{ item?.label }}</div>
       <div class="input-text" [class]="item.class">
         <div *ngIf="
@@ -32,26 +32,14 @@
             </option>
           </select>
         </div>
-        <!-- <div *ngIf="item.type === 'htmlText'">
-            <div class="NgxEditor__Wrapper">
-              <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
-              <ngx-editor
-                [editor]="editor"
-                [ngModel]="html"
-                editable="true"
-                placeholder="Type here..."
-              ></ngx-editor>
-            </div>
-          </div> -->
-
-        <!-- chưa customer-->
-        <!-- <div *ngIf="item.type === 'radio'">
-          <mat-radio-group [(ngModel)]="model[item.id]" aria-label="Select an option">
-            <mat-radio-button value="1">Nam</mat-radio-button>
-            <mat-radio-button value="2">Nữ</mat-radio-button>
-          </mat-radio-group>
-        </div>
-        <div *ngIf="item.type === 'checkbox'">123</div> -->
+      </div>
+    </div>
+  </div>
+  <div class="content row align-items-center" *ngFor="let item of data" [hidden]="item.id !== 'Manual'">
+    <div class="label">{{ item?.label }}</div>
+    <div class="input-text" >
+      <div [class]="item.class">
+        <input style="height: 150px; width: 98%;" type="{{ item.type }}" id="{{ item.id }}" name="{{ item.name }}" [(ngModel)]="model[item.id]" />
       </div>
     </div>
   </div>
@@ -73,13 +61,13 @@
       </div>
     </div>
   </div>
-  <div class="subtitle add-new" *ngIf="!option?.unShow">
+  <div class="subtitle add-new" *ngIf="option?.showAddCer">
     <div class="content row align-items-center" [hidden]="item.type !== 'button'" *ngFor="let item of data">
       <div class="label">{{ item?.label }}</div>
     </div>
     <button class="btn-add-new" (click)="addCer()">Thêm mới</button>
   </div>
-  <div class="layout" *ngIf="option?.unShow === true">
+  <div class="layout" *ngIf="option?.showCer">
     <div class="cer">
       <div>
         <label class="radio">

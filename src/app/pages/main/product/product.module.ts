@@ -13,7 +13,8 @@ import { ProductDeleteComponent } from './product-delete/product-delete.componen
 import { CreateModule } from 'src/app/components/create/create.component';
 import { EditModule } from 'src/app/components/edit/edit.component';
 import { DeleteModule } from 'src/app/components/dialog/delete/delete.component';
-
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [ProductComponent, ProductListComponent, ProductAddComponent, ProductUpdateComponent, ProductDeleteComponent],
@@ -24,7 +25,9 @@ import { DeleteModule } from 'src/app/components/dialog/delete/delete.component'
     TableBaseModule,
     CreateModule,
     EditModule,
-    DeleteModule
+    FormsModule,
+    DeleteModule,
+    MatSelectModule
   ],
   exports: [ProductComponent]
 })

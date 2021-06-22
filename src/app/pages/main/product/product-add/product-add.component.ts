@@ -32,7 +32,7 @@ export class ProductAddComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.listCreate = this.conFig.create;
+    this.listCreate = this.conFig.general;
   }
 
   handleCallbackEvent = (value) => {

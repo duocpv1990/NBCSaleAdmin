@@ -4,6 +4,7 @@ export class CreateModel {
     type: string;
     label: string;
     data?: DataModel[];
+    required?: boolean;
     class?: string;
     child?: CreateModel[];
 }

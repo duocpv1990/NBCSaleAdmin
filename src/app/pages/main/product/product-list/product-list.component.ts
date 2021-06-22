@@ -77,7 +77,7 @@ export class ProductListComponent implements OnInit {
   handleCallbackTable(ev) {
     console.log(ev);
     if (ev.type === 'create') {
-      return this.dialog.open(ProductAddComponent, {
+      return this.dialog.open(ProductUpdateComponent, {
         width: '940px',
         height: '843px'
       }).afterClosed().subscribe(result => {

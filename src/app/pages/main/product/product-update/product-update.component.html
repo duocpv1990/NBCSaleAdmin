@@ -1,2 +1,118 @@
-<app-edit [(data)]="listCreate" [(option)]="option" [(dataModel)]="dataModel" [(arrayButton)]="arrayButton"
-    (callback)="handleCallbackEvent($event)"></app-edit>
+<div class="form-create">
+  <div class="title">
+    {{ option?.title }}
+  </div>
+  <div class="subtitle">
+    THÔNG TIN CHUNG
+  </div>
+  <div class="layout">
+    <div class="content row align-items-center">
+      <div class="label">Mã số sản phẩm toàn cầu (GTIN)</div>
+      <div class="input-text">
+        <div>
+          <input type="text" [(ngModel)]="dataModel.barcode" />
+        </div>
+      </div>
+    </div>
+    <div class="content row align-items-center">
+      <div class="label">Tên sản phẩm</div>
+      <div class="input-text">
+        <div>
+          <input type="text" [(ngModel)]="dataModel.productName" />
+        </div>
+      </div>
+    </div>
+    <div class="content row align-items-center">
+      <div class="label">Giá niêm yết</div>
+      <div class="input-text">
+        <div>
+          <input type="text" [(ngModel)]="dataModel.price" />
+        </div>
+      </div>
+    </div>
+    <div class="content row align-items-center">
+      <div class="label">Ngành hàng</div>
+      <div class="input-text">
+        <div>
+          <select [(ngModel)]="dataModel.category">
+            <ng-container *ngFor="let item of lstCategory">
+              <option [ngValue]="item.CategoryId">{{item.Name}}</option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="content row align-items-center">
+      <div class="label">Nhà phân phối</div>
+      <div class="input-text">
+        <div>
+          <select [(ngModel)]="category">
+            <ng-container *ngFor="let item of lstDistributor">
+              <option [ngValue]="item.DistributorId">{{item.Name}}</option>
+            </ng-container>
+            <!-- <option *ngFor="let i of item.data" [ngValue]="i.id">
+              {{ i.value || 1 }}
+            </option> -->
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="content row align-items-center">
+      <div class="label">Điểm bán</div>
+      <div class="input-text">
+        <div>
+          <mat-form-field class="ca80">
+            <mat-select [(ngModel)]="lstStoreInput" multiple name="lst">
+              <mat-select-trigger>
+                {{ (lst && lst.length !== 0 ) ? lst[0].Name : ''}}
+                <span *ngIf="lst.length > 1" class="example-additional-selection">
+                  (+{{lst.length - 1}} {{lst.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let store of lstStore" [value]="store"> {{store.Name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="upload-img">
+    <div class="content row align-items-center">
+      <div class="label">Ảnh đại diện</div>
+      <div class="input-text">
+        <div class="img">
+          <ng-container *ngFor="let mediaURL of dataModel.MediaURL">
+            <img [src]="mediaURL" height="200" />
+          </ng-container>
+
+          <div class="label-upload-img">
+            <label class="" for="add-img">
+              <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31">
+                <line id="Line_8934" data-name="Line 8934" x2="29" transform="translate(1 15.5)" fill="none" stroke="#1894ff" stroke-linecap="round" stroke-width="2"/>
+                <line id="Line_8935" data-name="Line 8935" x2="29" transform="translate(15.5 1) rotate(90)" fill="none" stroke="#1894ff" stroke-linecap="round" stroke-width="2"/>
+              </svg>
+              <!-- <mat-icon class="add-photo">add_a_photo</mat-icon> -->
+            </label>
+          </div>
+          <input id="add-img" #file hidden type="file" accept="image/*" multiple (change)="preview(file.files)"/>
+          <!-- (change)="preview(file.files, item.name)" /> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="subtitle add-new">
+    <div class="content row align-items-center">
+      <div class="label">GIẤY CHỨNG NHẬN</div>
+    </div>
+    <button class="btn-add-new">Thêm mới</button>
+  </div>
+
+
+</div>
+
+
+
+
+<app-edit [(data)]="listDetal" [(dataModel)]="dataModel" [(arrayButton)]="arrayButton"
+    (callback)="handleCallbackEvent($event)">
+</app-edit>

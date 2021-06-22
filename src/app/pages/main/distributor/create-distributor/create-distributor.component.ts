@@ -15,7 +15,8 @@ export class CreateDistributorComponent implements OnInit {
   dataModel: any = {};
   option = {
     title: 'Thêm mới nhà phân phối',
-    type: 'create'
+    type: 'create',
+    subtitle: 'THÔNG TIN CHUNG'
   };
 
   arrayButton = [{
@@ -40,7 +41,8 @@ export class CreateDistributorComponent implements OnInit {
       this.dataModel = this.data;
       this.option = {
         title: 'THÔNG TIN NHÀ PHÂN PHỐI',
-        type: 'edit'
+        type: 'edit',
+        subtitle: 'THÔNG TIN CHUNG'
       };
     }
     this.listCreate = this.conFig.create;

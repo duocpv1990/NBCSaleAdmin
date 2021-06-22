@@ -27,7 +27,8 @@ export class EnterpriseEditComponent implements OnInit {
   dataModel;
   option = {
     title: 'THÔNG TIN DOANH NGHIỆP',
-    type: 'edit'
+    type: 'edit',
+    subtitle: 'THÔNG TIN CHUNG'
   };
 
   arrayButton = [{
@@ -45,7 +46,8 @@ export class EnterpriseEditComponent implements OnInit {
     if (!this.data) {
       this.option = {
         title: 'Thêm mới doanh nghiệp',
-        type: 'create'
+        type: 'create',
+        subtitle: 'THÔNG TIN CHUNG'
       };
     }
     this.addressService.getNation().subscribe(res => {

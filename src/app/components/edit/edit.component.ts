@@ -82,6 +82,14 @@ export class EditComponent extends BaseUploadComponent implements OnInit {
 
   onClickButton = (i) => {
     i.data = this.model;
+    i.data.CertificationMedia = this.fileLinkList.map(x => {
+      return {
+        MediaURL: x,
+        Type: 1,
+        Status: 1
+      };
+    });
+
     this.callback.emit(i);
   }
   addCer(): void {

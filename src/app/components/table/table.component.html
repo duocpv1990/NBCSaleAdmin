@@ -39,7 +39,9 @@
                             item[i.id] |
                             number}}</span>
                         <span *ngIf="i.type === 'text'" (click)="handleRouteLink(item);handleClickRow(item)">{{
-                            item[i.id] }}</span>
+                            item[i.id] }}
+                            <ng-container *ngIf="i.id === 'price'">đ</ng-container>
+                          </span>
                         <span *ngIf="i.type === 'object'" (click)="handleRouteLink(item);handleClickRow(item)">{{
                             item[i.id][i.idSub]}}</span>
                         <span *ngIf="i.type === 'date'" (click)="handleRouteLink(item);handleClickRow(item)">

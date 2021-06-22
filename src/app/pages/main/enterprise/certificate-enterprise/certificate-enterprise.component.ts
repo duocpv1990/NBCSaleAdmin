@@ -15,7 +15,7 @@ export class CertificateEnterpriseComponent implements OnInit {
   option = {
     title: 'Thêm mới chứng chỉ, chứng nhận',
     type: 'add',
-    unShow: true
+    showCer: true
   };
   dataModel: any;
   conFig = new CertificateModel();

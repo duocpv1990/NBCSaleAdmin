@@ -8,7 +8,7 @@ export class CertificateModel {
             id: 'name-full',
             label: 'Tên chứng chỉ, chứng nhận',
             name: 'name',
-            type: 'text',
+            type: 'name-full',
             class: 'width-98'
         },
         {

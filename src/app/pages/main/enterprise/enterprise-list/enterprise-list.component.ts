@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteComponent } from 'src/app/components/dialog/delete/delete.component';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { AuthenticationService } from 'src/app/services/auth.service';
+import { CertificationService } from 'src/app/services/certification.service';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
 import { FormatDateService } from 'src/app/services/format-date.service';
 import { CertificateEnterpriseComponent } from '../certificate-enterprise/certificate-enterprise.component';
@@ -27,7 +28,8 @@ export class EnterpriseListComponent implements OnInit {
     private dialog: MatDialog,
     private dialogCer: MatDialog,
     private enterpriseService: EnterpriseService,
-    private serviceDate: FormatDateService
+    private serviceDate: FormatDateService,
+    private certificationService: CertificationService
   ) { }
 
   ngOnInit(): void {
@@ -42,27 +44,27 @@ export class EnterpriseListComponent implements OnInit {
    */
   getListEnterprise(code: string, name: string, pageCurrent: number, status?: number): void {
     this.enterpriseService.getEnterprise(code ? code : '', name ? name : '',
-       pageCurrent, 5, status ? status : null).subscribe((res) => {
-      this.dataLength = res.count;
-      this.data = res.payload.map((x, index) => {
-        return {
-          stt: index + 1,
-          companyId: x.CompanyId,
-          code: x.CompanyCode,
-          global: x.GLN,
-          register: x.Name,
-          status: (x.Status === 1) ? 'Hoạt động' : 'Không hoạt động',
-          gt: x.CertificateNumber + ' giấy tờ',
-          type: x.Type,
-          update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
-        };
-      });
-      this.dataSub = this.data;
+      pageCurrent, 5, status ? status : null).subscribe((res) => {
+        this.dataLength = res.count;
+        this.data = res.payload.map((x, index) => {
+          return {
+            stt: index + 1,
+            companyId: x.CompanyId,
+            code: x.CompanyCode,
+            global: x.GLN,
+            register: x.Name,
+            status: (x.Status === 1) ? 'Hoạt động' : 'Không hoạt động',
+            gt: x.CertificateNumber + ' giấy tờ',
+            type: x.Type,
+            update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
+          };
+        });
+        this.dataSub = this.data;
 
-    },
-      (err) => {
-        console.log(err);
-      });
+      },
+        (err) => {
+          console.log(err);
+        });
   }
 
   handleCallback(): void {
@@ -179,20 +181,26 @@ export class EnterpriseListComponent implements OnInit {
       );
     }
   }
-  openAddCetificate(companyId): void{
+  openAddCetificate(companyId): void {
     this.dialogCer.open(CertificateEnterpriseComponent, {
       width: '940px',
       height: '843px',
       data: companyId
     }).afterClosed().subscribe(result => {
-      console.log(result, 'ssss');
       if (result.text === 'Lưu') {
+        const req =
+        {
+          Name: result.data['name-full'],
+          ExpiredDate: result.data.date,
+          Type: 1,
+          Status: result.data.status,
+          CertificationMedia: result.data.CertificationMedia
+        };
+        this.certificationService.add(req).subscribe(res => {
 
-
+        });
       }
-
-
-    });
+      });
   }
 
 }
