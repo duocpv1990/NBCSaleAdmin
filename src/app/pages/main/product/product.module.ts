@@ -7,7 +7,6 @@ import { ProductComponent } from './product.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { FilterBaseModule } from 'src/app/components/filter/filter.component';
 import { TableBaseModule } from 'src/app/components/table/table.component';
-import { ProductAddComponent } from './product-add/product-add.component';
 import { ProductUpdateComponent } from './product-update/product-update.component';
 import { ProductDeleteComponent } from './product-delete/product-delete.component';
 import { CreateModule } from 'src/app/components/create/create.component';
@@ -17,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [ProductComponent, ProductListComponent, ProductAddComponent, ProductUpdateComponent, ProductDeleteComponent],
+  declarations: [ProductComponent, ProductListComponent, ProductUpdateComponent, ProductDeleteComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(productRoute),

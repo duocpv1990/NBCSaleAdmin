@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { ShopModel } from 'src/app/models/shop.model';
-import { EnterpriseCreateComponent } from '../../enterprise/enterprise-create/enterprise-create.component';
 
 @Component({
   selector: 'app-shop-create',

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ProductAddComponent } from '../product-add/product-add.component';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { ProductDeleteComponent } from '../product-delete/product-delete.component';
 import { ProductService } from 'src/app/services/product.service';
