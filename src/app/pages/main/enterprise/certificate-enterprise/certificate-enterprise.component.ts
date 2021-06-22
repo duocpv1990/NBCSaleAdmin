@@ -33,6 +33,7 @@ export class CertificateEnterpriseComponent implements OnInit {
   }
   handleCallbackEvent(value): void {
     console.log(value);
+    this.dialogRef.close(value);
 
   }
 }

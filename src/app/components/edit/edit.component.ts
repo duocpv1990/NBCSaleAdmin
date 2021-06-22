@@ -60,17 +60,11 @@ export class EditComponent implements OnInit {
   }
   addUrl(files): void {
     console.log(files);
+    this.model.lstImg = files;
     Array.from(files).forEach(file => {
       console.log(file);
       this.lstImg.push(file);
     });
-    const reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-    reader.onload = (_event) => {
-      console.log(reader.result);
-
-    }
-
   }
   handleCallbackOption(value, typeOption): void {
     console.log(value);

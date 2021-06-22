@@ -40,7 +40,6 @@ export class ProductListComponent implements OnInit {
   getListProduct(name: string, companyName: string, pageCurrent: number, status?: number, type?: number): void {
     this.productService.getProduct(name ? name : '', companyName ? companyName : '',
       pageCurrent, 5, status ? status : '', type ? type : '').subscribe((res) => {
-        console.log(res);
         this.dataLength = res.count;
         this.data = res.payload.map((x, index) => {
           return {
@@ -66,7 +65,6 @@ export class ProductListComponent implements OnInit {
   }
 
   handleCallback(): void {
-    console.log(this.listFilter);
     this.getListProduct(
       this.listFilter.find(x => x.condition === 'name')?.value,
       this.listFilter.find(x => x.condition === 'companyName')?.value,
@@ -163,11 +161,15 @@ export class ProductListComponent implements OnInit {
         width: '400px',
         height: '250px',
         data: {
-          item: ev.item,
+          item: ev.item.productId,
           title: "Xoá sản phẩm",
           content: "Bạn có muốn xoá sản phẩm trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {
+        debugger;
+        if (result === true) {
+          this.ngOnInit();
+        }
       });
     }
     else if (ev.type === 'page') {

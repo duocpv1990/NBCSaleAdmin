@@ -5,8 +5,16 @@
   <div class="subtitle" *ngIf="option?.unShow !== true">
     THÔNG TIN CHUNG
   </div>
+  <div class="content row align-items-center" *ngFor="let item of data" [hidden]="item.id !== 'name-full'">
+    <div class="label">{{ item?.label }}</div>
+    <div class="input-text" >
+      <div [class]="item.class">
+        <input type="{{ item.type }}" id="{{ item.id }}" name="{{ item.name }}" [(ngModel)]="model[item.id]" />
+      </div>
+    </div>
+  </div>
   <div class="layout">
-    <div class="content row align-items-center" *ngFor="let item of data">
+    <div class="content row align-items-center" *ngFor="let item of data" [hidden]="item.id === 'name-full'">
       <div class="label" *ngIf="item.type !== 'img' && item.type !== 'button'">{{ item?.label }}</div>
       <div class="input-text" [class]="item.class">
         <div *ngIf="

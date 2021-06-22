@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DistributorModel } from 'src/app/models/distributor.model';
 import { DistributorService } from 'src/app/services/distributor.service';
 import { FormatDateService } from 'src/app/services/format-date.service';
-import { DeleteEnterpriseComponent } from '../../enterprise/delete-enterprise/delete-enterprise.component';
 import { CreateDistributorComponent } from '../create-distributor/create-distributor.component';
+import { DeleteDistributorComponent } from '../delete-distributor/delete-distributor.component';
 
 @Component({
   selector: 'app-distributor-list',
@@ -172,15 +172,18 @@ export class DistributorListComponent implements OnInit {
     }
 
     if (ev.type === 'delete') {
-      return this.dialog.open(DeleteEnterpriseComponent, {
+      return this.dialog.open(DeleteDistributorComponent, {
         width: '400px',
         height: '250px',
         data: {
-          item: ev.item,
+          item: ev.item.distributorId,
           title: "Xoá nhà phân phối",
           content: "Bạn có muốn xoá thông tin nhà phân phối trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {
+        if (result === true) {
+          this.ngOnInit();
+        }
       });
     }
 

@@ -25,4 +25,8 @@ export class DistributorService {
     }
     return this.http.get<any>(url);
   }
+
+  delete(distributorId): Observable<any> {
+    return this.http.delete<any>(`distributor?distributorId=${distributorId}`).pipe(map((res: any) => res.payload));
+  }
 }

@@ -26,4 +26,7 @@ export class ProductService {
   getProductDetail(productId): Observable<any> {
     return this.http.get<any>(`product/detail?productId=${productId}`).pipe(map((res: any) => res.payload));
   }
+  delete(productId): Observable<any> {
+    return this.http.delete<any>(`product?productId=${productId}`).pipe(map((res: any) => res.payload));
+  }
 }

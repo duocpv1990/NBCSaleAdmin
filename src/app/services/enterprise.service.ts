@@ -24,4 +24,7 @@ export class EnterpriseService {
   getEnterpriseDetail(companyId): Observable<any> {
     return this.http.get<any>(`company/detail?companyId=${companyId}`).pipe(map((res: any) => res.payload));
   }
+  delete(companyId): Observable<any> {
+    return this.http.delete<any>(`company?companyId=${companyId}`).pipe(map((res: any) => res.payload));
+  }
 }

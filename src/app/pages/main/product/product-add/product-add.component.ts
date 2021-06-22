@@ -36,8 +36,6 @@ export class ProductAddComponent implements OnInit {
   }
 
   handleCallbackEvent = (value) => {
-    console.log(value);
-
     switch (value.class) {
       case 'btn-cancel':
         this.cancel();

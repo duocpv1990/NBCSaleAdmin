@@ -61,6 +61,9 @@
     }
     .group-btn {
         text-align: right;
+        button {
+          min-width: 120px;
+        }
         button:not(:nth-child(1)) {
             margin-left: 20px;
         }
@@ -82,9 +85,9 @@
 .btn-delete{
    height: 40px;
    padding: 0 20px;
-   color: #FF1818;
-   background-color:#FFFFFF ;
-   border: 1px solid #FF1818;
+   color: #FFFFFF;
+   background-color:#FF1818 ;
+   border: 1px solid #FFFFFF;
    border-radius: 10px;
    cursor: pointer;
 }

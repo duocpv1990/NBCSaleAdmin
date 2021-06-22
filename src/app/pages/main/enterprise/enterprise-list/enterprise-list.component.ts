@@ -43,7 +43,6 @@ export class EnterpriseListComponent implements OnInit {
   getListEnterprise(code: string, name: string, pageCurrent: number, status?: number): void {
     this.enterpriseService.getEnterprise(code ? code : '', name ? name : '',
        pageCurrent, 5, status ? status : null).subscribe((res) => {
-      console.log(res);
       this.dataLength = res.count;
       this.data = res.payload.map((x, index) => {
         return {
@@ -67,7 +66,6 @@ export class EnterpriseListComponent implements OnInit {
   }
 
   handleCallback(): void {
-    console.log(this.listFilter);
     this.getListEnterprise(
       this.listFilter.find(x => x.condition === 'global')?.value,
       this.listFilter.find(x => x.condition === 'name')?.value,
@@ -151,7 +149,7 @@ export class EnterpriseListComponent implements OnInit {
           console.log(result);
 
           if (result === 'add') {
-            this.openAddCetificate();
+            this.openAddCetificate(ev.item.companyId);
           }
         });
 
@@ -165,11 +163,12 @@ export class EnterpriseListComponent implements OnInit {
         width: '400px',
         height: '250px',
         data: {
-          item: ev.item,
+          item: ev.item.companyId,
           title: "Xoá doanh nghiệp",
           content: "Bạn có muốn xoá thông tin doanh nghiệp trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {
+        this.ngOnInit();
       });
     } else if (ev.type === 'page') {
       this.getListEnterprise(
@@ -180,13 +179,18 @@ export class EnterpriseListComponent implements OnInit {
       );
     }
   }
-  openAddCetificate(): void{
+  openAddCetificate(companyId): void{
     this.dialogCer.open(CertificateEnterpriseComponent, {
       width: '940px',
       height: '843px',
-      // data: item
+      data: companyId
     }).afterClosed().subscribe(result => {
       console.log(result, 'ssss');
+      if (result.text === 'Lưu') {
+
+
+      }
+
 
     });
   }

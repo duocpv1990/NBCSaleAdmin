@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ChangeModel } from '../models/auth/change.model';
 import { BaseApiService } from './base-api.service';
 @Injectable({
@@ -10,10 +12,9 @@ export class AuthenticationService extends BaseApiService<any> {
     super(http, 'cognito/login');
   }
 
-  login = (params) => {
-    return this.http.post(this.actionUrl, params);
+  login(params): Observable<any> {
+    return this.http.post<any>(this.actionUrl, params).pipe(map((res: any) => res.payload));
   }
-
   changePassword = (params: ChangeModel) => {
     return this.http.post(`api/SalesManager/Admin/Account/ChangePassword`, params);
   }

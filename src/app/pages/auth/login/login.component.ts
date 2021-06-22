@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (res) => {
           console.log(res);
-          debugger;
           this.localStorage.set('access_token', res);
           this.router.navigate(['home']);
         },

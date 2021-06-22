@@ -62,7 +62,6 @@ export class EnterpriseEditComponent implements OnInit {
     });
     if (this.data && this.data.country) {
       this.addressService.getProvince(this.data.country).subscribe(res => {
-        console.log(res);
         this.listCreate.forEach(create => {
           if (create.id === 'city' && res.length !== 0) {
             create.data = res.map(x => {
@@ -77,7 +76,6 @@ export class EnterpriseEditComponent implements OnInit {
     }
     if (this.data && this.data.city) {
       this.addressService.getDistrict(this.data.city).subscribe(res => {
-        console.log(res);
         this.listCreate.forEach(create => {
           if (create.id === 'district' && res.length !== 0) {
             create.data = res.map(x => {
@@ -99,8 +97,6 @@ export class EnterpriseEditComponent implements OnInit {
     this.dataModel = this.data;
   }
   handleCallbackEvent = (value) => {
-    console.log(value);
-
     switch (value.class) {
       case 'btn-cancel':
         this.cancel();
@@ -121,7 +117,6 @@ export class EnterpriseEditComponent implements OnInit {
     switch (value.type) {
       case 'country':
         this.addressService.getProvince(value.id).subscribe(res => {
-          console.log(res);
           this.listCreate.forEach(create => {
             if (create.id === 'city' && res.length !== 0) {
               create.data = res.map(x => {
@@ -136,7 +131,6 @@ export class EnterpriseEditComponent implements OnInit {
         break;
       case 'city':
         this.addressService.getDistrict(value.id).subscribe(res => {
-          console.log(res);
           this.listCreate.forEach(create => {
             if (create.id === 'district' && res.length !== 0) {
               create.data = res.map(x => {

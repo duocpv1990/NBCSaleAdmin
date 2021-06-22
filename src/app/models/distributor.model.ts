@@ -123,16 +123,16 @@ export class DistributorModel {
                 text: 'Thêm mới',
                 type: 'create',
                 icon: ''
-            },
-            {
-                class: 'btn-delete',
-                text: 'Gỡ nhà phân phối',
-                type: 'delete',
-                icon: ''
             },            {
                 class: 'btn-export',
                 text: 'Export',
                 type: 'export',
+                icon: ''
+            },
+            {
+                class: 'btn-delete',
+                text: 'Xóa',
+                type: 'delete',
                 icon: ''
             }
         ];

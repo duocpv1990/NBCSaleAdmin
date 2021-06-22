@@ -5,17 +5,27 @@ export class CertificateModel {
   public get create(): Array<CreateModel> {
     return [
         {
-            id: 'name',
+            id: 'name-full',
             label: 'Tên chứng chỉ, chứng nhận',
             name: 'name',
             type: 'text',
-            class: 'ccc'
+            class: 'width-98'
         },
         {
             id: 'status',
             label: 'Trạng thái',
             name: 'status',
-            type: 'select'
+            type: 'select',
+            data: [
+              {
+                id: 0,
+                value: 'Không hoạt động'
+              },
+              {
+                id: 1,
+                value: 'Hoạt động'
+              }
+            ]
         },
         {
             id: 'date',

@@ -22,7 +22,6 @@ export class TableComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.totalPage = Math.ceil((this.dataLength / this.pageSize));
-    console.log(this.data);
     this.dataSub = this.data;
 
     // this.onLoadDatePagitor();
