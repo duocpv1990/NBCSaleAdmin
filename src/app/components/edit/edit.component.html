@@ -2,7 +2,7 @@
   <div class="title">
     {{ option?.title }}
   </div>
-  <div class="subtitle">
+  <div class="subtitle" *ngIf="option?.unShow !== true">
     THÔNG TIN CHUNG
   </div>
   <div class="layout">
@@ -12,6 +12,7 @@
         <div *ngIf="
               item.type === 'text' ||
               item.type === 'number' ||
+              item.type === 'date' ||
               item.type === 'file'
             ">
           <input type="{{ item.type }}" id="{{ item.id }}" name="{{ item.name }}" [(ngModel)]="model[item.id]" />
@@ -64,11 +65,75 @@
       </div>
     </div>
   </div>
-  <div class="subtitle add-new">
+  <div class="subtitle add-new" *ngIf="option?.unShow !== true">
     <div class="content row align-items-center" [hidden]="item.type !== 'button'" *ngFor="let item of data">
       <div class="label">{{ item?.label }}</div>
     </div>
-    <button class="btn-add-new">Thêm mới</button>
+    <button class="btn-add-new" (click)="addCer()">Thêm mới</button>
+  </div>
+  <div class="layout" *ngIf="option?.unShow === true">
+    <div class="cer">
+      <div>
+        <label class="radio">
+          <input type="radio" name="answer" [checked]="type === 0"/>
+          Tải lên từ máy
+        </label>
+      </div>
+
+      <div class="cer-cell content row align-items-center">
+        <div >
+          <ul>
+            <li *ngFor="let item of lstImg">{{item.name}}</li>
+          </ul>
+        </div>
+        <div>
+          <div class="img">
+            <div class="label-upload-img">
+              <label class="" for="1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31">
+                  <g id="Group_21176" data-name="Group 21176" transform="translate(-1289.814 -578.814)">
+                    <g id="Rectangle_2451" data-name="Rectangle 2451" transform="translate(1289.814 578.814)" fill="#fff"
+                      stroke="#1894ff" stroke-width="1">
+                      <rect width="31" height="31" rx="5" stroke="none" />
+                      <rect x="0.5" y="0.5" width="30" height="30" rx="4.5" fill="none" />
+                    </g>
+                    <line id="Line_8935" data-name="Line 8935" x2="12.023" transform="translate(1299.616 594.314)"
+                      fill="none" stroke="#1894ff" stroke-linecap="round" stroke-width="2" />
+                    <line id="Line_8936" data-name="Line 8936" x2="12.023"
+                      transform="translate(1305.314 588.616) rotate(90)" fill="none" stroke="#1894ff" stroke-linecap="round"
+                      stroke-width="2" />
+                  </g>
+                </svg>
+              </label>
+            </div>
+            <input id="1" #file hidden type="file" accept="image/*" (change)="addUrl(file.files)" multiple/>
+          </div>
+          <!-- <button>
+
+
+          </button> -->
+        </div>
+      </div>
+
+    </div>
+    <div class="cer">
+      <div>
+        <label class="radio">
+          <input type="radio" name="answer"  [checked]="type === 1"/>
+          Đường link
+        </label>
+      </div>
+
+      <div class="content row align-items-center" >
+        <div class="input-text" placeholder="Nhập URL">
+          <div >
+            <input type="text"/>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
   <ng-container *ngIf="model.certifi && model.certifi.length !== 0">
     <div class="certification" *ngFor="let certifi of model.certifi">

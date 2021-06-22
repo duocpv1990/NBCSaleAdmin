@@ -5,6 +5,7 @@ import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
 import { FormatDateService } from 'src/app/services/format-date.service';
+import { CertificateEnterpriseComponent } from '../certificate-enterprise/certificate-enterprise.component';
 import { DeleteEnterpriseComponent } from '../delete-enterprise/delete-enterprise.component';
 import { EnterpriseCreateComponent } from '../enterprise-create/enterprise-create.component';
 import { EnterpriseEditComponent } from '../enterprise-edit/enterprise-edit.component';
@@ -24,6 +25,7 @@ export class EnterpriseListComponent implements OnInit {
   dataSub;
   constructor(
     private dialog: MatDialog,
+    private dialogCer: MatDialog,
     private enterpriseService: EnterpriseService,
     private serviceDate: FormatDateService
   ) { }
@@ -97,7 +99,7 @@ export class EnterpriseListComponent implements OnInit {
   handleCallbackTable(ev) {
     console.log(ev);
     if (ev.type === 'create') {
-      return this.dialog.open(EnterpriseCreateComponent, {
+      return this.dialog.open(EnterpriseEditComponent, {
         width: '940px',
         height: '843px'
       }).afterClosed().subscribe(result => {
@@ -116,9 +118,6 @@ export class EnterpriseListComponent implements OnInit {
           update: (res.UpdatedOn !== null) ? this.serviceDate.formatDate(res.UpdatedOn, 'hh:mm MM/DD/YYYY') : '',
           address: res.AddressDetail,
           taxcode: res.TaxCode,
-          // city: res.Province,
-          // district: res.District,
-          // country: res.Nation,
           website: res.Website,
           phone: res.PhoneNumber,
           email: res.Email,
@@ -141,10 +140,6 @@ export class EnterpriseListComponent implements OnInit {
                   url: media.MediaURL
                 };
               }),
-              // status: (x.Status === 1) ? 'Hoạt động' : 'Không hoạt động',
-              // gt: x.CertificateNumber + ' giấy tờ',
-              // type: x.Type,
-              // update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
             };
           });
         }
@@ -153,6 +148,11 @@ export class EnterpriseListComponent implements OnInit {
           height: '843px',
           data: item
         }).afterClosed().subscribe(result => {
+          console.log(result);
+
+          if (result === 'add') {
+            this.openAddCetificate();
+          }
         });
 
       },
@@ -179,6 +179,16 @@ export class EnterpriseListComponent implements OnInit {
         this.listFilter.find(x => x.condition === 'status')?.value
       );
     }
+  }
+  openAddCetificate(): void{
+    this.dialogCer.open(CertificateEnterpriseComponent, {
+      width: '940px',
+      height: '843px',
+      // data: item
+    }).afterClosed().subscribe(result => {
+      console.log(result, 'ssss');
+
+    });
   }
 
 }

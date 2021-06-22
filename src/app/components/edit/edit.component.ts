@@ -19,7 +19,9 @@ export class EditComponent implements OnInit {
   @Output() callBackOption = new EventEmitter<any>();
 
   html: '';
+  type = 0;
   model: any = {};
+  lstImg = [];
   // modelChill: any = {};
   imagePath;
   imgURL;
@@ -56,6 +58,20 @@ export class EditComponent implements OnInit {
     }
 
   }
+  addUrl(files): void {
+    console.log(files);
+    Array.from(files).forEach(file => {
+      console.log(file);
+      this.lstImg.push(file);
+    });
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      console.log(reader.result);
+
+    }
+
+  }
   handleCallbackOption(value, typeOption): void {
     console.log(value);
     const data = {
@@ -70,6 +86,12 @@ export class EditComponent implements OnInit {
   onClickButton = (i) => {
     i.data = this.model;
     this.callback.emit(i);
+  }
+  addCer(): void {
+    const data = {
+      type: 'add',
+    };
+    this.callback.emit(data);
   }
 }
 

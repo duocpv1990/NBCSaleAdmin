@@ -1,8 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { Component, Inject, NgModule, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { AddressService } from 'src/app/services/address.service';
 import { MediaService } from 'src/app/services/media.service';
+import { EditModule } from 'src/app/components/edit/edit.component';
 
 @Component({
   selector: 'app-enterprise-edit',
@@ -15,13 +18,16 @@ export class EnterpriseEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<EnterpriseEditComponent>,
     private addressService: AddressService,
+    private dialog: MatDialog,
     private mediaService: MediaService
-  ) { }
+  ) {
+    dialogRef.disableClose = true;
+  }
   conFig = new EnterPriseModel();
   dataModel;
   option = {
     title: 'THÔNG TIN DOANH NGHIỆP',
-    type: 'edit'
+    type: 'edit',
   };
 
   arrayButton = [{
@@ -31,11 +37,17 @@ export class EnterpriseEditComponent implements OnInit {
   {
     class: 'btn-save',
     text: 'Chỉnh sửa'
-  }]
+  }];
   listCreate = [];
 
   ngOnInit(): void {
     this.listCreate = this.conFig.create;
+    if (!this.data) {
+      this.option = {
+        title: 'Thêm mới doanh nghiệp',
+        type: 'create'
+      };
+    }
     this.addressService.getNation().subscribe(res => {
       this.listCreate.forEach(create => {
         if (create.id === 'country' && res.length !== 0) {
@@ -86,21 +98,24 @@ export class EnterpriseEditComponent implements OnInit {
     // this.data.BackgroundURL = this.data.CompanyMedias.find(x => x.Type === 2)?.MediaURL;
     this.dataModel = this.data;
   }
-
   handleCallbackEvent = (value) => {
     console.log(value);
 
     switch (value.class) {
       case 'btn-cancel':
         this.cancel();
+        this.dialogRef.close();
         break;
       case 'btn-save':
         this.save(value.data);
+        this.dialogRef.close();
         break;
       default:
         break;
     }
-    this.dialogRef.close();
+    if (value.type === 'add') {
+      this.dialogRef.close('add');
+    }
   }
   handleCallbackOption(value): void {
     switch (value.type) {
