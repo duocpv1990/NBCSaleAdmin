@@ -22,6 +22,7 @@
         </div>
       </div>
     </div>
+    <div></div>
     <div class="content row align-items-center">
       <div class="label">Giá niêm yết</div>
       <div class="input-text input-price">
@@ -46,39 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="content row align-items-center">
-      <div class="label">Nhà phân phối</div>
-      <div class="input-text">
-        <div>
-          <select [(ngModel)]="category">
-            <ng-container *ngFor="let item of lstDistributor">
-              <option [ngValue]="item.DistributorId">{{item.Name}}</option>
-            </ng-container>
-            <!-- <option *ngFor="let i of item.data" [ngValue]="i.id">
-              {{ i.value || 1 }}
-            </option> -->
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="content row align-items-center">
-      <div class="label">Điểm bán</div>
-      <div class="input-text">
-        <div>
-          <mat-form-field class="ca80">
-            <mat-select [(ngModel)]="lstStoreInput" multiple name="lst">
-              <mat-select-trigger>
-                {{ (lst && lst.length !== 0 ) ? lst[0].Name : ''}}
-                <span *ngIf="lst.length > 1" class="example-additional-selection">
-                  (+{{lst.length - 1}} {{lst.length === 2 ? 'other' : 'others'}})
-                </span>
-              </mat-select-trigger>
-              <mat-option *ngFor="let store of lstStore" [value]="store"> {{store.Name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
+    <div></div>
   </div>
   <div class="upload-img">
     <div class="content row align-items-center">
@@ -104,19 +73,225 @@
       </div>
     </div>
   </div>
+  <div class="subtitle">
+    KÊNH PHÂN PHỐI
+  </div>
+  <div class="layout layout2">
+    <div class="content row align-items-center">
+      <div class="label">Nhà phân phối</div>
+    </div>
+    <div class="content row align-items-center">
+      <div class="label">Điểm bán</div>
+    </div>
+    <div class="content row align-items-center"></div>
+    <ng-container *ngFor="let DistributorProduct of dataModel.DistributorProducts; let i = index">
+      <div class="content row align-items-center">
+        <div class="input-text"><b>{{DistributorProduct.Name}}</b></div>
+      </div>
+      <div class="content row align-items-center">
+        <div class="input-text"><b>
+          <ng-container *ngFor="let DistributorProductStore of DistributorProduct.DistributorProductStores; let i = index">
+            <ng-container *ngIf="i !== 0">, </ng-container>
+            {{DistributorProduct.Name}}
+          </ng-container>
+        </b></div>
+      </div>
+      <div class="content row align-items-center">
+        <button (click)="updateDistributor(i, 'edit')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18.93" height="18.93" viewBox="0 0 18.93 18.93">
+            <g id="Component_7_12" data-name="Component 7 – 12" transform="translate(0.416 0.416)">
+              <g id="Component_5_1" data-name="Component 5 – 1">
+                <g id="Rectangle_2400" data-name="Rectangle 2400" fill="#fff" stroke="#707070" stroke-width="1">
+                  <rect width="18" height="18" rx="5" stroke="none"/>
+                  <rect x="0.5" y="0.5" width="17" height="17" rx="4.5" fill="none"/>
+                </g>
+              </g>
+              <g id="Group_21240" data-name="Group 21240" transform="translate(0.584 0.584)">
+                <line id="Line_8934" data-name="Line 8934" x2="16.93" transform="translate(0 8.465)" fill="none" stroke="#1894ff" stroke-linecap="round" stroke-width="2"/>
+                <line id="Line_8935" data-name="Line 8935" x2="16.93" transform="translate(8.465) rotate(90)" fill="none" stroke="#1894ff" stroke-linecap="round" stroke-width="2"/>
+              </g>
+            </g>
+          </svg>
+        </button>
+        <button (click)="updateDistributor(i, 'delete')">
+          <svg id="Component_7_13" data-name="Component 7 – 13" xmlns="http://www.w3.org/2000/svg" width="23.943" height="23.943" viewBox="0 0 23.943 23.943">
+            <g id="Component_5_1" data-name="Component 5 – 1" transform="translate(2.922 2.922)">
+              <g id="Rectangle_2400" data-name="Rectangle 2400" fill="#fff" stroke="#707070" stroke-width="1">
+                <rect width="18" height="18" rx="5" stroke="none"/>
+                <rect x="0.5" y="0.5" width="17" height="17" rx="4.5" fill="none"/>
+              </g>
+            </g>
+            <g id="Group_21240" data-name="Group 21240" transform="translate(11.971 0) rotate(45)">
+              <line id="Line_8934" data-name="Line 8934" x2="16.93" transform="translate(0 8.465)" fill="none" stroke="#ff1818" stroke-linecap="round" stroke-width="2"/>
+              <line id="Line_8935" data-name="Line 8935" x2="16.93" transform="translate(8.465) rotate(90)" fill="none" stroke="#ff1818" stroke-linecap="round" stroke-width="2"/>
+            </g>
+          </svg>
+
+        </button>
+      </div>
+    </ng-container>
+    <div class="content row align-items-center">
+      <div class="input-text">
+        <div>
+          <select [(ngModel)]="distributor">
+            <ng-container *ngFor="let item of lstDistributor">
+              <option [ngValue]="item.DistributorId">{{item.Name}}</option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="content row align-items-center">
+      <div class="input-text">
+        <div *ngIf="distributor && distributor !== 0">
+          <mat-form-field class="ca80">
+            <mat-select [(ngModel)]="lstStoreInput" multiple name="lst">
+              <mat-select-trigger>
+                {{ (lstStoreInput && lstStoreInput.length !== 0 ) ? lstStoreInput[0].Name : ''}}
+                <span *ngIf="lstStoreInput.length > 1" class="example-additional-selection">
+                  (+{{lstStoreInput.length - 1}} {{lstStoreInput.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let store of lstStore" [value]="store"> {{store.Name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                       [removable]="removable" (removed)="remove(fruit)">
+                {{fruit.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="New fruit..."
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+          </mat-form-field> -->
+        </div>
+      </div>
+    </div>
+    <div class="content row align-items-center">
+      <button (click)="addDistributor()" *ngIf="distributor && distributor !== 0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18.93" height="18.93" viewBox="0 0 18.93 18.93">
+          <g id="Component_7_12" data-name="Component 7 – 12" transform="translate(0.416 0.416)">
+            <g id="Component_5_1" data-name="Component 5 – 1">
+              <g id="Rectangle_2400" data-name="Rectangle 2400" fill="#fff" stroke="#707070" stroke-width="1">
+                <rect width="18" height="18" rx="5" stroke="none"/>
+                <rect x="0.5" y="0.5" width="17" height="17" rx="4.5" fill="none"/>
+              </g>
+            </g>
+            <g id="Group_21240" data-name="Group 21240" transform="translate(0.584 0.584)">
+              <line id="Line_8934" data-name="Line 8934" x2="16.93" transform="translate(0 8.465)" fill="none" stroke="#1894ff" stroke-linecap="round" stroke-width="2"/>
+              <line id="Line_8935" data-name="Line 8935" x2="16.93" transform="translate(8.465) rotate(90)" fill="none" stroke="#1894ff" stroke-linecap="round" stroke-width="2"/>
+            </g>
+          </g>
+        </svg>
+      </button>
+    </div>
+  </div>
   <div class="subtitle add-new">
     <div class="content row align-items-center">
       <div class="label">GIẤY CHỨNG NHẬN</div>
     </div>
     <button class="btn-add-new">Thêm mới</button>
   </div>
+  <div class="subtitle">
+    THÔNG TIN CHI TIẾT
+  </div>
+  <div class="layout">
+    <div class="content row align-items-center">
+      <div class="label">Thành phần</div>
+      <div class="input-text">
+        <div>
+          <!-- <input type="text" [(ngModel)]="dataModel.barcode" /> -->
+          <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <mat-chip *ngFor="let fruit of Ingradient" [selectable]="selectable"
+                       [removable]="removable" (removed)="remove(fruit)">
+                {{fruit.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input style="border: none; padding: 0px;"
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="content row align-items-center">
+      <div class="label">Nhãn hiệu</div>
+      <div class="input-text">
+        <div>
+          <input type="text" [(ngModel)]="dataModel.productName" />
+        </div>
+      </div>
+    </div>
+    <div></div>
+    <div class="content row align-items-center">
+      <div class="label">Khối lương/dung tích sản phẩm</div>
+      <div class="input-text">
+        <div>
+          <input type="text" [(ngModel)]="dataModel.productName" />
+        </div>
+      </div>
+    </div>
+    <div class="content row align-items-center">
+      <div class="label">Đơn vị</div>
+      <div class="input-text">
+        <div class="input-text">
+          <div>
+            <input type="text" [(ngModel)]="dataModel.barcode" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div></div>
+    <div class="content row align-items-center">
+      <div class="label">Ngày sẵn xuất</div>
+      <div class="input-text">
+        <div class="input-text">
+          <div>
+            <input type="text" [(ngModel)]="dataModel.barcode" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content row align-items-center">
+      <div class="label">Thời hạn sử dụng</div>
+      <div class="input-text">
+        <div class="input-text">
+          <div>
+            <input type="text" [(ngModel)]="dataModel.barcode" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content row align-items-center">
+    <div class="label">Hướng dẫn sử dụng</div>
+    <div class="input-text" >
+      <div>
+        <textarea style="height: 150px; width: 98%;" type="text" id="Manual" name="Manual" [(ngModel)]="dataModel.Manual" ></textarea>
+        <!-- <input style="height: 150px; width: 98%;" type="text" id="Manual" name="Manual" [(ngModel)]="dataModel.Manual" /> -->
+      </div>
+    </div>
+  </div>
+  <div class="group-btn">
+    <button *ngFor="let i of arrayButton; let index = index" class="btn mbf-btn" [class]="i.class">
 
-
+      {{ i?.text }}
+    </button>
+  </div>
 </div>
 
 
 
 
-<app-edit [(data)]="listDetal" [(dataModel)]="dataModel" [(arrayButton)]="arrayButton"
+<!-- <app-edit [(data)]="listDetal" [(dataModel)]="dataModel" [(arrayButton)]="arrayButton"
     (callback)="handleCallbackEvent($event)">
-</app-edit>
+</app-edit> -->

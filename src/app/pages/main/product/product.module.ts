@@ -14,6 +14,8 @@ import { EditModule } from 'src/app/components/edit/edit.component';
 import { DeleteModule } from 'src/app/components/dialog/delete/delete.component';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [ProductComponent, ProductListComponent, ProductUpdateComponent, ProductDeleteComponent],
@@ -26,8 +28,10 @@ import { MatSelectModule } from '@angular/material/select';
     EditModule,
     FormsModule,
     DeleteModule,
-    MatSelectModule
+    MatSelectModule,
+    MatChipsModule,
+    MatIconModule
   ],
-  exports: [ProductComponent]
+  exports: [ProductComponent, MatChipsModule]
 })
 export class ProductModule { }
