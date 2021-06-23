@@ -39,29 +39,37 @@ export class EditComponent extends BaseUploadComponent implements OnInit {
   }
 
   preview(files, value) {
-    debugger;
-    if (value === 'MediaURL') {
-      if (files.length === 0)
-        return;
-      let reader = new FileReader();
-      this.imagePath = files;
-      reader.readAsDataURL(files[0]);
-      reader.onload = (_event) => {
-        this.model.MediaURL = reader.result;
+    this.selectImage(files).subscribe(result => {
+      console.log(this.imageLinkUpload, value);
+      if (value === 'avatar') {
+        this.model.MediaURL = this.imageLinkUpload;
+      } else if (value === 'background') {
+        this.model.BackgroundURL = this.imageLinkUpload;
       }
-    }
-    else if (value === 'BackgroundURL') {
-      if (files.length === 0)
-        return;
-      let reader = new FileReader();
-      this.imagePath = files;
-      reader.readAsDataURL(files[0]);
-      reader.onload = (_event) => {
-        this.model.BackgroundURL = reader.result;
-        console.log(this.model);
+    });
+    // debugger;
+    // if (value === 'MediaURL') {
+    //   if (files.length === 0)
+    //     return;
+    //   let reader = new FileReader();
+    //   this.imagePath = files;
+    //   reader.readAsDataURL(files[0]);
+    //   reader.onload = (_event) => {
+    //     this.model.MediaURL = reader.result;
+    //   }
+    // }
+    // else if (value === 'BackgroundURL') {
+    //   if (files.length === 0)
+    //     return;
+    //   let reader = new FileReader();
+    //   this.imagePath = files;
+    //   reader.readAsDataURL(files[0]);
+    //   reader.onload = (_event) => {
+    //     this.model.BackgroundURL = reader.result;
+    //     console.log(this.model);
 
-      }
-    }
+    //   }
+    // }
 
   }
   addUrl(files): void {

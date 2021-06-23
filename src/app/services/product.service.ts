@@ -23,6 +23,12 @@ export class ProductService {
   getProduct(name: string, companyName: string, pageNumber: number, pageSize, status, type): Observable<any> {
     return this.http.get<any>(`product?name=${name}&companyName=${companyName}&type=${type}&status=${status}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
   }
+  edit(productId, param): Observable<any> {
+    return this.http.put<any>(`product?productId=${productId}`, param).pipe(map((res: any) => res.payload));
+  }
+  add(param): Observable<any> {
+    return this.http.post<any>(`product`, param).pipe(map((res: any) => res.payload));
+  }
   getProductDetail(productId): Observable<any> {
     return this.http.get<any>(`product/detail?productId=${productId}`).pipe(map((res: any) => res.payload));
   }

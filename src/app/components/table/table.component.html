@@ -40,6 +40,7 @@
                             number}}</span>
                         <span *ngIf="i.type === 'text'" (click)="handleRouteLink(item);handleClickRow(item)">{{
                             item[i.id] }}
+                            <ng-container *ngIf="i.id === 'price' && !item[i.id]">0</ng-container>
                             <ng-container *ngIf="i.id === 'price'">đ</ng-container>
                           </span>
                         <span *ngIf="i.type === 'object'" (click)="handleRouteLink(item);handleClickRow(item)">{{

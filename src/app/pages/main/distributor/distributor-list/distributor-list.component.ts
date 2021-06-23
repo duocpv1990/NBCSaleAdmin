@@ -186,6 +186,8 @@ export class DistributorListComponent implements OnInit {
           city: res.ProvinceId,
           district: res.DistrictId,
           address: res.AddressDetail,
+          Type: res.Type,
+          Status: res.Status,
           phone: res.PhoneNumber,
           email: res.Email,
           website: res.Website,

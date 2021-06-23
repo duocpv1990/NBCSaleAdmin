@@ -10,7 +10,7 @@
       <div class="label">Mã số sản phẩm toàn cầu (GTIN)</div>
       <div class="input-text">
         <div>
-          <input type="text" [(ngModel)]="dataModel.barcode" />
+          <input type="text" [(ngModel)]="dataModel.ProductCode" />
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
       <div class="label">Tên sản phẩm</div>
       <div class="input-text">
         <div>
-          <input type="text" [(ngModel)]="dataModel.productName" />
+          <input type="text" [(ngModel)]="dataModel.Name" />
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
       <div class="label">Giá niêm yết</div>
       <div class="input-text input-price">
         <div>
-          <input type="text" [(ngModel)]="dataModel.price" />
+          <input type="text" [(ngModel)]="dataModel.Price" />
         </div>
         <div class="price">
           VND
@@ -39,7 +39,7 @@
       <div class="label">Ngành hàng</div>
       <div class="input-text">
         <div>
-          <select [(ngModel)]="dataModel.category">
+          <select [(ngModel)]="dataModel.CategoryId">
             <ng-container *ngFor="let item of lstCategory">
               <option [ngValue]="item.CategoryId">{{item.Name}}</option>
             </ng-container>
@@ -54,8 +54,8 @@
       <div class="label">Ảnh đại diện</div>
       <div class="input-text">
         <div class="img">
-          <ng-container *ngFor="let mediaURL of dataModel.MediaURL">
-            <img [src]="mediaURL" height="200" />
+          <ng-container *ngFor="let mediaURL of dataModel.ProductMedias">
+            <img [src]="mediaURL.MediaURL" height="200" />
           </ng-container>
 
           <div class="label-upload-img">
@@ -195,8 +195,28 @@
     <div class="content row align-items-center">
       <div class="label">GIẤY CHỨNG NHẬN</div>
     </div>
-    <button class="btn-add-new">Thêm mới</button>
+    <button class="btn-add-new" (click)="showAdd()">Thêm mới</button>
   </div>
+  <ng-container *ngIf="dataModel?.ProductCertifications && dataModel.ProductCertifications.length !== 0">
+    <div class="certification" *ngFor="let certifi of dataModel.ProductCertifications">
+        <ng-container *ngFor="let certi of listDetal">
+          <div class="cer-cell">
+            {{certi.label}}
+          </div>
+          <div class="cer-cell" *ngIf="certi.id !== 'CertificationMedias'">
+            {{certifi[certi.id]}}
+          </div>
+          <div class="cer-cell" *ngIf="certi.id === 'CertificationMedias'">
+            <ul>
+              <li *ngFor="let img of certifi.CertificationMedias">
+                <a href="{{img.MediaURL}}" target="_blank">{{img.str}}</a>
+              </li>
+            </ul>
+
+          </div>
+        </ng-container>
+    </div>
+  </ng-container>
   <div class="subtitle">
     THÔNG TIN CHI TIẾT
   </div>
@@ -210,7 +230,7 @@
             <mat-chip-list #chipList aria-label="Fruit selection">
               <mat-chip *ngFor="let fruit of Ingradient" [selectable]="selectable"
                        [removable]="removable" (removed)="remove(fruit)">
-                {{fruit.name}}
+                {{fruit}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
               <input style="border: none; padding: 0px;"
@@ -227,7 +247,7 @@
       <div class="label">Nhãn hiệu</div>
       <div class="input-text">
         <div>
-          <input type="text" [(ngModel)]="dataModel.productName" />
+          <input type="text" [(ngModel)]="dataModel.Label" />
         </div>
       </div>
     </div>
@@ -236,7 +256,7 @@
       <div class="label">Khối lương/dung tích sản phẩm</div>
       <div class="input-text">
         <div>
-          <input type="text" [(ngModel)]="dataModel.productName" />
+          <input type="number" [(ngModel)]="dataModel.Capacity" />
         </div>
       </div>
     </div>
@@ -245,7 +265,7 @@
       <div class="input-text">
         <div class="input-text">
           <div>
-            <input type="text" [(ngModel)]="dataModel.barcode" />
+            <input type="text" [(ngModel)]="dataModel.Unit" />
           </div>
         </div>
       </div>
@@ -256,7 +276,7 @@
       <div class="input-text">
         <div class="input-text">
           <div>
-            <input type="text" [(ngModel)]="dataModel.barcode" />
+            <input type="text" [(ngModel)]="dataModel.ManufacturedOn" />
           </div>
         </div>
       </div>
@@ -266,7 +286,7 @@
       <div class="input-text">
         <div class="input-text">
           <div>
-            <input type="text" [(ngModel)]="dataModel.barcode" />
+            <input type="text" [(ngModel)]="dataModel.ExpiredOn" />
           </div>
         </div>
       </div>
@@ -282,7 +302,8 @@
     </div>
   </div>
   <div class="group-btn">
-    <button *ngFor="let i of arrayButton; let index = index" class="btn mbf-btn" [class]="i.class">
+    <button *ngFor="let i of arrayButton; let index = index" class="btn mbf-btn" [class]="i.class"
+    (click)="handleCallbackEvent(i.class)">
 
       {{ i?.text }}
     </button>

@@ -97,13 +97,19 @@
   .certification {
     border: 2px #707070 dashed;
     margin-top: 3em;
-    height: 200px;
+    background: #F6F6F6;
+    min-height: 200px;
     display: grid;
     grid-template-columns: 2fr 3fr;
     .cer-cell {
       text-align: left;
       padding: 0px 20px;
       margin-top: 1em;
+      ul {
+        list-style-type: none;
+        margin: 0px !important;
+        padding: 0px;
+      }
     }
   }
   .input-text {

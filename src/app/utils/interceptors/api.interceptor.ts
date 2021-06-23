@@ -16,7 +16,7 @@ export class APIInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const request = req.clone({
-      url: `${environment.API_URL}/${req.url}`,
+      url: `${environment.API_URL}/api/${req.url}`,
       setHeaders: {
         'Content-Type': 'application/json',
         // 'X-CBH-VIETTEL':  'd96ed56b-a0c9-4fc8-9bb8-adcc285b904d-cbh-viettel'

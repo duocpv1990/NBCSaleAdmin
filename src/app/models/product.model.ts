@@ -267,5 +267,32 @@ export class Product {
       },
     ];
   }
+  public get img(): Array<CreateModel> {
+    return [{
+      id: 'Name',
+      label: 'Tên chứng nhận',
+      name: 'Name',
+      type: 'text'
+    },
+    {
+      id: 'Status',
+      label: 'Trạng thái',
+      name: 'Status',
+      type: 'text',
+    },
+    {
+      id: 'ExpiredDate',
+      label: 'Ngày hết hạn',
+      name: 'ExpiredDate',
+      type: 'date',
+    },
+    {
+      id: 'CertificationMedias',
+      label: 'Hình ảnh giấy trứng nhận',
+      name: 'CertificationMedias',
+      type: 'img',
+      data: []
+    }];
+  }
 
 }

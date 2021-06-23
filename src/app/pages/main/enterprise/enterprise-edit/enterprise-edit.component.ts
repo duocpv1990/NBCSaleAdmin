@@ -6,6 +6,9 @@ import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { AddressService } from 'src/app/services/address.service';
 import { MediaService } from 'src/app/services/media.service';
 import { EditModule } from 'src/app/components/edit/edit.component';
+import { CertificateEnterpriseComponent } from '../certificate-enterprise/certificate-enterprise.component';
+import { CertificationService } from 'src/app/services/certification.service';
+import { EnterpriseService } from 'src/app/services/enterprise.service';
 
 @Component({
   selector: 'app-enterprise-edit',
@@ -19,7 +22,11 @@ export class EnterpriseEditComponent implements OnInit {
     private dialogRef: MatDialogRef<EnterpriseEditComponent>,
     private addressService: AddressService,
     private dialog: MatDialog,
-    private mediaService: MediaService
+    private enterpriseService: EnterpriseService,
+    private mediaService: MediaService,
+
+    private certificationService: CertificationService,
+    private dialogCer: MatDialog
   ) {
     dialogRef.disableClose = true;
   }
@@ -28,7 +35,8 @@ export class EnterpriseEditComponent implements OnInit {
   option = {
     title: 'THÔNG TIN DOANH NGHIỆP',
     type: 'edit',
-    subtitle: 'THÔNG TIN CHUNG'
+    subtitle: 'THÔNG TIN CHUNG',
+    showAddCer: true
   };
 
   arrayButton = [{
@@ -47,7 +55,8 @@ export class EnterpriseEditComponent implements OnInit {
       this.option = {
         title: 'Thêm mới doanh nghiệp',
         type: 'create',
-        subtitle: 'THÔNG TIN CHUNG'
+        subtitle: 'THÔNG TIN CHUNG',
+        showAddCer: true
       };
     }
     this.addressService.getNation().subscribe(res => {
@@ -112,8 +121,49 @@ export class EnterpriseEditComponent implements OnInit {
         break;
     }
     if (value.type === 'add') {
-      this.dialogRef.close('add');
+      this.openAddCetificate(this.data?.companyId);
+      // this.dialogRef.close('add');
     }
+  }
+  openAddCetificate(companyId): void {
+    this.dialogCer.open(CertificateEnterpriseComponent, {
+      width: '940px',
+      height: '843px',
+      data: companyId
+    }).afterClosed().subscribe(result => {
+      if (result.text === 'Lưu') {
+        const req =
+        {
+          Name: result.data['name-full'],
+          ExpiredDate: result.data.date,
+          Type: 1,
+          Status: result.data.status,
+          CertificationMedia: result.data.CertificationMedia
+        };
+        this.certificationService.add(req).subscribe(res => {
+          debugger;
+          this.dataModel.CompanyCertifications.push(
+            {
+              CertificationId: +res,
+              Name: result.data['name-full'],
+              ExpiredDate: result.data.date,
+              Type: 1,
+              Status: result.data.status,
+              CertificationMedias: result.data.CertificationMedia.map(media => {
+                return {
+                  str: media.MediaURL.substring(media.MediaURL.lastIndexOf('/') + 1),
+                  MediaURL: media.MediaURL,
+                  Type: media.Type,
+                  Status: media.Type
+                };
+              }),
+            }
+          );
+          console.log(this.dataModel);
+
+        });
+      }
+    });
   }
   handleCallbackOption(value): void {
     switch (value.type) {
@@ -153,6 +203,49 @@ export class EnterpriseEditComponent implements OnInit {
   }
 
   save = (value) => {
+    if (this.option.type === 'create') {
+      this.dataModel = value;
+    }
+    const item = {
+      CompanyId: this.dataModel.companyId,
+      Name: this.dataModel.register,
+      // Description: string,
+      CompanyCode: this.dataModel.code,
+      GLN: this.dataModel.global,
+      TaxCode: this.dataModel.taxcode,
+      NationId: this.dataModel.country,
+      ProvinceId: this.dataModel.city,
+      DistrictId: this.dataModel.district,
+      AddressDetail: this.dataModel.address,
+      PhoneNumber: this.dataModel.phone,
+      Email: this.dataModel.email,
+      Website: this.dataModel.website,
+      Type: this.dataModel.Type,
+      Status: this.dataModel.Status,
+      CertificationIdList: (this.dataModel.CompanyCertifications) ? this.dataModel.CompanyCertifications.map(x => {
+        return x.CertificationId;
+      }) : [],
+      companyMedias: []
+      // companyMedias: [
+      //   {
+      //     CompanyMediaId: 0,
+      //     CompanyId: 0,
+      //     MediaId: 0,
+      //     MediaURL: "string",
+      //     Type: 0,
+      //     Status: 0
+      //   }
+      // ]
+    };
+    if (this.dataModel && this.dataModel.companyId) {
+      this.enterpriseService.edit(this.dataModel.companyId, item).subscribe(res => {
+        this.dialogRef.close(true);
+      });
+    } else {
+      this.enterpriseService.add(item).subscribe(res => {
+        this.dialogRef.close(true);
+      });
+    }
     this.dataModel = value;
   }
 

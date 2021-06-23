@@ -123,20 +123,25 @@ export class EnterpriseListComponent implements OnInit {
           country: res.NationId,
           city: res.ProvinceId,
           district: res.DistrictId,
+          Type: res.Type,
+          Status: res.Status,
           MediaURL: res.CompanyMedias.find(x => x.Type === 1 && x.Status === 1)?.MediaURL,
           BackgroundURL: res.CompanyMedias.find(x => x.Type === 2 && x.Status === 1)?.MediaURL,
-          certifi: []
+          CompanyCertifications: []
         };
         if (res.CompanyCertifications && res.CompanyCertifications.length !== 0) {
-          item.certifi = res.CompanyCertifications.map(cer => {
+          item.CompanyCertifications = res.CompanyCertifications.map(cer => {
             return {
-              name: cer.Name,
-              status: cer.Status,
-              date: (cer.ExpiredDate !== null) ? this.serviceDate.formatDate(cer.ExpiredDate, 'MM/DD/YYYY') : '',
-              image: cer.CertificationMedias.map(media => {
+              CertificationId: cer.CertificationId,
+              Name: cer.Name,
+              Status: cer.Status,
+              ExpiredDate: (cer.ExpiredDate !== null) ? this.serviceDate.formatDate(cer.ExpiredDate, 'MM/DD/YYYY') : '',
+              CertificationMedias: cer.CertificationMedias.map(media => {
                 return {
                   str: media.MediaURL.substring(media.MediaURL.lastIndexOf('/') + 1),
-                  url: media.MediaURL
+                  MediaURL: media.MediaURL,
+                  Type: media.Type,
+                  Status: media.Type
                 };
               }),
             };
@@ -147,11 +152,6 @@ export class EnterpriseListComponent implements OnInit {
           height: '843px',
           data: item
         }).afterClosed().subscribe(result => {
-          console.log(result);
-
-          if (result === 'add') {
-            this.openAddCetificate(ev.item.companyId);
-          }
         });
 
       },
@@ -179,27 +179,6 @@ export class EnterpriseListComponent implements OnInit {
         this.listFilter.find(x => x.condition === 'status')?.value
       );
     }
-  }
-  openAddCetificate(companyId): void {
-    this.dialogCer.open(CertificateEnterpriseComponent, {
-      width: '940px',
-      height: '843px',
-      data: companyId
-    }).afterClosed().subscribe(result => {
-      if (result.text === 'Lưu') {
-        const req =
-        {
-          Name: result.data['name-full'],
-          ExpiredDate: result.data.date,
-          Type: 1,
-          Status: result.data.status,
-          CertificationMedia: result.data.CertificationMedia
-        };
-        this.certificationService.add(req).subscribe(res => {
-
-        });
-      }
-      });
   }
 
 }

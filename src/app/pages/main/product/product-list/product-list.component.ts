@@ -85,14 +85,14 @@ export class ProductListComponent implements OnInit {
     if (ev.type === 'edit') {
       // this.productService.getProductDetail(ev.item.productId).subscribe((res) => {})
       this.productService.getProductDetail(ev.item.productId).subscribe((res) => {
-        console.log(res);
-        const itme = {
-          barcode: res.ProductCode,
-          productName: res.Name,
-          price: res.Price,
-          category: res.Category,
-          productDetail: res.Ingredient
-        };
+        // console.log(res);
+        // const itme = {
+        //   barcode: res.ProductCode,
+        //   productName: res.Name,
+        //   price: res.Price,
+        //   category: res.Category,
+        //   productDetail: res.Ingredient
+        // };
         // const item = {
         // companyId: ev.item.companyId,
         // code: res.CompanyCode,
@@ -128,24 +128,24 @@ export class ProductListComponent implements OnInit {
         //       };
         //     });
         //   }
-        //   return this.dialog.open(EnterpriseEditComponent, {
-        //     width: '940px',
-        //     height: '843px',
-        //     data: item
-        //   }).afterClosed().subscribe(result => {
-        //   });
+          return this.dialog.open(ProductUpdateComponent, {
+            width: '940px',
+            height: '843px',
+            data: res,
+          }).afterClosed().subscribe(result => {
+          });
 
         // },
         //   (err) => {
         //     console.log(err);
         //   });
       });
-      return this.dialog.open(ProductUpdateComponent, {
-            width: '940px',
-          height: '843px',
-          data: ev.item
-        }).afterClosed().subscribe(result => {
-        });
+      // return this.dialog.open(ProductUpdateComponent, {
+      //       width: '940px',
+      //     height: '843px',
+      //     data: ev.item
+      //   }).afterClosed().subscribe(result => {
+      //   });
 
       //   return this.dialog.open(ProductUpdateComponent, {
       //     width: '940px',

@@ -231,33 +231,33 @@ export class EnterPriseModel {
         type: 'button'
       },
       {
-        id: 'certifi',
-        label: 'CHỨNG CHỈ, CHỨNG NHẬN',
-        name: 'certifi',
+        id: 'CompanyCertifications',
+        label: '',
+        name: 'CompanyCertifications',
         type: 'div',
         child: [
           {
-            id: 'name',
+            id: 'Name',
             label: 'Tên chứng nhận',
-            name: 'name',
+            name: 'Name',
             type: 'text'
           },
           {
-            id: 'status',
+            id: 'Status',
             label: 'Trạng thái',
-            name: 'status',
+            name: 'Status',
             type: 'text',
           },
           {
-            id: 'date',
+            id: 'ExpiredDate',
             label: 'Ngày hết hạn',
-            name: 'status',
+            name: 'ExpiredDate',
             type: 'date',
           },
           {
-            id: 'image',
+            id: 'CertificationMedias',
             label: 'Hình ảnh giấy trứng nhận',
-            name: 'image',
+            name: 'CertificationMedias',
             type: 'img',
             data: []
           },

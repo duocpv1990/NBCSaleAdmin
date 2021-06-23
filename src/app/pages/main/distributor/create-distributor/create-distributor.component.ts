@@ -157,21 +157,27 @@ export class CreateDistributorComponent implements OnInit {
   }
 
   onFunictionSave = () => {
+    if (this.option.type === 'create') {
+debugger
+    }
     const item = {
       DistributorId: this.dataModel.distributorId,
       CompanyId: this.dataModel.name,
-      Name : this.dataModel.distributorName,
-      TaxCode : this.dataModel.mst,
-      NationId : this.dataModel.country,
-      ProvinceId : this.dataModel.city,
-      DistrictId : this.dataModel.district,
-      AddressDetail : this.dataModel.address,
-      PhoneNumber : this.dataModel.phone,
+      Name: this.dataModel.distributorName,
+      TaxCode: this.dataModel.mst,
+      NationId: this.dataModel.country,
+      ProvinceId: this.dataModel.city,
+      DistrictId: this.dataModel.district,
+      AddressDetail: this.dataModel.address,
+      Type: (this.dataModel.Type) ? this.dataModel.Type : 1,
+      Status: (this.dataModel.Status) ? this.dataModel.Status : 1,
+      PhoneNumber: this.dataModel.phone,
       Email: this.dataModel.email,
       Website: this.dataModel.website,
+      DistributorMedias: []
       // MediaURL: this.dataModel.DistributorMedias.find(x => x.Type === 1 && x.Status === 1)?.MediaURL,
       // BackgroundURL: res.DistributorMedias.find(x => x.Type === 2 && x.Status === 1)?.MediaURL,
-     };
+    };
     if (this.dataModel && this.dataModel.distributorId) {
       this.distributorService.edit(this.dataModel.distributorId, item).subscribe(res => {
         this.dialogRef.close(true);

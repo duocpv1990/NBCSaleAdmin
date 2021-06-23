@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // API_URL: 'https://uat-cbh-viettel.congbaohiem.com.vn',
-  API_URL: 'http://192.168.1.34/nbc/api',
+  API_URL: 'http://192.168.1.34/nbc',
 
 };
 

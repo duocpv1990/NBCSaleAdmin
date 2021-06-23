@@ -44,9 +44,10 @@
     </div>
   </div>
   <div class="upload-img">
+
     <div class="content row align-items-center" [hidden]="item.type !== 'img'" *ngFor="let item of data">
       <div class="label">{{ item?.label }}</div>
-      <div class="input-text" [class]="item.class">
+      <!-- <div class="input-text" [class]="item.class">
         <div class="img" *ngIf="item.type === 'img'">
           <div class="label-upload-img">
             <label class="" for="{{ item.id }}">
@@ -57,6 +58,33 @@
           </div>
           <input id="{{ item.id }}" #file hidden type="file" accept="image/*"
             (change)="preview(file.files, item.name)" />
+        </div>
+      </div> -->
+      <div class="input-text">
+        <div class="img">
+          <div class="label-upload-img">
+            <label class="" for="img-{{item.id}}" *ngIf="item.name === 'avatar'">
+              <img [src]="model.MediaURL" height="200"  *ngIf="model.MediaURL"/>
+              <svg *ngIf="!model.MediaURL"
+                xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31">
+                <line id="Line_8934" data-name="Line 8934" x2="29" transform="translate(1 15.5)" fill="none" stroke="#1894ff" stroke-linecap="round" stroke-width="2"/>
+                <line id="Line_8935" data-name="Line 8935" x2="29" transform="translate(15.5 1) rotate(90)" fill="none" stroke="#1894ff" stroke-linecap="round" stroke-width="2"/>
+              </svg>
+              <!-- <mat-icon class="add-photo">add_a_photo</mat-icon> -->
+            </label>
+            <label class="" for="img-{{item.id}}" *ngIf="item.name === 'background'">
+              <img [src]="model.BackgroundURL" height="200" *ngIf=" model.BackgroundURL" />
+              <svg *ngIf="!model.BackgroundURL"
+                xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31">
+                <line id="Line_8934" data-name="Line 8934" x2="29" transform="translate(1 15.5)" fill="none" stroke="#1894ff" stroke-linecap="round" stroke-width="2"/>
+                <line id="Line_8935" data-name="Line 8935" x2="29" transform="translate(15.5 1) rotate(90)" fill="none" stroke="#1894ff" stroke-linecap="round" stroke-width="2"/>
+              </svg>
+              <!-- <mat-icon class="add-photo">add_a_photo</mat-icon> -->
+            </label>
+          </div>
+          <input id="img-{{item.id}}" #file1 accept="image/*" class="{{ item.id }}"
+          (change)="preview(file1.files, item.name)" hidden type="file" accept="image/*"/>
+          <!-- (change)="preview(file.files, item.name)" /> -->
         </div>
       </div>
     </div>
@@ -86,7 +114,7 @@
         <div>
           <div class="img">
             <div class="label-upload-img">
-              <label class="" for="1">
+              <label class="" for="mutil">
                 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31">
                   <g id="Group_21176" data-name="Group 21176" transform="translate(-1289.814 -578.814)">
                     <g id="Rectangle_2451" data-name="Rectangle 2451" transform="translate(1289.814 578.814)" fill="#fff"
@@ -103,7 +131,7 @@
                 </svg>
               </label>
             </div>
-            <input id="1" #file hidden type="file" accept="image/*" (change)="addUrl(file.files)" multiple/>
+            <input id="mutil" #file hidden type="file" accept="image/*" (change)="addUrl(file.files)" multiple/>
           </div>
           <!-- <button>
 
@@ -132,20 +160,22 @@
     </div>
 
   </div>
-  <ng-container *ngIf="model.certifi && model.certifi.length !== 0">
-    <div class="certification" *ngFor="let certifi of model.certifi">
+  <ng-container *ngIf="model.CompanyCertifications && model.CompanyCertifications.length !== 0">
+    <div class="certification" *ngFor="let certifi of model.CompanyCertifications">
       <ng-container *ngFor="let item of data">
         <ng-container *ngFor="let certi of item.child">
           <div class="cer-cell">
             {{certi.label}}
           </div>
-          <div class="cer-cell" *ngIf="certi.id !== 'image'">
+          <div class="cer-cell" *ngIf="certi.id !== 'CertificationMedias'">
             {{certifi[certi.id]}}
           </div>
-          <div class="cer-cell" *ngIf="certi.id === 'image'">
-            <ng-container *ngFor="let img of certifi.image">
-              <a href="{{img.url}}" target="_blank">{{img.str}}</a>
-            </ng-container>
+          <div class="cer-cell" *ngIf="certi.id === 'CertificationMedias'">
+            <ul *ngFor="let img of certifi.CertificationMedias">
+              <li>
+                <a href="{{img.MediaURL}}" target="_blank">{{img.str}}</a>
+              </li>
+            </ul>
 
           </div>
         </ng-container>

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Product } from 'src/app/models/product.model';
 import { FormsModule } from '@angular/forms';
 import { FormControl } from '@angular/forms';
@@ -8,22 +8,28 @@ import { CategoryService } from 'src/app/services/category.service';
 import { DistributorService } from 'src/app/services/distributor.service';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
+import { ProductService } from 'src/app/services/product.service';
+import { BaseUploadComponent, S3FileService } from '@consult-indochina/common';
+import { CertificateEnterpriseComponent } from '../../enterprise/certificate-enterprise/certificate-enterprise.component';
+import { CertificationService } from 'src/app/services/certification.service';
+import { FormatDateService } from 'src/app/services/format-date.service';
 @Component({
   selector: 'app-product-update',
   templateUrl: './product-update.component.html',
   styleUrls: ['./product-update.component.scss']
 })
-export class ProductUpdateComponent implements OnInit {
+export class ProductUpdateComponent extends BaseUploadComponent implements OnInit {
   conFig = new Product();
-  dataModel = {
-    barcode: '222',
-    productName: '222',
-    price: 234,
-    category: 1,
-    MediaURL: null,
-    DistributorProducts: [],
-    Manual: '2222'
-  };
+  // dataModel = {
+  //   barcode: '222',
+  //   productName: '222',
+  //   price: 234,
+  //   category: 1,
+  //   MediaURL: null,
+  //   DistributorProducts: [],
+  //   Manual: '2222'
+  // };
+  dataModel;
   option = {
     title: 'THÊM MỚI SẢN PHẨM',
     type: 'add',
@@ -48,22 +54,8 @@ export class ProductUpdateComponent implements OnInit {
   listGeneral = [];
   listDetal = [];
   lstCategory = [];
-  lstStore = [{
-    StoreId: 1,
-    Name: '22222444'
-  },
-  {
-    StoreId: 2,
-    Name: '22222444'
-  }];
-  lstDistributor = [{
-    DistributorId: 1,
-    Name: '22222444'
-  },
-  {
-    DistributorId: 2,
-    Name: '22222444'
-  }];
+  lstStore = [];
+  lstDistributor = [];
 
 
   lstStoreInput = [];
@@ -86,16 +78,49 @@ export class ProductUpdateComponent implements OnInit {
     private categoryService: CategoryService,
     private storeService: StoreService,
     private distributorService: DistributorService,
-  ) { }
+    private productService: ProductService,
+    public s3Service: S3FileService,
+    private dialogCer: MatDialog,
+    private certificationService: CertificationService,
+    private serviceDate: FormatDateService
+  ) {
+    super(s3Service);
+   }
 
   ngOnInit(): void {
-    this.listDetal = this.conFig.detal;
+    this.listDetal = this.conFig.img;
     if (this.data) {
+      this.dataModel = this.data;
+      if (this.dataModel.Ingredient) {
+        this.Ingradient =  this.dataModel.Ingredient.split(',');
+      }
+      this.dataModel.ProductCertifications = this.dataModel.ProductCertifications.map(cer => {
+        return {
+          CertificationId: cer.CertificationId,
+          Name: cer.Name,
+          Status: cer.Status,
+          ExpiredDate: (cer.ExpiredDate !== null) ? this.serviceDate.formatDate(cer.ExpiredDate, 'MM/DD/YYYY') : '',
+          CertificationMedias: cer.CertificationMedias.map(media => {
+            return {
+              str: media.MediaURL.substring(media.MediaURL.lastIndexOf('/') + 1),
+              MediaURL: media.MediaURL,
+              Type: media.Type,
+              Status: media.Type
+            };
+          }),
+        };
+      });
+      console.log(this.dataModel);
+
       this.option = {
         title: 'THÔNG TIN SẢN PHẨM',
         type: 'edit',
         subtitle: 'THÔNG TIN CHUNG'
       };
+    } else {
+      this.dataModel = {
+        ProductCode: '',
+      }
     }
     this.getCategory();
     this.getStore();
@@ -118,18 +143,63 @@ export class ProductUpdateComponent implements OnInit {
   }
   handleCallbackEvent = (value) => {
     console.log(value);
-
-    switch (value.class) {
-      case 'btn-cancel':
-        this.cancel();
-        break;
-      case 'btn-save':
-        this.save(value.data);
-        break;
-      default:
-        break;
+    if (value === 'btn-save') {
+      this.save();
+    } else {
+      this.dialogRef.close();
     }
-    this.dialogRef.close();
+    // switch (value.class) {
+    //   case 'btn-cancel':
+    //     this.cancel();
+    //     break;
+    //   case 'btn-save':
+    //     this.save(value.data);
+    //     break;
+    //   default:
+    //     break;
+    // }
+  }
+  showAdd(): void {
+    this.openAddCetificate(this.dataModel?.ProductId);
+  }
+  openAddCetificate(ProductId): void {
+    this.dialogCer.open(CertificateEnterpriseComponent, {
+      width: '940px',
+      height: '843px',
+      data: ProductId
+    }).afterClosed().subscribe(result => {
+      if (result.text === 'Lưu') {
+        const req =
+        {
+          Name: result.data['name-full'],
+          ExpiredDate: result.data.date,
+          Type: 1,
+          Status: result.data.status,
+          CertificationMedia: result.data.CertificationMedia
+        };
+        this.certificationService.add(req).subscribe(res => {
+          this.dataModel.ProductCertifications.push(
+            {
+              CertificationId: +res,
+              Name: result.data['name-full'],
+              ExpiredDate: result.data.date,
+              Type: 1,
+              Status: result.data.status,
+              CertificationMedias: result.data.CertificationMedia.map(media => {
+                return {
+                  str: media.MediaURL.substring(media.MediaURL.lastIndexOf('/') + 1),
+                  MediaURL: media.MediaURL,
+                  Type: media.Type,
+                  Status: media.Type
+                };
+              }),
+            }
+          );
+          console.log(this.dataModel);
+
+        });
+      }
+    });
   }
   addDistributor(): void {
     const distributorProduct = {
@@ -163,24 +233,17 @@ export class ProductUpdateComponent implements OnInit {
     this.dataModel.DistributorProducts.splice(index, 1);
   }
   preview(files: File[]): void {
-    console.log(files);
-    this.dataModel.MediaURL = [];
-    if (files.length !== 0) {
-      // tslint:disable-next-line:prefer-for-of
-      for (let index = 0; index < files.length; index++) {
-        const reader = new FileReader();
-        reader.readAsDataURL(files[index]);
-        // tslint:disable-next-line:variable-name
-        reader.onload = (_event) => {
-          this.dataModel.MediaURL.push(reader.result);
+    this.multipleUpload(files).subscribe(res => {
+      console.log(res, this.fileLinkList);
+      this.dataModel.ProductMedias = this.fileLinkList.map(x => {
+        return {
+          ProductId: this.dataModel?.ProductId,
+          MediaURL: x,
+          Status: 1,
+          Type: 3
         };
-      }
-      // const reader = new FileReader();
-      // reader.readAsDataURL(files[0]);
-      // reader.onload = (_event) => {
-      //   this.dataModel.MediaURL = reader.result;
-      // }
-    }
+      });
+    });
   }
 
   add(event: MatChipInputEvent): void {
@@ -188,7 +251,8 @@ export class ProductUpdateComponent implements OnInit {
 
     // Add our fruit
     if (value) {
-      this.Ingradient.push({name: value});
+      this.Ingradient.push(value);
+      this.dataModel.Ingredient = this.Ingradient.toString();
     }
 
     // Clear the input value
@@ -202,13 +266,22 @@ export class ProductUpdateComponent implements OnInit {
 
     if (index >= 0) {
       this.Ingradient.splice(index, 1);
+      this.dataModel.Ingredient = this.Ingradient.toString();
     }
   }
   cancel = () => {
   }
 
-  save = (value) => {
-    this.dataModel = value;
+  save = () => {
+    if (this.dataModel && this.dataModel.ProductId) {
+      this.productService.edit(this.dataModel.ProductId, this.dataModel).subscribe(res => {
+        this.dialogRef.close(true);
+      });
+    } else {
+      this.productService.add(this.dataModel).subscribe(res => {
+        this.dialogRef.close(true);
+      });
+    }
   }
 
 }
