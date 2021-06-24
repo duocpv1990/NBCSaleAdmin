@@ -185,7 +185,15 @@ export class EnterpriseListComponent implements OnInit {
           content: "Bạn có muốn xoá thông tin doanh nghiệp trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {
-        this.ngOnInit();
+        if (result === true) {
+          this.getListEnterprise(
+            this.listFilter.find(x => x.condition === 'global')?.value,
+            this.listFilter.find(x => x.condition === 'name')?.value,
+            1,
+            this.listFilter.find(x => x.condition === 'status')?.value ?? 0,
+            this.listFilter.find(x => x.condition === 'type')?.value ?? 0,
+          );
+        }
       });
     } else if (ev.type === 'deleteAll') {
       if (ev.data.length !== 0 ) {

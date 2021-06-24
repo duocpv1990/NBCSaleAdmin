@@ -66,7 +66,6 @@ export class CreateDistributorComponent implements OnInit {
         }
       });
     });
-    console.log(this.listCreate);
 
     this.addressService.getNation().subscribe(res => {
       this.listCreate.forEach(create => {
@@ -80,7 +79,6 @@ export class CreateDistributorComponent implements OnInit {
         }
       });
     });
-    console.log(this.dataModel, this.data);
 
     if (this.data && this.data.country) {
       this.addressService.getProvince(this.data.country).subscribe(res => {
@@ -184,23 +182,61 @@ export class CreateDistributorComponent implements OnInit {
       // BackgroundURL: res.DistributorMedias.find(x => x.Type === 2 && x.Status === 1)?.MediaURL,
     };
     if (this.dataModel && this.dataModel.MediaURL) {
-      item.DistributorMedias.push(
-        {
+      if (this.dataModel.checkMediaUrl === true && this.dataModel.distributorId) {
+        this.distributorService.updateImage({
+          DistributorId: this.dataModel.distributorId,
           MediaURL: this.dataModel.MediaURL,
           Type: 1,
           Status: 1
-        }
-      );
+        }).subscribe(res => {
+        });
+      } else {
+        item.DistributorMedias.push(
+          {
+            MediaURL: this.dataModel.MediaURL,
+            Type: 1,
+            Status: 1
+          }
+        );
+      }
     }
     if (this.dataModel && this.dataModel.BackgroundURL) {
-      item.DistributorMedias.push(
-        {
+      if (this.dataModel.checkBackgroundURL === true && this.dataModel.distributorId) {
+        this.distributorService.updateImage({
+          DistributorId: this.dataModel.distributorId,
           MediaURL: this.dataModel.BackgroundURL,
           Type: 2,
           Status: 1
-        }
-      );
+        }).subscribe(res => {
+        });
+      } else {
+        item.DistributorMedias.push(
+          {
+            MediaURL: this.dataModel.BackgroundURL,
+            Type: 2,
+            Status: 1
+          }
+        );
+      }
     }
+    // if (this.dataModel && this.dataModel.MediaURL) {
+    //   item.DistributorMedias.push(
+    //     {
+    //       MediaURL: this.dataModel.MediaURL,
+    //       Type: 1,
+    //       Status: 1
+    //     }
+    //   );
+    // }
+    // if (this.dataModel && this.dataModel.BackgroundURL) {
+    //   item.DistributorMedias.push(
+    //     {
+    //       MediaURL: this.dataModel.BackgroundURL,
+    //       Type: 2,
+    //       Status: 1
+    //     }
+    //   );
+    // }
     if (this.dataModel && this.dataModel.distributorId) {
       this.distributorService.edit(this.dataModel.distributorId, item).subscribe(res => {
         this.dialogRef.close(true);

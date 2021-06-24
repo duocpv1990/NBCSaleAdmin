@@ -22,7 +22,16 @@ export class ShopModel {
             {
                 Text: 'Hình thức',
                 type: 'select',
-                data: [],
+                data: [
+                  {
+                    value: 2,
+                    text: 'Online',
+                  },
+                  {
+                    value: 1,
+                    text: 'Offline',
+                  }
+                ],
                 condition: 'form'
             },
             {
@@ -31,7 +40,7 @@ export class ShopModel {
                 condition: 'fullText'
             }];
     }
-   
+
     public get btnActice(): Array<any> {
         return [
             {
@@ -61,12 +70,12 @@ export class ShopModel {
                 width: 100,
                 type: 'checkbox',
             },
-            {
-                id: 'stt',
-                name: 'STT',
-                width: 100,
-                type: 'text',
-            },
+            // {
+            //     id: 'stt',
+            //     name: 'STT',
+            //     width: 100,
+            //     type: 'text',
+            // },
             {
                 id: 'MediaURL',
                 name: 'Ảnh',
@@ -75,31 +84,31 @@ export class ShopModel {
             },
 
             {
-                id: 'name',
+                id: 'Name',
                 name: 'Tên cửa hàng',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'address',
+                id: 'AddressDetail',
                 name: 'Địa chỉ',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'area',
+                id: 'Province',
                 name: 'Khu vực',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'phone',
+                id: 'PhoneNumber',
                 name: 'Điện thoại',
                 width: 200,
                 type: 'text',
             },
             {
-                id: 'form',
+                id: 'type',
                 name: 'Hình thức',
                 width: 200,
                 type: 'text',
@@ -111,7 +120,7 @@ export class ShopModel {
                 type: 'text',
             },
             {
-                id: 'update',
+                id: 'UpdatedOn',
                 name: 'Cập nhập',
                 width: 200,
                 type: 'text',
@@ -128,63 +137,69 @@ export class ShopModel {
     public get create(): Array<CreateModel> {
         return [
             {
-                id: 'name',
+                id: 'CompanyId',
                 label: 'Tên doanh nghiệp',
-                name: 'name',
-                type: 'text'
+                name: 'CompanyId',
+                type: 'select'
             },
+            // {
+            //     id: 'DistributorId',
+            //     label: 'Tên nhà phân phối',
+            //     name: 'DistributorId',
+            //     type: 'select'
+            // },
             {
-                id: 'distributorName',
-                label: 'Tên nhà phân phối',
-                name: 'distributorName',
-                type: 'text'
-            },
-            {
-                id: 'location',
+                id: 'Name',
                 label: 'Điểm bán',
-                name: 'location',
+                name: 'Name',
                 type: 'text'
             },
             {
-                id: 'country',
+              id: 'Type',
+              label: 'Hình thức',
+              name: 'Type',
+              type: 'select'
+          },
+            {
+                id: 'NationId',
                 label: 'Quốc gia',
-                name: 'country',
+                name: 'NationId',
                 type: 'select'
             },
             {
-                id: 'city',
+                id: 'ProvinceId',
                 label: 'Thành phố/Tỉnh',
-                name: 'city',
+                name: 'ProvinceId',
                 type: 'select'
             },
             {
-                id: 'district',
+                id: 'DistrictId',
                 label: 'Quận/Huyện',
-                name: 'district',
+                name: 'DistrictId',
                 type: 'select'
             },
             {
-                id: 'address',
+                id: 'AddressDetail',
                 label: 'Địa chỉ',
-                name: 'address',
+                name: 'AddressDetail',
                 type: 'text'
             },
             {
-                id: 'phone',
+                id: 'PhoneNumber',
                 label: 'Số điện thoại',
-                name: 'phone',
+                name: 'PhoneNumber',
                 type: 'text'
             },
             {
-                id: 'email',
+                id: 'Email',
                 label: 'Email',
-                name: 'email',
+                name: 'Email',
                 type: 'text'
-            },            
+            },
             {
-                id: 'website',
+                id: 'Website',
                 label: 'Website',
-                name: 'website',
+                name: 'Website',
                 type: 'text'
             },
             {

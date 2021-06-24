@@ -37,4 +37,7 @@ export class DistributorService {
   delete(distributorId): Observable<any> {
     return this.http.delete<any>(`distributor?distributorId=${distributorId}`).pipe(map((res: any) => res.payload));
   }
+  updateImage(param): Observable<any> {
+    return this.http.post<any>(`distributor/media`, param).pipe(map((res: any) => res.payload));
+  }
 }

@@ -35,7 +35,7 @@ export class Product {
           },
           {
             value: 1,
-            text: 'Ngừng hoạt động',
+            text: 'Không hoạt động',
           }
         ],
         condition: 'status'

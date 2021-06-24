@@ -36,4 +36,7 @@ export class ProductService {
   delete(productId): Observable<any> {
     return this.http.delete<any>(`product?productId=${productId}`).pipe(map((res: any) => res.payload));
   }
+  updateImage(param): Observable<any> {
+    return this.http.post<any>(`product/media`, param).pipe(map((res: any) => res.payload));
+  }
 }

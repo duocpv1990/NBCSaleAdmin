@@ -32,4 +32,7 @@ export class EnterpriseService {
   delete(companyId): Observable<any> {
     return this.http.delete<any>(`company?companyId=${companyId}`).pipe(map((res: any) => res.payload));
   }
+  updateImage(param): Observable<any> {
+    return this.http.post<any>(`company/media`, param).pipe(map((res: any) => res.payload));
+  }
 }

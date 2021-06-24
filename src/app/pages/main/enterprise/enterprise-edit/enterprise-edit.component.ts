@@ -244,24 +244,46 @@ export class EnterpriseEditComponent implements OnInit {
       //   }
       // ]
     };
+
     if (this.dataModel && this.dataModel.MediaURL) {
-      item.companyMedias.push(
-        {
+      if (this.dataModel.checkMediaUrl === true && this.dataModel.companyId) {
+        this.enterpriseService.updateImage({
+          CompanyId: this.dataModel.companyId,
           MediaURL: this.dataModel.MediaURL,
           Type: 1,
           Status: 1
-        }
-      );
+        }).subscribe(res => {
+        });
+      } else {
+        item.companyMedias.push(
+          {
+            MediaURL: this.dataModel.MediaURL,
+            Type: 1,
+            Status: 1
+          }
+        );
+      }
     }
     if (this.dataModel && this.dataModel.BackgroundURL) {
-      item.companyMedias.push(
-        {
+      if (this.dataModel.checkBackgroundURL === true && this.dataModel.companyId) {
+        this.enterpriseService.updateImage({
+          CompanyId: this.dataModel.companyId,
           MediaURL: this.dataModel.BackgroundURL,
           Type: 2,
           Status: 1
-        }
-      );
+        }).subscribe(res => {
+        });
+      } else {
+        item.companyMedias.push(
+          {
+            MediaURL: this.dataModel.BackgroundURL,
+            Type: 2,
+            Status: 1
+          }
+        );
+      }
     }
+
     if (this.dataModel && this.dataModel.companyId) {
       this.enterpriseService.edit(this.dataModel.companyId, item).subscribe(res => {
         this.dialogRef.close(true);
@@ -271,7 +293,7 @@ export class EnterpriseEditComponent implements OnInit {
         this.dialogRef.close(true);
       });
     }
-    this.dataModel = value;
+    // this.dataModel = value;
   }
 
 

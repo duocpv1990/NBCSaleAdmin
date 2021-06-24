@@ -29,7 +29,7 @@ export class EnterPriseModel {
           },
           {
             value: 1,
-            text: 'Ngừng hoạt động',
+            text: 'Không hoạt động',
           }
         ],
         condition: 'status'

@@ -12,6 +12,7 @@ import { ShopCreateComponent } from './shop-create/shop-create.component';
 import { ShopDeleteComponent } from './shop-delete/shop-delete.component';
 import { CreateModule } from 'src/app/components/create/create.component';
 import { DeleteModule } from 'src/app/components/dialog/delete/delete.component';
+import { EditModule } from 'src/app/components/edit/edit.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { DeleteModule } from 'src/app/components/dialog/delete/delete.component'
     FilterBaseModule,
     TableBaseModule,
     CreateModule,
+    EditModule,
     DeleteModule,
     RouterModule.forChild(shopRoute),
   ],

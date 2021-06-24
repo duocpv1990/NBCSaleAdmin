@@ -43,8 +43,10 @@ export class EditComponent extends BaseUploadComponent implements OnInit {
       console.log(this.imageLinkUpload, value);
       if (value === 'avatar') {
         this.model.MediaURL = this.imageLinkUpload;
+        this.model.checkMediaUrl = true;
       } else if (value === 'background') {
         this.model.BackgroundURL = this.imageLinkUpload;
+        this.model.checkBackgroundURL = true;
       }
     });
     // debugger;

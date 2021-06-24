@@ -148,8 +148,8 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
     });
   }
   getCompany(): void {
-    this.storeService.getStores(1, 500).subscribe(result => {
-      this.lstStore = result;
+    this.storeService.getStores('', '', '', 1, 500).subscribe(result => {
+      this.lstStore = result.payload;
     });
 
   }
@@ -256,7 +256,7 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
   }
   preview(files: File[]): void {
     this.multipleUpload(files).subscribe(res => {
-      console.log(res, this.fileLinkList);
+      this.dataModel.checkMediaUrl = true;
       this.dataModel.ProductMedias = this.fileLinkList.map(x => {
         return {
           ProductId: this.dataModel?.ProductId,
@@ -299,9 +299,22 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
       return x.CertificationId;
     });
     if (this.dataModel && this.dataModel.ProductId) {
-      this.productService.edit(this.dataModel.ProductId, this.dataModel).subscribe(res => {
-        this.dialogRef.close(true);
-      });
+      if (this.dataModel.checkMediaUrl === true) {
+        for (let i = 0; i < this.dataModel.ProductMedias; i++) {
+          this.productService.updateImage( this.dataModel.ProductMedias[i]).subscribe(res => {
+            if (i === this.dataModel.ProductMedias.length - 1) {
+              this.productService.edit(this.dataModel.ProductId, this.dataModel).subscribe(res2 => {
+                this.dialogRef.close(true);
+              });
+            }
+          });
+
+        }
+      } else {
+        this.productService.edit(this.dataModel.ProductId, this.dataModel).subscribe(res => {
+          this.dialogRef.close(true);
+        });
+      }
     } else {
       this.productService.add(this.dataModel).subscribe(res => {
         this.dialogRef.close(true);
