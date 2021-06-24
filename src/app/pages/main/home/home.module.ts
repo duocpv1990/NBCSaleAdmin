@@ -50,6 +50,7 @@ import { homeRoute } from './home.routes';
 import { HomeComponent } from './home.component';
 import { HomePageComponent } from './home-page/home-page.component'
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { SettingModule } from './setting/setting.module';
 
 
 
@@ -105,6 +106,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     OverlayModule,
     PortalModule,
     ScrollingModule,
+    SettingModule
   ],
   exports: [HomeComponent]
 })

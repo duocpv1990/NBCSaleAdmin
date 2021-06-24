@@ -10,9 +10,15 @@
     <span matBadge="18" matBadgeOverlap="false">
       <img src="assets/svg/nbc-noti.svg" srcset="" />
     </span>
-    <span matBadge="!" matBadgeOverlap="false" matBadgeColor="warn">
+    <span matBadge="!" [matMenuTriggerFor]="setting" matBadgeOverlap="false" matBadgeColor="warn">
       <img src="assets/svg/nbc-setting.svg" srcset="" />
     </span>
+    <mat-menu #setting="matMenu">
+        <button mat-menu-item [routerLink]="['/home/setting/enterprise']">Thông tin doanh nghiệp</button>
+        <button mat-menu-item [routerLink]="['/home/setting']">Thông tin tài khoản</button>
+        <button mat-menu-item>Thay đổi mật khẩu</button>
+        <button mat-menu-item (click)="btnLogout()">Đăng xuất</button>
+    </mat-menu>
   </div>
   <div class="info">
     <div class="image" [matMenuTriggerFor]="menu">

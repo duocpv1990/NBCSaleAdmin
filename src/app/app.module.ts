@@ -11,8 +11,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { CiCommonModule } from '@consult-indochina/common';
 import { ciAuthInterceptorProvider, CiAuthModule } from '@consult-indochina/auth';
+import { ImportExcelComponent } from './components/dialog/import-excel/import-excel.component';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ImportExcelComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
