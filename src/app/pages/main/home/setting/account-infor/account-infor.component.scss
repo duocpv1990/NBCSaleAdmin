@@ -3,9 +3,12 @@
     font-weight: 500;
     color: #002C6C;
 }
-.row {
+.row-grid {
     display: grid;
     grid-template-columns: 5fr 7fr;
+    .col {
+      margin-right: 20px;
+    }
 }
 .add-img {
     height: 70vh;
@@ -42,8 +45,11 @@
     background-color: #fff;
     border-radius: 10px;
     form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         padding: 80px 50px;
         label {
+            width: 90%;
             font-size: 16px;
             font-weight: 500;
             color: #A4A4A4;
