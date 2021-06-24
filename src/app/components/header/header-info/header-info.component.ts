@@ -22,13 +22,13 @@ export class HeaderInfoComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getProfile()
+    //this.getProfile()
 
   }
 
   btnLogout() {
     this.local.clear();
-    this.route.navigate([''])
+    this.route.navigate(['/log-in']);
   }
   getProfile() {
     this.profile = this.profileService.get('').pipe(map((res: any) => {

@@ -158,7 +158,6 @@ export class CreateDistributorComponent implements OnInit {
 
   onFunictionSave = () => {
     if (this.option.type === 'create') {
-debugger
     }
     const item = {
       DistributorId: this.dataModel.distributorId,

@@ -34,8 +34,6 @@ export class LoginComponent implements OnInit {
     };
     this.ciAuthService.login(loginValue).subscribe(
       (res) => {
-        debugger;
-        this.localStorage.set('access_token', res);
         this.router.navigate(['home']);
       },
       (err) => {

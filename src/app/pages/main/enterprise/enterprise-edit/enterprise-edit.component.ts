@@ -141,7 +141,6 @@ export class EnterpriseEditComponent implements OnInit {
           CertificationMedia: result.data.CertificationMedia
         };
         this.certificationService.add(req).subscribe(res => {
-          debugger;
           this.dataModel.CompanyCertifications.push(
             {
               CertificationId: +res,
