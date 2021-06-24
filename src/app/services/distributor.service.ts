@@ -12,17 +12,17 @@ export class DistributorService {
   }
   /**
    * get list distributor
-   * @param provinceId string
+   * @param companyName string
    * @param name string
    * @param pageNumber number
    * @param pageSize number
    * @returns list
    */
-  getDistributor( name: string, pageNumber: number, pageSize: number, provinceId?: number): Observable<any> {
-    let url = `distributor?name=${name}&provinceId=${provinceId}&pageNumber=${pageNumber}&pageSize=${pageSize}`;
-    if (!provinceId) {
-      url = `distributor?name=${name}&pageNumber=${pageNumber}&pageSize=${pageSize}`;
-    }
+  getDistributor( name: string, pageNumber: number, pageSize: number, companyName: string): Observable<any> {
+    const url = `distributor?name=${name}&companyName=${companyName}&pageNumber=${pageNumber}&pageSize=${pageSize}`;
+    // if (!provinceId) {
+    //   url = `distributor?name=${name}&pageNumber=${pageNumber}&pageSize=${pageSize}`;
+    // }
     return this.http.get<any>(url);
   }
   getDistributorDetail(distributorId): Observable<any> {

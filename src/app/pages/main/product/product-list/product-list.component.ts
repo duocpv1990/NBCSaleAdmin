@@ -5,6 +5,7 @@ import { ProductUpdateComponent } from '../product-update/product-update.compone
 import { ProductDeleteComponent } from '../product-delete/product-delete.component';
 import { ProductService } from 'src/app/services/product.service';
 import { FormatDateService } from 'src/app/services/format-date.service';
+import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 
 @Component({
   selector: 'app-product-list',
@@ -16,7 +17,7 @@ export class ProductListComponent implements OnInit {
   config = new Product();
   value: string;
   dataSub = [];
-  // tableData = [];
+  currrentPage = 1;
   listActive;
   dataTable;
   dataLength = 0;
@@ -33,11 +34,11 @@ export class ProductListComponent implements OnInit {
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
     // this.dataSub = this.data;
-    this.getListProduct('', '', 1);
+    this.getListProduct('', '', '', 1);
   }
 
-  getListProduct(name: string, companyName: string, pageCurrent: number, status?: number, type?: number): void {
-    this.productService.getProduct(name ? name : '', companyName ? companyName : '',
+  getListProduct(name: string, companyName: string, productCode: string, pageCurrent: number, status?: number, type?: number): void {
+    this.productService.getProduct(name ? name : '', companyName ? companyName : '', productCode ? productCode : '',
       pageCurrent, 5, status ? status : '', type ? type : '').subscribe((res) => {
         this.dataLength = res.count;
         this.data = res.payload.map((x, index) => {
@@ -52,7 +53,7 @@ export class ProductListComponent implements OnInit {
             scanStatus: 0,
             price: x.Price,
             type: x.Type,
-            status: (x.Status === 1) ? 'Hoạt động' : 'Không hoạt động',
+            status: (x.Status === 2) ? 'Hoạt động' : 'Không hoạt động',
             checkbox: false
           };
         });
@@ -68,6 +69,7 @@ export class ProductListComponent implements OnInit {
     this.getListProduct(
       this.listFilter.find(x => x.condition === 'name')?.value,
       this.listFilter.find(x => x.condition === 'companyName')?.value,
+      this.listFilter.find(x => x.condition === 'productCode')?.value,
       1,
       this.listFilter.find(x => x.condition === 'status')?.value,
       this.listFilter.find(x => x.condition === 'type')?.value,
@@ -79,8 +81,19 @@ export class ProductListComponent implements OnInit {
     if (ev.type === 'create') {
       return this.dialog.open(ProductUpdateComponent, {
         width: '940px',
-        height: '843px'
+        height: '843px',
+        data: {
+          ProductCertifications: [],
+          DistributorProducts: []
+        }
       }).afterClosed().subscribe(result => {
+      });
+    } else if (ev.type === 'import') {
+      return this.dialog.open(ImportExcelComponent, {
+        width: '500px',
+        height: '350px'
+      }).afterClosed().subscribe(result => {
+        this.ngOnInit();
       });
     }
     if (ev.type === 'edit') {
@@ -171,30 +184,49 @@ export class ProductListComponent implements OnInit {
         }
       });
     } else if (ev.type === 'deleteAll') {
-      return this.dialog.open(ProductDeleteComponent, {
-        width: '400px',
-        height: '250px',
-        data: {
-          item: ev.data.map(x => {
-            return x.productId;
-          }),
-          title: "Xoá sản phẩm",
-          content: "Bạn có muốn xoá sản phẩm trên hệ thống?"
-        }
-      }).afterClosed().subscribe(result => {
-        if (result === true) {
-          this.ngOnInit();
-        }
-      });
+      if (ev.data.length !== 0 ) {
+        return this.dialog.open(ProductDeleteComponent, {
+          width: '400px',
+          height: '250px',
+          data: {
+            item: ev.data.map(x => {
+              return x.productId;
+            }),
+            title: "Xoá sản phẩm",
+            content: "Bạn có muốn xoá sản phẩm trên hệ thống?"
+          }
+        }).afterClosed().subscribe(result => {
+          if (result === true) {
+            this.getListProduct(
+              this.listFilter.find(x => x.condition === 'name')?.value,
+              this.listFilter.find(x => x.condition === 'companyName')?.value,
+              this.listFilter.find(x => x.condition === 'productCode')?.value,
+              this.currrentPage,
+              this.listFilter.find(x => x.condition === 'status')?.value,
+              this.listFilter.find(x => x.condition === 'type')?.value,
+            );
+          }
+        });
+      }
     }
     else if (ev.type === 'page') {
+      this.currrentPage = +ev.item;
       this.getListProduct(
         this.listFilter.find(x => x.condition === 'name')?.value,
         this.listFilter.find(x => x.condition === 'companyName')?.value,
+        this.listFilter.find(x => x.condition === 'productCode')?.value,
         +ev.item,
         this.listFilter.find(x => x.condition === 'status')?.value,
         this.listFilter.find(x => x.condition === 'type')?.value,
       );
+    } else if (ev.type === 'approve') {
+      const item = {
+        ProductId: ev.item.productId,
+        Type: 2,
+      };
+      this.productService.edit(ev.item.productId, item).subscribe(res => {
+        this.ngOnInit();
+      });
     }
   }
 

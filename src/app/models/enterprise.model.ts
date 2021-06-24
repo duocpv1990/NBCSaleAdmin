@@ -24,11 +24,11 @@ export class EnterPriseModel {
         type: 'select',
         data: [
           {
-            value: 1,
+            value: 2,
             text: 'Hoạt động',
           },
           {
-            value: 0,
+            value: 1,
             text: 'Ngừng hoạt động',
           }
         ],
@@ -39,11 +39,11 @@ export class EnterPriseModel {
         type: 'select',
         data: [
           {
-            value: 1,
+            value: 2,
             text: 'Đã duyệt',
           },
           {
-            value: 0,
+            value: 1,
             text: 'Chưa duyệt',
           }
         ],
@@ -139,7 +139,7 @@ export class EnterPriseModel {
       }, {
         class: 'btn-delete',
         text: 'Xoá',
-        type: 'delete',
+        type: 'deleteAll',
         icon: ''
       }
     ];

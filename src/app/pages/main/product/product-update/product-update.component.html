@@ -47,7 +47,38 @@
         </div>
       </div>
     </div>
+
     <div></div>
+    <div class="content row align-items-center">
+      <div class="label">Công ty</div>
+      <div class="input-text">
+        <div>
+          <select [(ngModel)]="dataModel.CompanyId">
+            <ng-container *ngFor="let item of lstCompany">
+              <option [ngValue]="item.CompanyId">{{item.Name}}</option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="content row align-items-center">
+      <div class="label">Thị trường mục tiêu</div>
+      <div class="input-text">
+        <div>
+          <mat-form-field class="ca80">
+            <mat-select [(ngModel)]="lstTargetInput" multiple name="lst">
+              <mat-select-trigger>
+                {{ (lstTargetInput && lstTargetInput.length !== 0 ) ? lstTargetInput[0].Name : ''}}
+                <span *ngIf="lstTargetInput.length > 1" class="example-additional-selection">
+                  (+{{lstTargetInput.length - 1}} {{lstTargetInput.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let store of lstTarget" [value]="store"> {{store.Name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
   </div>
   <!-- <div>
     <div class="content row align-items-center">
@@ -286,7 +317,7 @@
       <div class="input-text">
         <div class="input-text">
           <div>
-            <input type="text" [(ngModel)]="dataModel.ManufacturedOn" />
+            <input type="date" [(ngModel)]="dataModel.ManufacturedOn" />
           </div>
         </div>
       </div>
@@ -296,7 +327,7 @@
       <div class="input-text">
         <div class="input-text">
           <div>
-            <input type="text" [(ngModel)]="dataModel.ExpiredOn" />
+            <input type="date" [(ngModel)]="dataModel.ExpiredOn" />
           </div>
         </div>
       </div>

@@ -51,7 +51,7 @@ export class EnterpriseEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.listCreate = this.conFig.create;
-    if (!this.data) {
+    if (!this.data || !this.data.companyId) {
       this.option = {
         title: 'Thêm mới doanh nghiệp',
         type: 'create',

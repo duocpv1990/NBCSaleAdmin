@@ -14,14 +14,15 @@ export class ProductService {
    * get list product
    * @param name string
    * @param companyName string
+   * @param productCode string
    * @param pageNumber number
    * @param pageSize number
    * @param status number
    * @param type number
    * @returns list
    */
-  getProduct(name: string, companyName: string, pageNumber: number, pageSize, status, type): Observable<any> {
-    return this.http.get<any>(`product?name=${name}&companyName=${companyName}&type=${type}&status=${status}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
+  getProduct(name: string, companyName: string, productCode: string, pageNumber: number, pageSize, status, type): Observable<any> {
+    return this.http.get<any>(`product?name=${name}&companyName=${companyName}&productCode=${productCode}&type=${type}&status=${status}&pageNumber=${pageNumber}&pageSize=${pageSize}`);
   }
   edit(productId, param): Observable<any> {
     return this.http.put<any>(`product?productId=${productId}`, param).pipe(map((res: any) => res.payload));

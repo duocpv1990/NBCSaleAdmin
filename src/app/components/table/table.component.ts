@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, NgModule, OnChanges, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-table',
@@ -79,7 +80,7 @@ export class TableComponent implements OnInit, OnChanges {
 
   onClickBtnActive = (i) => {
     const dataDe = [];
-    if (i.type === 'delete') {
+    if (i.type === 'deleteAll') {
       this.dataSub.forEach(dat => {
         if (dat.checkbox === true) {
           dataDe.push(dat);
@@ -87,12 +88,21 @@ export class TableComponent implements OnInit, OnChanges {
       });
     }
     this.callback.emit({
-      type: 'deleteAll',
+      type: i.type,
       data: dataDe,
       service: i.service
     });
   }
-
+  clickCreate(): void {
+    this.callback.emit({
+      type: 'create'
+    });
+  }
+  import(): void {
+    this.callback.emit({
+      type: 'import',
+    });
+  }
   handleRouteLink = (item) => {
     this.callback.emit({
       type: 'route',
@@ -113,7 +123,8 @@ export class TableComponent implements OnInit, OnChanges {
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule
   ],
   exports: [
     TableComponent

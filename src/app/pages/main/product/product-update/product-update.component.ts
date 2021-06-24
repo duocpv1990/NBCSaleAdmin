@@ -6,13 +6,14 @@ import { FormControl } from '@angular/forms';
 import { StoreService } from 'src/app/services/store.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { DistributorService } from 'src/app/services/distributor.service';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { ProductService } from 'src/app/services/product.service';
 import { BaseUploadComponent, S3FileService } from '@consult-indochina/common';
 import { CertificateEnterpriseComponent } from '../../enterprise/certificate-enterprise/certificate-enterprise.component';
 import { CertificationService } from 'src/app/services/certification.service';
 import { FormatDateService } from 'src/app/services/format-date.service';
+import { EnterpriseService } from 'src/app/services/enterprise.service';
 @Component({
   selector: 'app-product-update',
   templateUrl: './product-update.component.html',
@@ -53,12 +54,15 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
   }];
   listGeneral = [];
   listDetal = [];
+  lstCompany = [];
+  lstTarget = [];
   lstCategory = [];
   lstStore = [];
   lstDistributor = [];
 
 
   lstStoreInput = [];
+  lstTargetInput = [];
 
   // toppingList = [
   //   {
@@ -77,6 +81,7 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
     private dialogRef: MatDialogRef<ProductUpdateComponent>,
     private categoryService: CategoryService,
     private storeService: StoreService,
+    private enterpriseService: EnterpriseService,
     private distributorService: DistributorService,
     private productService: ProductService,
     public s3Service: S3FileService,
@@ -85,14 +90,14 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
     private serviceDate: FormatDateService
   ) {
     super(s3Service);
-   }
+  }
 
   ngOnInit(): void {
     this.listDetal = this.conFig.img;
-    if (this.data) {
+    if (this.data && this.data.ProductId) {
       this.dataModel = this.data;
       if (this.dataModel.Ingredient) {
-        this.Ingradient =  this.dataModel.Ingredient.split(',');
+        this.Ingradient = this.dataModel.Ingredient.split(',');
       }
       this.dataModel.ProductCertifications = this.dataModel.ProductCertifications.map(cer => {
         return {
@@ -126,18 +131,27 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
         text: 'Chỉnh sửa'
       }];
     } else {
-      this.dataModel = {
-        ProductCode: '',
-      }
+      this.dataModel = this.data;
     }
     this.getCategory();
     this.getStore();
     this.getDistributor();
+    this.getCompany();
   }
+
   getStore(): void {
+    this.enterpriseService.getEnterprise('', '', 1, 500, '', '').subscribe(result => {
+      this.lstCompany = result.payload;
+    });
+    this.enterpriseService.getTarget().subscribe(result => {
+      this.lstTarget = result;
+    });
+  }
+  getCompany(): void {
     this.storeService.getStores(1, 500).subscribe(result => {
       this.lstStore = result;
     });
+
   }
   getCategory(): void {
     this.categoryService.getCategory(1, 500).subscribe(result => {
@@ -145,7 +159,7 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
     });
   }
   getDistributor(): void {
-    this.distributorService.getDistributor('', 1, 500).subscribe(result => {
+    this.distributorService.getDistributor('', 1, 500, '').subscribe(result => {
       this.lstDistributor = result.payload;
     });
   }
@@ -215,7 +229,7 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
       Name: this.lstDistributor.find(x => x.DistributorId === this.distributor)?.Name,
       Type: 1,
       Status: 1,
-      DistributorProductStores : this.lstStoreInput.map(res => {
+      DistributorProductStores: this.lstStoreInput.map(res => {
         return {
           StoreId: res.StoreId,
           Name: this.lstStore.find(x => x.StoreId === res.StoreId)?.Name,
@@ -281,6 +295,9 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
   }
 
   save = () => {
+    this.dataModel.CertificationIdList = this.dataModel.ProductCertifications.map(x => {
+      return x.CertificationId;
+    });
     if (this.dataModel && this.dataModel.ProductId) {
       this.productService.edit(this.dataModel.ProductId, this.dataModel).subscribe(res => {
         this.dialogRef.close(true);

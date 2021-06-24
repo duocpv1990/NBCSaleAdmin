@@ -3,6 +3,10 @@
     font-weight: 500;
     color: #002C6C;
 }
+.row {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+}
 .add-img {
     height: 70vh;
     background-color: #fff;

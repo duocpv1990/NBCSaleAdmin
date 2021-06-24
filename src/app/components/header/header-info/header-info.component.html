@@ -1,8 +1,8 @@
 <div class="header">
-  <div class="search">
+  <!-- <div class="search">
     <input type="search" placeholder="Tìm kiếm" />
     <img src="assets/svg/nbc-search.svg" alt="" srcset="" />
-  </div>
+  </div> -->
   <div class="badge">
     <span matBadge="2" matBadgeOverlap="false">
       <img src="assets/svg/nbc-mess.svg" srcset="" />
@@ -14,7 +14,6 @@
       <img src="assets/svg/nbc-setting.svg" srcset="" />
     </span>
     <mat-menu #setting="matMenu">
-        <button mat-menu-item [routerLink]="['/home/setting/enterprise']">Thông tin doanh nghiệp</button>
         <button mat-menu-item [routerLink]="['/home/setting']">Thông tin tài khoản</button>
         <button mat-menu-item>Thay đổi mật khẩu</button>
         <button mat-menu-item (click)="btnLogout()">Đăng xuất</button>

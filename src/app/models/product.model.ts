@@ -20,35 +20,41 @@ export class Product {
         condition: 'companyName'
       },
       {
+        Text: 'Mã vạch',
+        type: 'text',
+        data: [],
+        condition: 'productCode'
+      },
+      {
         Text: 'Trạng thái',
         type: 'select',
         data: [
           {
-            value: 1,
+            value: 2,
             text: 'Hoạt động',
           },
           {
-            value: 0,
+            value: 1,
             text: 'Ngừng hoạt động',
           }
         ],
         condition: 'status'
       },
-      {
-        Text: 'Trạng thái thông tin',
-        type: 'select',
-        data: [
-          {
-            value: 1,
-            text: 'Đã duyệt',
-          },
-          {
-            value: 0,
-            text: 'Chưa duyệt',
-          }
-        ],
-        condition: 'type'
-      },
+      // {
+      //   Text: 'Trạng thái thông tin',
+      //   type: 'select',
+      //   data: [
+      //     {
+      //       value: 2,
+      //       text: 'Đã duyệt',
+      //     },
+      //     {
+      //       value: 1,
+      //       text: 'Chưa duyệt',
+      //     }
+      //   ],
+      //   condition: 'type'
+      // },
       {
         Text: '',
         type: 'search',
@@ -158,7 +164,7 @@ export class Product {
       {
         class: 'btn-delete',
         text: 'Xoá sản phẩm',
-        type: 'delete',
+        type: 'deleteAll',
         icon: ''
       },
       {

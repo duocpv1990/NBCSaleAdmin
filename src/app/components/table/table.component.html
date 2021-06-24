@@ -1,11 +1,31 @@
 <div class="table-style">
     <div class="row btn-header">
 
-        <div class="group-btn">
-            <button *ngFor="let i of listActive" class="btn" [class]="i.class" (click)="onClickBtnActive(i)">
+        <div class="group-btn" >
+            <!-- <button *ngFor="let i of listActive" class="btn" [class]="i.class" (click)="onClickBtnActive(i)">
                 {{ i?.text }}
-            </button>
+            </button> -->
+            <ng-container *ngFor="let i of listActive">
+              <button *ngIf="i.type !== 'create'" class="btn" [class]="i.class" (click)="onClickBtnActive(i)">
+                {{ i?.text }}
+              </button>
+              <button [matMenuTriggerFor]="menu" *ngIf="i.type === 'create'" class="btn" [class]="i.class">
+                {{ i?.text }}
+              </button>
+            </ng-container>
+
+            <!-- <span *ngIf="checkedList.length !== 0">
+              <button *ngIf="i.type !== 'create'" class="btn" [class]="i.class" (click)="onClickBtnActive(i)">
+                {{ i?.text }}
+              </button>
+            </span> -->
+
+
         </div>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="clickCreate()">Thêm mới bằng tay</button>
+          <button mat-menu-item (click)="import()">Import excel</button>
+        </mat-menu>
         <div class="paginator">
             <div class="current-page">
                 <button (click)="backPage()">
@@ -49,13 +69,13 @@
                             {{ item[i.id] | date: "dd-MM-YYYY" }}
                         </span>
 
-                        <span *ngIf="i.type === 'type'" [ngStyle]="{'color': (item[i.id] === 1)? 'green' : 'red'}" (click)="handleRouteLink(item);handleClickRow(item)">
-                          <ng-container *ngIf="item[i.id] === 1">Đã duyệt</ng-container>
-                          <ng-container *ngIf="item[i.id] !== 1">Chưa duyệt</ng-container>
+                        <span *ngIf="i.type === 'type'" [ngStyle]="{'color': (item[i.id] === 2)? 'green' : 'red'}" (click)="handleRouteLink(item);handleClickRow(item)">
+                          <ng-container *ngIf="item[i.id] === 2">Đã duyệt</ng-container>
+                          <ng-container *ngIf="item[i.id] !== 2">Chưa duyệt</ng-container>
                         </span>
-                        <span *ngIf="i.type === 'scanStatus'" [ngStyle]="{'color': (item[i.id] !== 1)? 'red': ''}" (click)="handleRouteLink(item);handleClickRow(item)">
-                          <ng-container *ngIf="item[i.id] === 1">Cho quét</ng-container>
-                          <ng-container *ngIf="item[i.id] !== 1">Không cho quyét</ng-container>
+                        <span *ngIf="i.type === 'scanStatus'" [ngStyle]="{'color': (item[i.id] !== 2)? 'red': ''}" (click)="handleRouteLink(item);handleClickRow(item)">
+                          <ng-container *ngIf="item[i.id] === 2">Cho quét</ng-container>
+                          <ng-container *ngIf="item[i.id] !== 2">Không cho quyét</ng-container>
                         </span>
                         <span *ngIf="i.type === 'approve'" >
                           <button (click)="onClickSetting(item, 'approve')" class="btn-approve">

@@ -18,11 +18,11 @@ export class CertificateModel {
             type: 'select',
             data: [
               {
-                id: 0,
+                id: 1,
                 value: 'Không hoạt động'
               },
               {
-                id: 1,
+                id: 2,
                 value: 'Hoạt động'
               }
             ]

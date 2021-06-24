@@ -132,7 +132,7 @@ export class DistributorModel {
             {
                 class: 'btn-delete',
                 text: 'Xóa',
-                type: 'delete',
+                type: 'deleteAll',
                 icon: ''
             }
         ];

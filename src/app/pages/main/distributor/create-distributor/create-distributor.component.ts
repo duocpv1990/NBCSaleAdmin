@@ -37,7 +37,7 @@ export class CreateDistributorComponent implements OnInit {
   listCreate = [];
 
   ngOnInit(): void {
-    if (this.data) {
+    if (this.data && this.data.distributorId) {
       this.dataModel = this.data;
       this.option = {
         title: 'THÔNG TIN NHÀ PHÂN PHỐI',
@@ -54,9 +54,7 @@ export class CreateDistributorComponent implements OnInit {
       }];
     }
     this.listCreate = this.conFig.create;
-    this.enterpriseService.getEnterprise('', '', 1, 500, 1).subscribe(res => {
-      console.log(res);
-
+    this.enterpriseService.getEnterprise('', '', 1, 500, 1, '').subscribe(res => {
       this.listCreate.forEach(create => {
         if (create.id === 'name' && res.length !== 0) {
           create.data = res.payload.map(x => {

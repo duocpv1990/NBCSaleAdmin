@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteComponent } from 'src/app/components/dialog/delete/delete.component';
+import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
 import { AuthenticationService } from 'src/app/services/auth.service';
 import { CertificationService } from 'src/app/services/certification.service';
@@ -20,6 +21,7 @@ export class EnterpriseListComponent implements OnInit {
   listFilter = [];
   data = [];
   dataLength = 0;
+  currrentPage = 1;
   dataTable;
   listActive;
   dataSub;
@@ -35,15 +37,15 @@ export class EnterpriseListComponent implements OnInit {
     this.listFilter = this.config.filter;
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
-    this.getListEnterprise('', '', 1);
+    this.getListEnterprise('', '', 1, 0, 0);
   }
   /**
    *
    * @param pageCurrent current
    */
-  getListEnterprise(code: string, name: string, pageCurrent: number, status?: number): void {
+  getListEnterprise(code: string, name: string, pageCurrent: number, status?: number, type?: number): void {
     this.enterpriseService.getEnterprise(code ? code : '', name ? name : '',
-      pageCurrent, 5, status ? status : null).subscribe((res) => {
+      pageCurrent, 5, status !== 0 ? status : '', type !== 0 ? type : '').subscribe((res) => {
         this.dataLength = res.count;
         this.data = res.payload.map((x, index) => {
           return {
@@ -52,7 +54,7 @@ export class EnterpriseListComponent implements OnInit {
             code: x.CompanyCode,
             global: x.GLN,
             register: x.Name,
-            status: (x.Status === 1) ? 'Hoạt động' : 'Không hoạt động',
+            status: (x.Status === 2) ? 'Hoạt động' : 'Không hoạt động',
             gt: x.CertificateNumber + ' giấy tờ',
             type: x.Type,
             update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : '',
@@ -72,7 +74,8 @@ export class EnterpriseListComponent implements OnInit {
       this.listFilter.find(x => x.condition === 'global')?.value,
       this.listFilter.find(x => x.condition === 'name')?.value,
       1,
-      this.listFilter.find(x => x.condition === 'status')?.value
+      this.listFilter.find(x => x.condition === 'status')?.value ?? 0,
+      this.listFilter.find(x => x.condition === 'type')?.value ?? 0
     );
     // const filter = this.listFilter.filter(x => x.value);
     // if (!filter.length) return this.dataSub = this.data;
@@ -108,6 +111,13 @@ export class EnterpriseListComponent implements OnInit {
       }).afterClosed().subscribe(result => {
         this.ngOnInit();
       });
+    } else if (ev.type === 'import') {
+      return this.dialog.open(ImportExcelComponent, {
+        width: '500px',
+        height: '350px'
+      }).afterClosed().subscribe(result => {
+        this.ngOnInit();
+      });
     }
     else if (ev.type === 'edit') {
       console.log(ev);
@@ -117,7 +127,7 @@ export class EnterpriseListComponent implements OnInit {
           code: res.CompanyCode,
           global: res.GLN,
           register: res.Name,
-          status: (res.Status === 1) ? 'Đã duyệt' : 'Chưa duyệt',
+          status: (res.Status === 2) ? 'Đã duyệt' : 'Chưa duyệt',
           gt: res.CertificateNumber + ' giấy tờ',
           update: (res.UpdatedOn !== null) ? this.serviceDate.formatDate(res.UpdatedOn, 'hh:mm MM/DD/YYYY') : '',
           address: res.AddressDetail,
@@ -178,27 +188,74 @@ export class EnterpriseListComponent implements OnInit {
         this.ngOnInit();
       });
     } else if (ev.type === 'deleteAll') {
-      return this.dialog.open(DeleteEnterpriseComponent, {
-        width: '400px',
-        height: '250px',
-        data: {
-          item: ev.data.map(x => {
-            return x.companyId;
-          }),
-          title: "Xoá doanh nghiệp",
-          content: "Bạn có muốn xoá thông tin doanh nghiệp trên hệ thống?"
-        }
-      }).afterClosed().subscribe(result => {
-        this.ngOnInit();
-      });
+      if (ev.data.length !== 0 ) {
+        return this.dialog.open(DeleteEnterpriseComponent, {
+          width: '400px',
+          height: '250px',
+          data: {
+            item: ev.data.map(x => {
+              return x.companyId;
+            }),
+            title: "Xoá doanh nghiệp",
+            content: "Bạn có muốn xoá thông tin doanh nghiệp trên hệ thống?"
+          }
+        }).afterClosed().subscribe(result => {
+          if (result === true) {
+            this.getListEnterprise(
+              this.listFilter.find(x => x.condition === 'global')?.value,
+              this.listFilter.find(x => x.condition === 'name')?.value,
+              this.currrentPage,
+              this.listFilter.find(x => x.condition === 'status')?.value ?? 0,
+              this.listFilter.find(x => x.condition === 'type')?.value ?? 0,
+            );
+          }
+        });
+      }
     }
      else if (ev.type === 'page') {
+      this.currrentPage = +ev.item;
       this.getListEnterprise(
         this.listFilter.find(x => x.condition === 'global')?.value,
         this.listFilter.find(x => x.condition === 'name')?.value,
         +ev.item,
-        this.listFilter.find(x => x.condition === 'status')?.value
+        this.listFilter.find(x => x.condition === 'status')?.value ?? 0,
+        this.listFilter.find(x => x.condition === 'type')?.value ?? 0,
       );
+    } else if (ev.type === 'approve') {
+      const item = {
+        CompanyId: ev.item.companyId,
+        Name: ev.item.register,
+        // Description: string,
+        CompanyCode: ev.item.code,
+        GLN: ev.item.global,
+        TaxCode: ev.item.taxcode,
+        NationId: ev.item.country,
+        ProvinceId: ev.item.city,
+        DistrictId: ev.item.district,
+        AddressDetail: ev.item.address,
+        PhoneNumber: ev.item.phone,
+        Email: ev.item.email,
+        Website: ev.item.website,
+        Type: 2,
+        Status: ev.item.Status,
+        CertificationIdList: (ev.item.CompanyCertifications) ? ev.item.CompanyCertifications.map(x => {
+          return x.CertificationId;
+        }) : [],
+        companyMedias: []
+        // companyMedias: [
+        //   {
+        //     CompanyMediaId: 0,
+        //     CompanyId: 0,
+        //     MediaId: 0,
+        //     MediaURL: "string",
+        //     Type: 0,
+        //     Status: 0
+        //   }
+        // ]
+      };
+      this.enterpriseService.edit(ev.item.companyId, item).subscribe(res => {
+        this.ngOnInit();
+      });
     }
   }
 

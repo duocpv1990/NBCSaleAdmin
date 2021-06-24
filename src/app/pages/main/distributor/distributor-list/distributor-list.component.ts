@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { DistributorModel } from 'src/app/models/distributor.model';
 import { DistributorService } from 'src/app/services/distributor.service';
 import { FormatDateService } from 'src/app/services/format-date.service';
@@ -21,103 +22,8 @@ export class DistributorListComponent implements OnInit {
   config = new DistributorModel();
   listFilter = [];
   dataLength = 0;
-  data = [
-    // {
-    //   "stt": "1",
-    //   "code": "023456781",
-    //   "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
-    //   "distributor": "Nhà phân phối số 1",
-    //   'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-    //   'area': 'Hà Nội',
-    //   'production': 0,
-    //   'phone': '0123456789',
-    //   "global": '023456781',
-    //   "register": 'Công ty TNHH Việt An',
-    //   "gt": '1 giấy tờ',
-    //   "status": "Đã duyệt",
-    //   "update": "13:30, 21/04/2021"
-    // },
-    // {
-    //   "stt": "2",
-    //   "code": "023456781",
-    //   "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
-    //   "distributor": "Nhà phân phối số 1",
-    //   'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-    //   'area': 'Hà Nội',
-    //   'production': 0,
-    //   'phone': '0123456789',
-    //   "global": '023456781',
-    //   "register": 'Công ty TNHH Việt An',
-    //   "gt": '1 giấy tờ',
-    //   "status": "Đã duyệt",
-    //   "update": "13:30, 21/04/2021"
-
-    // },
-    // {
-    //   "stt": "3",
-    //   "code": "023456781",
-    //   "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
-    //   "global": '023456781',
-    //   "register": 'Công ty TNHH Việt An',
-    //   "gt": '1 giấy tờ',
-    //   "status": "Đã duyệt",
-    //   "update": "13:30, 21/04/2021",
-    //   "distributor": "Nhà phân phối số 1",
-    //   'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-    //   'area': 'Hà Nội',
-    //   'production': 0,
-    //   'phone': '0123456789',
-    // },
-    // {
-    //   "stt": "4",
-    //   "code": "023456781",
-    //   "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
-    //   "global": '023456781',
-    //   "register": 'Công ty TNHH Việt An',
-    //   "gt": '1 giấy tờ',
-    //   "status": "Đã duyệt",
-    //   "update": "13:30, 21/04/2021",
-    //   "distributor": "Nhà phân phối số 1",
-    //   'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-    //   'area': 'Hà Nội',
-    //   'production': 0,
-    //   'phone': '0123456789',
-    // },
-    // {
-    //   "stt": "5",
-    //   "code": "023456781",
-    //   "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
-    //   "global": '023456781',
-    //   "register": 'Công ty TNHH Việt An',
-    //   "gt": '1 giấy tờ',
-    //   "status": "Đã duyệt",
-    //   "update": "13:30, 21/04/2021",
-    //   "distributor": "Nhà phân phối số 1",
-    //   'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-    //   'area': 'Hà Nội',
-    //   'production': 0,
-    //   'phone': '0123456789',
-    // },
-    // {
-    //   "stt": "6",
-    //   "code": "023456781",
-    //   "MediaURL": "https://lh4.ggpht.com/-Z_ue0VfOfsk/V4WroOv9Y7I/AAAAAAAAEjc/6mDfRJsMMYoU5q-drqGfQb6oT1Cm4UYOQCLcB/s1600/but%2Bthien%2Blong.jpg",
-
-    //   "global": '023456781',
-    //   "register": 'Công ty TNHH Việt An',
-    //   "gt": '1 giấy tờ',
-    //   "status": "Đã duyệt",
-    //   "update": "13:30, 21/04/2021",
-    //   "distributor": "Nhà phân phối số 1",
-    //   'address': "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-    //   'area': 'Hà Nội',
-    //   'production': 0,
-    //   'phone': '0123456789',
-
-    // },
-
-
-  ];
+  data = [];
+  currrentPage = 1;
   dataTable;
   listActive;
   dataSub;
@@ -126,10 +32,10 @@ export class DistributorListComponent implements OnInit {
     this.dataTable = this.config.collums;
     this.listActive = this.config.btnActice;
     this.dataSub = this.data;
-    this.getListDistributor(1, '');
+    this.getListDistributor(1, '', '');
   }
-  getListDistributor(pageCurrent: number, name: string, provinceId?: number): void {
-    this.distributorService.getDistributor(name ? name : '', pageCurrent, 5, provinceId).subscribe((res) => {
+  getListDistributor(pageCurrent: number, name: string, companyName: string): void {
+    this.distributorService.getDistributor(name ? name : '', pageCurrent, 5, companyName ? companyName : '').subscribe((res) => {
       console.log(res);
       this.dataLength = res.count;
       this.data = res.payload.map((x, index) => {
@@ -159,7 +65,7 @@ export class DistributorListComponent implements OnInit {
   handleCallback() {
     this.getListDistributor(1,
       this.listFilter.find(x => x.condition === 'name-dis')?.value,
-      this.listFilter.find(x => x.condition === 'city')?.value
+      this.listFilter.find(x => x.condition === 'name-ent')?.value
     );
   }
   handleCallbackTable(ev) {
@@ -172,6 +78,13 @@ export class DistributorListComponent implements OnInit {
         if (result === true) {
           this.ngOnInit();
         }
+      });
+    } else if (ev.type === 'import') {
+      return this.dialog.open(ImportExcelComponent, {
+        width: '500px',
+        height: '350px'
+      }).afterClosed().subscribe(result => {
+        this.ngOnInit();
       });
     }
     if (ev.type === 'edit') {
@@ -195,14 +108,16 @@ export class DistributorListComponent implements OnInit {
           MediaURL: res.DistributorMedias.find(x => x.Type === 1 && x.Status === 1)?.MediaURL,
           BackgroundURL: res.DistributorMedias.find(x => x.Type === 2 && x.Status === 1)?.MediaURL,
 
-         };
+        };
 
         return this.dialog.open(CreateDistributorComponent, {
           width: '940px',
           height: '843px',
           data: item
         }).afterClosed().subscribe(result => {
-          console.log(result);
+          if (result === true) {
+            this.ngOnInit();
+          }
         });
 
       },
@@ -226,27 +141,54 @@ export class DistributorListComponent implements OnInit {
       });
     }
     if (ev.type === 'deleteAll') {
-      return this.dialog.open(DeleteDistributorComponent, {
-        width: '400px',
-        height: '250px',
-        data: {
-          item: ev.data.map(x => {
-            return x.distributorId;
-          }),
-          title: "Xoá nhà phân phối",
-          content: "Bạn có muốn xoá thông tin nhà phân phối trên hệ thống?"
-        }
-      }).afterClosed().subscribe(result => {
-        if (result === true) {
-          this.ngOnInit();
-        }
-      });
+      if (ev.data.length !== 0) {
+        return this.dialog.open(DeleteDistributorComponent, {
+          width: '400px',
+          height: '250px',
+          data: {
+            item: ev.data.map(x => {
+              return x.distributorId;
+            }),
+            title: "Xoá nhà phân phối",
+            content: "Bạn có muốn xoá thông tin nhà phân phối trên hệ thống?"
+          }
+        }).afterClosed().subscribe(result => {
+          if (result === true) {
+            this.getListDistributor(this.currrentPage,
+              this.listFilter.find(x => x.condition === 'name-dis')?.value,
+              this.listFilter.find(x => x.condition === 'name-ent')?.value
+            );
+          }
+        });
+      }
     }
     if (ev.type === 'page') {
+      this.currrentPage = +ev.item;
       this.getListDistributor(+ev.item,
         this.listFilter.find(x => x.condition === 'name-dis')?.value,
-        this.listFilter.find(x => x.condition === 'city')?.value
+        this.listFilter.find(x => x.condition === 'name-ent')?.value
       );
+    }
+    if (ev.type === 'approve') {
+      const item = {
+        DistributorId: ev.item.distributorId,
+        CompanyId: ev.item.name,
+        Name: ev.item.distributorName,
+        TaxCode: ev.item.mst,
+        NationId: ev.item.country,
+        ProvinceId: ev.item.city,
+        DistrictId: ev.item.district,
+        AddressDetail: ev.item.address,
+        Type: 2,
+        Status: (ev.item.Status) ? ev.item.Status : 1,
+        PhoneNumber: ev.item.phone,
+        Email: ev.item.email,
+        Website: ev.item.website,
+        DistributorMedias: []
+      };
+      this.distributorService.edit(ev.item.distributorId, item).subscribe(res => {
+        this.ngOnInit();
+      });
     }
 
   }
