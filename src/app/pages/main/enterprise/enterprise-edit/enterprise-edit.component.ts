@@ -58,6 +58,14 @@ export class EnterpriseEditComponent implements OnInit {
         subtitle: 'THÔNG TIN CHUNG',
         showAddCer: true
       };
+      this.arrayButton = [{
+        class: 'btn-cancel',
+        text: 'Hủy bỏ'
+      },
+      {
+        class: 'btn-save',
+        text: 'Lưu'
+      }];
     }
     this.addressService.getNation().subscribe(res => {
       this.listCreate.forEach(create => {
@@ -236,6 +244,24 @@ export class EnterpriseEditComponent implements OnInit {
       //   }
       // ]
     };
+    if (this.dataModel && this.dataModel.MediaURL) {
+      item.companyMedias.push(
+        {
+          MediaURL: this.dataModel.MediaURL,
+          Type: 1,
+          Status: 1
+        }
+      );
+    }
+    if (this.dataModel && this.dataModel.BackgroundURL) {
+      item.companyMedias.push(
+        {
+          MediaURL: this.dataModel.BackgroundURL,
+          Type: 2,
+          Status: 1
+        }
+      );
+    }
     if (this.dataModel && this.dataModel.companyId) {
       this.enterpriseService.edit(this.dataModel.companyId, item).subscribe(res => {
         this.dialogRef.close(true);

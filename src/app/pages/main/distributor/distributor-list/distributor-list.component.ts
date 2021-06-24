@@ -145,7 +145,8 @@ export class DistributorListComponent implements OnInit {
           MediaURL: x.MediaURL,
           production: x.ProductNumber,
           type: x.Type,
-          update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
+          update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : '',
+          checkbox: false
         };
       });
       this.dataSub = this.data;
@@ -214,7 +215,7 @@ export class DistributorListComponent implements OnInit {
         width: '400px',
         height: '250px',
         data: {
-          item: ev.item.distributorId,
+          item: [ev.item.distributorId],
           title: "Xoá nhà phân phối",
           content: "Bạn có muốn xoá thông tin nhà phân phối trên hệ thống?"
         }
@@ -223,6 +224,29 @@ export class DistributorListComponent implements OnInit {
           this.ngOnInit();
         }
       });
+    }
+    if (ev.type === 'deleteAll') {
+      return this.dialog.open(DeleteDistributorComponent, {
+        width: '400px',
+        height: '250px',
+        data: {
+          item: ev.data.map(x => {
+            return x.distributorId;
+          }),
+          title: "Xoá nhà phân phối",
+          content: "Bạn có muốn xoá thông tin nhà phân phối trên hệ thống?"
+        }
+      }).afterClosed().subscribe(result => {
+        if (result === true) {
+          this.ngOnInit();
+        }
+      });
+    }
+    if (ev.type === 'page') {
+      this.getListDistributor(+ev.item,
+        this.listFilter.find(x => x.condition === 'name-dis')?.value,
+        this.listFilter.find(x => x.condition === 'city')?.value
+      );
     }
 
   }

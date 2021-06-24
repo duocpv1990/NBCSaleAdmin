@@ -29,10 +29,14 @@ export class ProductDeleteComponent implements OnInit {
       this.deleteFunction();
     }
   }
-  deleteFunction() {
-    this.productService.delete(this.data.item).subscribe((res) => {
-      this.dialogRef.close(true);
-    });
+  deleteFunction(): void {
+    for (let i = 0; i < this.data.item.length; i++) {
+      const element = this.data.item[i];
+      this.productService.delete(this.data.item[i]).subscribe((res) => {
+        if (i === (this.data.item.length - 1)) {
+          this.dialogRef.close(true);
+        }
+      });
+    }
   }
-
 }

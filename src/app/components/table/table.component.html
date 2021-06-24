@@ -25,14 +25,14 @@
                 <tr>
                     <th scope="col" *ngFor="let item of tableData" [style.min-width.px]="item.width">
                         {{ item.name }}
-                        <input class="checkbox" *ngIf="item.type === 'checkbox'" type="checkbox">
+                        <input class="checkbox" *ngIf="item.type === 'checkbox'" type="checkbox" (change)="checkValue(true)" [(ngModel)]="isAllChecked">
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of dataSub; let i = index">
                     <td *ngFor="let i of tableData">
-                        <span *ngIf="i.type === 'checkbox'"><input class="checkbox" type="checkbox"></span>
+                        <span *ngIf="i.type === 'checkbox'"><input class="checkbox" type="checkbox" (change)="checkValue(false)" [(ngModel)]="item.checkbox"></span>
                         <span *ngIf="i.type === 'image'"><img class="image" src="{{item[i.id]}}" alt=""
                                 srcset=""></span>
                         <span *ngIf="i.type === 'number'" (click)="handleRouteLink(item);handleClickRow(item)">{{

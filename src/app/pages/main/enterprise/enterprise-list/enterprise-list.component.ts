@@ -55,7 +55,8 @@ export class EnterpriseListComponent implements OnInit {
             status: (x.Status === 1) ? 'Hoạt động' : 'Không hoạt động',
             gt: x.CertificateNumber + ' giấy tờ',
             type: x.Type,
-            update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : ''
+            update: (x.UpdatedOn !== null) ? this.serviceDate.formatDate(x.UpdatedOn, 'hh:mm MM/DD/YYYY') : '',
+            checkbox: false
           };
         });
         this.dataSub = this.data;
@@ -100,8 +101,12 @@ export class EnterpriseListComponent implements OnInit {
     if (ev.type === 'create') {
       return this.dialog.open(EnterpriseEditComponent, {
         width: '940px',
-        height: '843px'
+        height: '843px',
+        data: {
+          CompanyCertifications: []
+        }
       }).afterClosed().subscribe(result => {
+        this.ngOnInit();
       });
     }
     else if (ev.type === 'edit') {
@@ -152,6 +157,7 @@ export class EnterpriseListComponent implements OnInit {
           height: '843px',
           data: item
         }).afterClosed().subscribe(result => {
+          this.ngOnInit();
         });
 
       },
@@ -164,14 +170,29 @@ export class EnterpriseListComponent implements OnInit {
         width: '400px',
         height: '250px',
         data: {
-          item: ev.item.companyId,
+          item: [ev.item.companyId],
           title: "Xoá doanh nghiệp",
           content: "Bạn có muốn xoá thông tin doanh nghiệp trên hệ thống?"
         }
       }).afterClosed().subscribe(result => {
         this.ngOnInit();
       });
-    } else if (ev.type === 'page') {
+    } else if (ev.type === 'deleteAll') {
+      return this.dialog.open(DeleteEnterpriseComponent, {
+        width: '400px',
+        height: '250px',
+        data: {
+          item: ev.data.map(x => {
+            return x.companyId;
+          }),
+          title: "Xoá doanh nghiệp",
+          content: "Bạn có muốn xoá thông tin doanh nghiệp trên hệ thống?"
+        }
+      }).afterClosed().subscribe(result => {
+        this.ngOnInit();
+      });
+    }
+     else if (ev.type === 'page') {
       this.getListEnterprise(
         this.listFilter.find(x => x.condition === 'global')?.value,
         this.listFilter.find(x => x.condition === 'name')?.value,

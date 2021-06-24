@@ -26,7 +26,7 @@ export class CreateDistributorComponent implements OnInit {
   {
     class: 'btn-save',
     text: 'Lưu'
-  }]
+  }];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private addressService: AddressService,
@@ -44,6 +44,14 @@ export class CreateDistributorComponent implements OnInit {
         type: 'edit',
         subtitle: 'THÔNG TIN CHUNG'
       };
+      this.arrayButton = [{
+        class: 'btn-cancel',
+        text: 'Hủy bỏ'
+      },
+      {
+        class: 'btn-save',
+        text: 'Chỉnh sửa'
+      }];
     }
     this.listCreate = this.conFig.create;
     this.enterpriseService.getEnterprise('', '', 1, 500, 1).subscribe(res => {
@@ -177,6 +185,24 @@ export class CreateDistributorComponent implements OnInit {
       // MediaURL: this.dataModel.DistributorMedias.find(x => x.Type === 1 && x.Status === 1)?.MediaURL,
       // BackgroundURL: res.DistributorMedias.find(x => x.Type === 2 && x.Status === 1)?.MediaURL,
     };
+    if (this.dataModel && this.dataModel.MediaURL) {
+      item.DistributorMedias.push(
+        {
+          MediaURL: this.dataModel.MediaURL,
+          Type: 1,
+          Status: 1
+        }
+      );
+    }
+    if (this.dataModel && this.dataModel.BackgroundURL) {
+      item.DistributorMedias.push(
+        {
+          MediaURL: this.dataModel.BackgroundURL,
+          Type: 2,
+          Status: 1
+        }
+      );
+    }
     if (this.dataModel && this.dataModel.distributorId) {
       this.distributorService.edit(this.dataModel.distributorId, item).subscribe(res => {
         this.dialogRef.close(true);

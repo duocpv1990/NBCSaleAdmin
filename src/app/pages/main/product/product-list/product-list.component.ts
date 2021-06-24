@@ -53,6 +53,7 @@ export class ProductListComponent implements OnInit {
             price: x.Price,
             type: x.Type,
             status: (x.Status === 1) ? 'Hoạt động' : 'Không hoạt động',
+            checkbox: false
           };
         });
         this.dataSub = this.data;
@@ -161,6 +162,22 @@ export class ProductListComponent implements OnInit {
         height: '250px',
         data: {
           item: ev.item.productId,
+          title: "Xoá sản phẩm",
+          content: "Bạn có muốn xoá sản phẩm trên hệ thống?"
+        }
+      }).afterClosed().subscribe(result => {
+        if (result === true) {
+          this.ngOnInit();
+        }
+      });
+    } else if (ev.type === 'deleteAll') {
+      return this.dialog.open(ProductDeleteComponent, {
+        width: '400px',
+        height: '250px',
+        data: {
+          item: ev.data.map(x => {
+            return x.productId;
+          }),
           title: "Xoá sản phẩm",
           content: "Bạn có muốn xoá sản phẩm trên hệ thống?"
         }

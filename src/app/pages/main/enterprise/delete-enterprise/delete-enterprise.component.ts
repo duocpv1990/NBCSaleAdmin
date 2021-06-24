@@ -23,14 +23,19 @@ export class DeleteEnterpriseComponent implements OnInit {
     if (ev.value === 'cancel') {
       this.dialogRef.close();
     }
-    if (ev.value === 'successful') {
+    if (ev.value === 'confirm') {
       this.deleteFunction();
     }
   }
   deleteFunction(): void {
-    this.enterpriseService.delete(this.data.item).subscribe((res) => {
-      this.dialogRef.close(true);
-    });
+    for (let i = 0; i < this.data.item.length; i++) {
+      const element = this.data.item[i];
+      this.enterpriseService.delete(this.data.item[i]).subscribe((res) => {
+        if (i === (this.data.item.length - 1)) {
+          this.dialogRef.close(true);
+        }
+      });
+    }
   }
 
 }

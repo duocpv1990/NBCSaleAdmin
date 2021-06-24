@@ -49,7 +49,7 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
   },
   {
     class: 'btn-save',
-    text: 'Chỉnh sửa'
+    text: 'Lưu'
   }];
   listGeneral = [];
   listDetal = [];
@@ -117,6 +117,14 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
         type: 'edit',
         subtitle: 'THÔNG TIN CHUNG'
       };
+      this.arrayButton = [{
+        class: 'btn-cancel',
+        text: 'Hủy bỏ'
+      },
+      {
+        class: 'btn-save',
+        text: 'Chỉnh sửa'
+      }];
     } else {
       this.dataModel = {
         ProductCode: '',
