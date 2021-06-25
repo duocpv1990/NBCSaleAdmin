@@ -256,7 +256,7 @@ export class EnterPriseModel {
           },
           {
             id: 'CertificationMedias',
-            label: 'Hình ảnh giấy trứng nhận',
+            label: 'Hình ảnh giấy chứng nhận',
             name: 'CertificationMedias',
             type: 'img',
             data: []
@@ -265,6 +265,70 @@ export class EnterPriseModel {
       },
     ];
   }
+  public get import(): any {
+    return {
+      'Tên doanh nghiệp (*)': {
+        prop: 'Name',
+        type: String,
+        required: true
+      },
+      'Mã doanh nghiệp (*)': {
+        prop: 'CompanyCode',
+        type: String,
+        required: true
+      },
+      'Mã địa điểm toàn cầu GLN (*)': {
+        prop: 'GLN',
+        type: String,
+        required: true
+      },
+      'Mã số thuế (*)': {
+        prop: 'TaxCode',
+        type: String,
+        required: true
+      },
+      'Quốc gia (*)': {
+        prop: 'NationId',
+        type: Number,
+        required: true
+      },
+      'Thành phố/Tỉnh (*)': {
+        prop: 'ProvinceId',
+        type: Number,
+        required: true
+      },
+      'Quận/Huyện (*)': {
+        prop: 'District',
+        type: Number,
+        required: true
+      },
+      'Địa chỉ (*)': {
+        prop: 'AddressDetail',
+        type: String,
+        required: true
+      },
+      'Email (*)': {
+        prop: 'Email',
+        type: String,
+        required: true
+      },
+      'Ảnh đại diện (*)': {
+        prop: 'MediaURL',
+        type: String,
+        required: true
+      },
+      'Ảnh nền (*)': {
+        prop: 'BackgroundURL',
+        type: String,
+        required: true
+      },
+      'Tên chứng chỉ, chứng nhận - Trạng thái - Ngày hết hạn': {
+        prop: 'CompanyCertifications',
+        type: String,
+        required: true
+      },
 
+    };
+  }
 
 }

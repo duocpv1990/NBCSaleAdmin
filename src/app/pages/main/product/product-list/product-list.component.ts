@@ -92,7 +92,8 @@ export class ProductListComponent implements OnInit {
     } else if (ev.type === 'import') {
       return this.dialog.open(ImportExcelComponent, {
         width: '500px',
-        height: '350px'
+        height: '350px',
+        data: 'product'
       }).afterClosed().subscribe(result => {
         this.ngOnInit();
       });

@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteComponent } from 'src/app/components/dialog/delete/delete.component';
 import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { EnterPriseModel } from 'src/app/models/enterprise.model';
-import { AuthenticationService } from 'src/app/services/auth.service';
+// import { AuthenticationService } from 'src/app/services/auth.service';
 import { CertificationService } from 'src/app/services/certification.service';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
 import { FormatDateService } from 'src/app/services/format-date.service';
@@ -114,7 +114,8 @@ export class EnterpriseListComponent implements OnInit {
     } else if (ev.type === 'import') {
       return this.dialog.open(ImportExcelComponent, {
         width: '500px',
-        height: '350px'
+        height: '350px',
+        data: 'company'
       }).afterClosed().subscribe(result => {
         this.ngOnInit();
       });

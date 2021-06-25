@@ -12,16 +12,16 @@
       <div class="step-2">BƯỚC 2: TẢI LÊN FILE MẪU</div>
       <div class="sample-file">
         <p>File excel:</p>
-        <input type="file" />
+        <input type="file" id="input-file" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
       </div>
     </div>
     <div class="checkbox">
       <div class="radio">
-        <input id="update" type="radio" />
+        <input id="update" type="radio" name="radio-file" (change)="type = 0"  [checked]="type === 0"/>
         <label for="update">Cập nhật thông tin</label>
       </div>
-      <div class="radio"> 
-        <input id="create" type="radio" />
+      <div class="radio">
+        <input id="create" type="radio" name="radio-file" (change)="type = 1"  [checked]="type === 1"/>
         <label for="create">Thêm mới</label>
       </div>
     </div>

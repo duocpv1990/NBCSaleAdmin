@@ -294,7 +294,7 @@ export class Product {
     },
     {
       id: 'CertificationMedias',
-      label: 'Hình ảnh giấy trứng nhận',
+      label: 'Hình ảnh giấy chứng nhận',
       name: 'CertificationMedias',
       type: 'img',
       data: []
