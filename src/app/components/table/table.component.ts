@@ -51,7 +51,7 @@ export class TableComponent implements OnInit, OnChanges {
     if (isAll === false) {
       let check = true;
       this.dataSub.forEach(data => {
-        if (data.checkbox === false) {
+        if (!data.checkbox || data.checkbox === false) {
           check = false;
         }
       });

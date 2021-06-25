@@ -44,7 +44,7 @@ export class ShopCreateComponent implements OnInit {
     this.dataModel = this.data;
     if (this.data && this.data.StoreId) {
       this.option = {
-        title: 'THÔNG TIN ĐIỂM BÁN',
+        title: 'CHỈNH SỬA THÔNG TIN ĐIỂM BÁN',
         type: 'edit',
         subtitle: 'THÔNG TIN CHUNG'
       };
@@ -58,18 +58,18 @@ export class ShopCreateComponent implements OnInit {
       }];
     }
     this.listCreate = this.conFig.create;
-    this.enterpriseService.getEnterprise('', '', 1, 500, 1, '').subscribe(res => {
-      this.listCreate.forEach(create => {
-        if (create.id === 'CompanyId' && res.length !== 0) {
-          create.data = res.payload.map(x => {
-            return {
-              id: x.CompanyId,
-              value: x.Name,
-            };
-          });
-        }
-      });
-    });
+    // this.enterpriseService.getEnterprise('', '', 1, 500, 1, '').subscribe(res => {
+    //   this.listCreate.forEach(create => {
+    //     if (create.id === 'CompanyId' && res.length !== 0) {
+    //       create.data = res.payload.map(x => {
+    //         return {
+    //           id: x.CompanyId,
+    //           value: x.Name,
+    //         };
+    //       });
+    //     }
+    //   });
+    // });
     // this.distributorService.getDistributor('', 1, 500, '').subscribe(res => {
     //   this.listCreate.forEach(create => {
     //     if (create.id === 'name' && res.length !== 0) {

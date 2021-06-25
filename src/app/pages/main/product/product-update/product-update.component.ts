@@ -116,9 +116,8 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
         };
       });
       console.log(this.dataModel);
-
       this.option = {
-        title: 'THÔNG TIN SẢN PHẨM',
+        title: 'CHỈNH SỬA THÔNG TIN SẢN PHẨM',
         type: 'edit',
         subtitle: 'THÔNG TIN CHUNG'
       };
@@ -145,6 +144,13 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
     });
     this.enterpriseService.getTarget().subscribe(result => {
       this.lstTarget = result;
+      this.lstTarget.forEach(element => {
+        this.dataModel.TargetMarketIdList.forEach(TargetMarketId => {
+          if (TargetMarketId === element.TargetMarketId) {
+            this.lstTargetInput.push(element);
+          }
+        });
+      });
     });
   }
   getCompany(): void {
@@ -297,6 +303,9 @@ export class ProductUpdateComponent extends BaseUploadComponent implements OnIni
   save = () => {
     this.dataModel.CertificationIdList = this.dataModel.ProductCertifications.map(x => {
       return x.CertificationId;
+    });
+    this.dataModel.TargetMarketIdList = this.lstTargetInput.map(x => {
+      return x.TargetMarketId;
     });
     if (this.dataModel && this.dataModel.ProductId) {
       if (this.dataModel.checkMediaUrl === true) {

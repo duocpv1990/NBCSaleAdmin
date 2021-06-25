@@ -9,6 +9,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FilterBaseModule } from 'src/app/components/filter/filter.component';
 import { TableBaseModule } from 'src/app/components/table/table.component';
 import { BaseButtonModule } from 'src/app/components/button/base-button/base-button.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SettingComponent, AccountInforComponent, EnterpriseInforComponent],
@@ -18,6 +19,7 @@ import { BaseButtonModule } from 'src/app/components/button/base-button/base-but
     MatTabsModule,
     FilterBaseModule,
     TableBaseModule,
+    FormsModule,
     BaseButtonModule
   ],
   exports: [SettingComponent],

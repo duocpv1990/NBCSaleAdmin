@@ -32,14 +32,14 @@ export class MainLayoutComponent implements OnInit {
         linkURL: 'distributor',
       },
       {
-        icon: 'assets/img/bag.svg',
-        name: 'Sản phẩm',
-        linkURL: 'product',
-      },
-      {
         icon: 'assets/img/shop.svg',
         name: 'Điểm bán',
         linkURL: 'shop',
+      },
+      {
+        icon: 'assets/img/bag.svg',
+        name: 'Sản phẩm',
+        linkURL: 'product',
       },
     ],
   };

@@ -4,7 +4,7 @@
 <div class="row-grid">
   <div class="col">
     <div class="add-img">
-      <!-- <img [scr]="'scsdc" alt=""> -->
+      <img  alt="">
       <div class="circle">
         <label for="img">
           <img src="assets/svg/camera.png" alt="">
@@ -20,19 +20,19 @@
       <form class="row1">
         <label >
           Họ (<span>*</span>)<br>
-          <input type="text">
+          <input type="text" name="fn" [(ngModel)]="userProfile.FirstName">
         </label>
         <label >
           Tên (<span>*</span>)<br>
-          <input type="text">
+          <input type="text" name="ln"  [(ngModel)]="userProfile.LastName">
         </label>
         <label >
           Điện thoại đăng nhập (<span>*</span>) <br>
-          <input type="text">
+          <input type="text" [(ngModel)]="userProfile.Phone">
         </label>
         <label >
           Email <br>
-          <input type="text">
+          <input type="text" [(ngModel)]="userProfile.Email">
         </label>
       </form>
       <div class="action">

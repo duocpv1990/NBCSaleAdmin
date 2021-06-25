@@ -33,7 +33,7 @@ export class EnterpriseEditComponent implements OnInit {
   conFig = new EnterPriseModel();
   dataModel;
   option = {
-    title: 'THÔNG TIN DOANH NGHIỆP',
+    title: 'CHỈNH SỬA THÔNG TIN DOANH NGHIỆP',
     type: 'edit',
     subtitle: 'THÔNG TIN CHUNG',
     showAddCer: true

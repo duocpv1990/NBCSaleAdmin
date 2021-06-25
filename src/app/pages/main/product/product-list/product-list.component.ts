@@ -84,7 +84,8 @@ export class ProductListComponent implements OnInit {
         height: '843px',
         data: {
           ProductCertifications: [],
-          DistributorProducts: []
+          DistributorProducts: [],
+          TargetMarketIdList: []
         }
       }).afterClosed().subscribe(result => {
       });

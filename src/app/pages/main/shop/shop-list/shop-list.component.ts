@@ -137,8 +137,8 @@ export class ShopListComponent implements OnInit {
     } else if (ev.type === 'edit') {
       this.storeService.getStoresDetail(ev.item.StoreId).subscribe( res => {
         const item = res;
-        item.MediaURL = res.CompanyMedias.find(x => x.Type === 1 && x.Status === 1)?.MediaURL;
-        item.BackgroundURL = res.CompanyMedias.find(x => x.Type === 2 && x.Status === 1)?.MediaURL;
+        item.MediaURL = res.StoreMedias.find(x => x.Type === 1 && x.Status === 1)?.MediaURL;
+        item.BackgroundURL = res.StoreMedias.find(x => x.Type === 2 && x.Status === 1)?.MediaURL;
         return this.dialog.open(ShopCreateComponent, {
           width: '940px',
           height: '843px',

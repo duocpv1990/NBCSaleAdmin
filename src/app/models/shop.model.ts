@@ -52,7 +52,7 @@ export class ShopModel {
             {
                 class: 'btn-delete',
                 text: 'Xoá',
-                type: 'delete',
+                type: 'deleteAll',
                 icon: ''
             },            {
                 class: 'btn-export',
@@ -136,12 +136,12 @@ export class ShopModel {
     }
     public get create(): Array<CreateModel> {
         return [
-            {
-                id: 'CompanyId',
-                label: 'Tên doanh nghiệp',
-                name: 'CompanyId',
-                type: 'select'
-            },
+            // {
+            //     id: 'CompanyId',
+            //     label: 'Tên doanh nghiệp',
+            //     name: 'CompanyId',
+            //     type: 'select'
+            // },
             // {
             //     id: 'DistributorId',
             //     label: 'Tên nhà phân phối',

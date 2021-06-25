@@ -40,7 +40,7 @@ export class CreateDistributorComponent implements OnInit {
     if (this.data && this.data.distributorId) {
       this.dataModel = this.data;
       this.option = {
-        title: 'THÔNG TIN NHÀ PHÂN PHỐI',
+        title: 'CHỈNH SỬA THÔNG TIN NHÀ PHÂN PHỐI',
         type: 'edit',
         subtitle: 'THÔNG TIN CHUNG'
       };
