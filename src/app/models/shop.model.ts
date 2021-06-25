@@ -158,7 +158,17 @@ export class ShopModel {
               id: 'Type',
               label: 'Hình thức',
               name: 'Type',
-              type: 'select'
+              type: 'select',
+              data: [
+                {
+                  id: 2,
+                  value: 'Online'
+                },
+                {
+                  id: 1,
+                  value: 'Offline'
+                },
+              ]
           },
             {
                 id: 'NationId',

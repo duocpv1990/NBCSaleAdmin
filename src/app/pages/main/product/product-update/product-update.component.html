@@ -133,11 +133,11 @@
         <div class="input-text"><b>
           <ng-container *ngFor="let DistributorProductStore of DistributorProduct.DistributorProductStores; let i = index">
             <ng-container *ngIf="i !== 0">, </ng-container>
-            {{DistributorProduct.Name}}
+            {{DistributorProductStore.Name}}
           </ng-container>
         </b></div>
       </div>
-      <div class="content row align-items-center">
+      <div class="content row align-items-center" style="display: grid; grid-template-columns: 1fr 1fr;">
         <button (click)="updateDistributor(i, 'edit')">
           <svg xmlns="http://www.w3.org/2000/svg" width="18.93" height="18.93" viewBox="0 0 18.93 18.93">
             <g id="Component_7_12" data-name="Component 7 – 12" transform="translate(0.416 0.416)">

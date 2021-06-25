@@ -47,6 +47,7 @@ export class TableComponent implements OnInit, OnChanges {
     this.onLoadDatePagitor();
   }
   checkValue(isAll): void {
+    debugger;
     if (isAll === false) {
       let check = true;
       this.dataSub.forEach(data => {

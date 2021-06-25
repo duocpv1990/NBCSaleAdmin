@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { CiAuthStateService } from '@consult-indochina/auth';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProfileModel } from 'src/app/models/profile/profile.model';
@@ -19,10 +20,13 @@ export class HeaderInfoComponent implements OnInit {
   constructor(private local: LocalStorageService,
     private route: Router,
     private profileService: ProfileService,
+    private ciAuthStateService: CiAuthStateService,
     private dialog: MatDialog) { }
-
+  userProfile;
   ngOnInit(): void {
-    //this.getProfile()
+    this.ciAuthStateService.currentUser$.subscribe(res => {
+      this.userProfile = res[0];
+    });
 
   }
 

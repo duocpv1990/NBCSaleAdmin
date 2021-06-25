@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ImportExcelComponent } from 'src/app/components/dialog/import-excel/import-excel.component';
 import { ShopModel } from 'src/app/models/shop.model';
+import { AddressService } from 'src/app/services/address.service';
 import { StoreService } from 'src/app/services/store.service';
 import { ShopCreateComponent } from '../shop-create/shop-create.component';
 import { ShopDeleteComponent } from '../shop-delete/shop-delete.component';
@@ -15,105 +16,14 @@ export class ShopListComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private addressService: AddressService,
   ) { }
   config = new ShopModel();
   listFilter = [];
   dataLength = 0;
   currrentPage = 1;
-  data = [
-    {
-      "stt": "1",
-      "code": "023456781",
-      "Name": 'Nhà phân phối số 1',
-      "status": "Đã duyệt",
-      "type": "online",
-      "Type": 1,
-      "UpdatedOn": "13:30, 21/04/2021",
-      "MediaURL": "assets/img/default-avatar.jpg",
-      "AddressDetail": "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      "Province": "Ha Noi",
-      "PhoneNumber": "0123456789",
-      "production": "1",
-    },
-    {
-      "stt": "2",
-      "code": "023456781",
-      "global": '023456781',
-      "Name": 'Nhà phân phối số 1',
-      "type": "online",
-      "Type": 1,
-      "status": "Đã duyệt",
-      "UpdatedOn": "13:30, 21/04/2021",
-      "AddressDetail": "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      "Province": "Ha Noi",
-      "PhoneNumber": "0123456789",
-      "production": "1",
-      "MediaURL": "assets/img/default-avatar.jpg",
-
-    },
-    {
-      "stt": "3",
-      "code": "023456781",
-      "global": '023456781',
-      "Name": 'Nhà phân phối số 1',
-      "type": "online",
-      "status": "Đã duyệt",
-      "Type": 1,
-      "UpdatedOn": "13:30, 21/04/2021",
-      "AddressDetail": "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      "Province": "Ha Noi",
-      "PhoneNumber": "0123456789",
-      "production": "1",
-      "MediaURL": "assets/img/default-avatar.jpg",
-
-    },
-    {
-      "stt": "4",
-      "code": "023456781",
-      "global": '023456781',
-      "Name": 'Nhà phân phối số 1',
-      "Type": 2,
-      "type": "online",
-      "status": "Đã duyệt",
-      "UpdatedOn": "13:30, 21/04/2021",
-      "AddressDetail": "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      "Province": "Ha Noi",
-      "PhoneNumber": "0123456789",
-      "production": "1",
-      "MediaURL": "assets/img/default-avatar.jpg",
-
-    },
-    {
-      "stt": "5",
-      "code": "023456781",
-      "global": '023456781',
-      "Name": 'Nhà phân phối số 1',
-      "status": "Đã duyệt",
-      "Type": 2,
-      "type": "online",
-      "AddressDetail": "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      "Province": "Ha Noi",
-      "PhoneNumber": "0123456789",
-      "production": "1",
-      "UpdatedOn": "13:30, 21/04/2021",
-      "MediaURL": "assets/img/default-avatar.jpg",
-    },
-    {
-      "stt": "6",
-      "code": "023456781",
-      "global": '023456781',
-      "Type": 2,
-      "Name": 'Nhà phân phối số 1',
-      "status": "Đã duyệt",
-      "UpdatedOn": "13:30, 21/04/2021",
-      "type": "online",
-      "AddressDetail": "Hàng Bồ - Hoàn Kiếm - Hà Nội",
-      "Province": "Ha Noi",
-      "PhoneNumber": "0123456789",
-      "production": "1",
-      "MediaURL": "assets/img/default-avatar.jpg",
-    }];
+  data = [];
   dataTable;
   listActive;
   ngOnInit(): void {
@@ -121,6 +31,7 @@ export class ShopListComponent implements OnInit {
     this.listActive = this.config.btnActice;
     this.dataTable = this.config.collums;
     this.getStores('', 0, 0, 1);
+    this.getProvice();
   }
   getStores(name, provinceId, type, pageCurrent): void {
     this.storeService.getStores(name ? name : '',
@@ -136,6 +47,22 @@ export class ShopListComponent implements OnInit {
           }
         });
       }
+    });
+  }
+  getProvice(): void {
+    this.addressService.getProvince(916).subscribe(res => {
+      this.listFilter.forEach(create => {
+        if (create.condition === 'province' && res.length !== 0) {
+          create.data = res.map(x => {
+            return {
+              value: x.ProvinceId,
+              text: x.Name,
+            };
+          });
+        }
+      });
+      console.log(this.listFilter, '12312');
+
     });
   }
   handleCallback(): void {

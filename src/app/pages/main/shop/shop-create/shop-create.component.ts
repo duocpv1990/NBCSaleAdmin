@@ -29,7 +29,7 @@ export class ShopCreateComponent implements OnInit {
   {
     class: 'btn-save',
     text: 'Lưu'
-  }]
+  }];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ShopCreateComponent>,
