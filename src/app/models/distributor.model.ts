@@ -84,7 +84,7 @@ export class DistributorModel {
             },
             {
                 id: 'update',
-                name: 'Cập nhập',
+                name: 'cập nhật',
                 width: 200,
                 type: 'text',
             },

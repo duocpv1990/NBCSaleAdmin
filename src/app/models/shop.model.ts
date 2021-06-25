@@ -121,7 +121,7 @@ export class ShopModel {
             },
             {
                 id: 'UpdatedOn',
-                name: 'Cập nhập',
+                name: 'cập nhật',
                 width: 200,
                 type: 'text',
             },

@@ -21,6 +21,7 @@ export class EditComponent extends BaseUploadComponent implements OnInit {
 
   html: '';
   type = 0;
+  imgInput = '';
   model: any = {};
   lstImg = [];
   // modelChill: any = {};
@@ -92,13 +93,24 @@ export class EditComponent extends BaseUploadComponent implements OnInit {
 
   onClickButton = (i) => {
     i.data = this.model;
-    i.data.CertificationMedia = this.fileLinkList.map(x => {
-      return {
-        MediaURL: x,
+    console.log(this.type);
+    if (this.type === 0) {
+      i.data.CertificationMedia = this.fileLinkList.map(x => {
+        return {
+          MediaURL: x,
+          Type: 1,
+          Status: 1
+        };
+      });
+    } else {
+      i.data.CertificationMedia = [{
+        MediaURL: this.imgInput,
         Type: 1,
         Status: 1
-      };
-    });
+      }];
+    }
+
+
 
     this.callback.emit(i);
   }

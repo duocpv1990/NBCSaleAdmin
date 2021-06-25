@@ -99,7 +99,7 @@
     <div class="cer">
       <div>
         <label class="radio">
-          <input type="radio" name="answer" [checked]="type === 0"/>
+          <input type="radio" name="answer" (change)="type = 0"  [checked]="type === 0"/>
           Tải lên từ máy
         </label>
       </div>
@@ -144,7 +144,7 @@
     <div class="cer">
       <div>
         <label class="radio">
-          <input type="radio" name="answer"  [checked]="type === 1"/>
+          <input type="radio" name="answer" (change)="type = 1"   [checked]="type === 1"/>
           Đường link
         </label>
       </div>
@@ -152,7 +152,7 @@
       <div class="content row align-items-center" >
         <div class="input-text" placeholder="Nhập URL">
           <div >
-            <input type="text"/>
+            <input type="text" [(ngModel)]="imgInput"/>
           </div>
         </div>
       </div>
