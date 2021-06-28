@@ -4,11 +4,11 @@
 <div class="row-grid">
   <div class="col">
     <div class="add-img">
-      <img  alt="">
-      <div class="circle">
+      <img class="circle" alt="" [src]="userProfile.MediaURL" *ngIf="userProfile && userProfile.MediaURL">
+      <div class="circle2" >
         <label for="img">
           <img src="assets/svg/camera.png" alt="">
-          <input hidden id="img" type="file">
+          <input hidden id="img" type="file" #file (change)="preview(file.files)">
         </label>
 
       </div>
@@ -28,16 +28,16 @@
         </label>
         <label >
           Điện thoại đăng nhập (<span>*</span>) <br>
-          <input type="text" [(ngModel)]="userProfile.Phone">
+          <input type="text" name="phone" [(ngModel)]="userProfile.Phone">
         </label>
         <label >
           Email <br>
-          <input type="text" [(ngModel)]="userProfile.Email">
+          <input type="text" name="email" [(ngModel)]="userProfile.Email">
         </label>
       </form>
       <div class="action">
-        <app-base-button [titleButton]="'Lưu'" [dataButton]="{cssClass: 'save-button'}"></app-base-button>
-        <app-base-button [titleButton]="'Hủy bỏ'" [dataButton]="{cssClass: 'cancel-button'}"></app-base-button>
+        <app-base-button [titleButton]="'Lưu'" (click)="saveUser()" [dataButton]="{cssClass: 'save-button'}"></app-base-button>
+        <app-base-button [titleButton]="'Hủy bỏ'" (click)="getUser()" [dataButton]="{cssClass: 'cancel-button'}"></app-base-button>
       </div>
 
     </div>

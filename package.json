@@ -24,6 +24,7 @@
     "@consult-indochina/auth": "^2.0.3",
     "@consult-indochina/common": "^1.1.1",
     "apexcharts": "^3.26.2",
+    "lodash.clonedeep": "^4.5.0",
     "moment-timezone": "^0.5.32",
     "ng-apexcharts": "^1.5.9",
     "ngx-pagination": "^5.0.0",
