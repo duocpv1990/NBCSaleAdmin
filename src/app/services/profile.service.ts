@@ -13,6 +13,6 @@ export class ProfileService extends BaseApiService<ProfileModel> {
     super(http, 'userprofile');
   }
   seftEdit(param): Observable<any> {
-    return this.http.put<any>(this.actionUrl, param);
+    return this.http.put<any>(`userprofile/updateProfile`, param);
   }
 }

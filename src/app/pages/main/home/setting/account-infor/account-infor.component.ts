@@ -25,7 +25,6 @@ export class AccountInforComponent extends BaseUploadComponent implements OnInit
 
   ngOnInit(): void {
     this.getUser();
-    // this.ciAuthStateService.set(this.userProfile);
   }
   getUser(): void {
     this.ciAuthStateService.currentUser$.subscribe(res => {
@@ -49,9 +48,7 @@ export class AccountInforComponent extends BaseUploadComponent implements OnInit
       MediaURL: this.userProfile.MediaURL,
     };
     this.profileService.seftEdit(req).subscribe(result => {
-      console.log(result);
       this.tempProfile = this.userProfile;
-      this.userProfile = cloneDeep(this.tempProfile);
     });
   }
 }
