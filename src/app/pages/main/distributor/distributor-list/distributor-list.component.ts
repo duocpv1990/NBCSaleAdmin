@@ -45,7 +45,7 @@ export class DistributorListComponent implements OnInit {
           global: x.GLN,
           distributor: x.Name,
           phone: x.PhoneNumber,
-          area: "Hà Nội",
+          area: x.Province,
           address: x.AddressDetail,
           gt: x.ProductNumber + ' giấy tờ',
           MediaURL: x.MediaURL,
